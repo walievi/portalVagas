@@ -23,3 +23,7 @@ Auth::routes();
 Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
+
+Route::get('/login', [Controllers\AutenticacaoController::class, 'index'])->name('login');
+
+Route::get('/login', [Controllers\AutenticacaoController::class, 'index'])->name('autenticacao.login');
