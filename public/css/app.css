@@ -21,3 +21,11 @@ body {
 .card {
 	border-radius: 20px;
 }
+
+.btn-link {
+	color: #1d1d1d;
+}
+
+.btn-link:hover {
+	color: #e47f0b;
+}
