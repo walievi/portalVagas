@@ -10,11 +10,12 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+	<link rel="stylesheet" href="css/app.css">
+	<link href="{{ ('css/app.css') }}" rel="stylesheet">
 
-	<link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-	@include("sidebar")
+	<!-- @include("sidebar") -->
 	@yield("page")
 </body>
 </html>

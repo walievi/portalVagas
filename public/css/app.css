@@ -1,3 +1,23 @@
 h1 {
 	color: red;
 }
+
+body {
+    background-color: #FFCA2C;
+    animation: fade-in 5s ease-in-out;
+}
+
+@keyframes fade-in {
+    0% {
+        background-color: #fcfcfc;
+    }
+    100% {
+        background-color: #FFCA2C;
+
+        ;
+    }
+}
+
+.card {
+	border-radius: 20px;
+}
