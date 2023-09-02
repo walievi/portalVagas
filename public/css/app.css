@@ -24,10 +24,12 @@ body {
 
 .btn-link {
 	color: #1d1d1d;
-	position: relative;
-	float: right;
+	display: flex;
+    justify-content: flex-end;
+	text-decoration: none;
 }
 
 .btn-link:hover {
 	color: #e47f0b;
+	text-decoration: underline;
 }

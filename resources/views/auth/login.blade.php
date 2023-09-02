@@ -37,30 +37,32 @@
                         </div>
 
                         <div class="row mb-3 mt-2">
-                            <div >
-                                <div class="form-check">
+                            <div class="col-md-6">
+                                <div class="form-check mt-1">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                    <label class="form-check-label " for="remember">
+                                        {{ __('Permanecer logado') }}
                                     </label>
                                 </div>
                             </div>
-                            @if (Route::has('password.request'))
+                            <div class="col-md-6">
+                                @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Recuperar senha') }}
                                     </a>
                                 @endif
+                            </div>
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-warning">
-                                    {{ __('Acessar') }}
-                                </button>
-
-                                
-                            </div>
+                            <center>
+                                <div class="col-md-8">
+                                    <button type="submit" class="btn btn-warning">
+                                        {{ __('Acessar') }}
+                                    </button>
+                                </div>
+                            </center>
                         </div>
                     </form>
                 </div>
