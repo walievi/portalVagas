@@ -22,5 +22,9 @@
         "vue": "^2.6.12",
         "vue-loader": "^15.10.1",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "artisan": "^0.1.2",
+        "bootstrap-icons": "^1.11.0"
     }
 }
