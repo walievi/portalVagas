@@ -8,6 +8,7 @@
 ## Rodar projeto
 
 1. composer install ou composer update
+2. php artisan migrate
 2. rodar: php artisan serve
 
 ## Criar controller
