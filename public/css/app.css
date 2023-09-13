@@ -1,15 +1,14 @@
-h1 {
-	color: red;
-}
-
 .background {
     background-color: #FFCA2C;
     animation: fade-in 5s ease-in-out;
     width: 100%;
     height: 100%;
     position: absolute;
-    background-size: cover;
-    z-index: -1;
+}
+
+.py-4 {
+    padding-top: 0rem!important;
+    padding-bottom: 0rem!important;
 }
 
 .py-4 {
@@ -43,4 +42,26 @@ h1 {
 .btn-link:hover {
 	color: #e47f0b;
 	text-decoration: underline;
+}
+
+
+ /* barra de rolagem */
+
+::-webkit-scrollbar {
+    width: 5px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo da faixa de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+    background: black;/* Cor do "polegar" (a parte que você arrasta) */
+    border: 1px solid white;
+    border-radius: 10%;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffbc2c; /* Cor do "polegar" quando hover */
+    border-radius: 1px solid white;
 }
