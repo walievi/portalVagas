@@ -2,6 +2,7 @@
 @extends('general')
 
 @section('content')
+<div class="background">
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
@@ -69,5 +70,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

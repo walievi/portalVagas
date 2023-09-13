@@ -2,7 +2,7 @@ h1 {
 	color: red;
 }
 
-body {
+.background {
     background-color: #FFCA2C;
     animation: fade-in 5s ease-in-out;
 }

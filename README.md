@@ -4,6 +4,7 @@
 2. Baixar Composer
 3. Descomentar ZIP no config do Apache
 4. Adicionar .env com modelo no arquivo .env.sample
+5. npm i artisan
 
 ## Rodar projeto
 
