@@ -5,6 +5,11 @@ h1 {
 .background {
     background-color: #FFCA2C;
     animation: fade-in 5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
+    z-index: -1;
 }
 
 @keyframes fade-in {
