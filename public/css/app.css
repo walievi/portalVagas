@@ -54,8 +54,3 @@
     border: 1px solid white;
     border-radius: 10%;
 }
-
-::-webkit-scrollbar-thumb:hover {
-    background: #ffbc2c; /* Cor do "polegar" quando hover */
-    border-radius: 1px solid white;
-}

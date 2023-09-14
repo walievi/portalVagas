@@ -24,6 +24,8 @@ Route::get('/', function () {
 
 Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
+
 Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
 // Route::get('/login', [Controllers\AutenticacaoController::class, 'index'])->name('login');
