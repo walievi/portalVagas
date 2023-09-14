@@ -15,7 +15,6 @@
 
 </head>
 <body>
-	<!-- @include("sidebar") -->
 	@yield("page")
 </body>
 </html>
