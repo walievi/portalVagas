@@ -58,7 +58,7 @@
 
 
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Usuários') }}</a>
+                                    <a class="nav-link" href="{{ route('users') }}">{{ __('Usuários') }}</a>
                             </li>
 
                             <li class="nav-item dropdown">
