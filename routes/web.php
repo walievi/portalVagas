@@ -28,6 +28,10 @@ Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas
 
 Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
 
+Route::delete('/users/{id}', [Controllers\UsersController::class, 'destroy'])->name('users.destroy');
+
+
+
 Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
 // Route::get('/login', [Controllers\AutenticacaoController::class, 'index'])->name('login');
