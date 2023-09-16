@@ -2,24 +2,26 @@
 @extends('general')
 
 @section('content')
-<div>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 mt-5">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+  <div class="row justify-content-center">
+    <div class="col-md-8 mt-5">
+      <div class="card-body">
+        @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+        @endif
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('Usuarios') }}
-
-
-                    <div class="table-responsive col-md-12">
+        <div class="row">
+            <div class="col-md-9">
+            <h4>  {{ __('Usuarios') }}</h4>
+            </div>
+            <div class="col-md-3 mb-3">
+                <button type="button" class="btn btn-primary">Adicionar usuário</button>
+            </div>
+        </div>
+        
+        <div class="table-responsive col-md-12">
           <table class="table table-bordered" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
@@ -31,45 +33,21 @@
               </tr>
             </thead>
             <tbody>
-
-                
-                 <tr>
+              <tr>
                 @foreach ($users as $user)
-                    
-                 <td>{{ $user->name }} </td>
-                 <td>{{ $user->email }}</td>
-                 <td>{{$user->created_at}}</td>
-
-
-                 
-                  
-                
-
-               <td class='actions'>
-             
-               <a class='btn btn-warning btn-xs' btn-block' href='#' data-toggle='modal' data-target='#autorizar' onClick=''><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
-               <a class='btn btn-danger btn-xs' btn-block' href='#' data-toggle='modal' data-target='#autorizar' onClick=''><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
-
-             	</td>
-
-             </tr>
-             @endforeach
-
-  
-
-</tbody>
-
-</table>
-</div>
-
-
-
-
-                   
-
-                </div>
-            </div>
+                <td>{{ $user->name }} </td>
+                <td>{{ $user->email }}</td>
+                <td>{{$user->created_at}}</td>
+                <td class='actions'>
+                  <a class='btn btn-warning btn-xs' btn-block' href='#' data-toggle='modal' data-target='#autorizar' onClick=''><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
+                  <a class='btn btn-danger btn-xs' btn-block' href='#' data-toggle='modal' data-target='#autorizar' onClick=''><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
-    </div>
+      </div>
+  </div>
 </div>
 @endsection
