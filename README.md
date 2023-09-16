@@ -16,3 +16,9 @@
 
 1. Sem actions: php artisan make:controller AutenticacaoController
 2. CRUD: php artisan make:controller AutenticacaoController –resources
+
+
+## Adicionar campo 'role' na tabela usuários
+1. php artisan make:migration add_role_to_users_table
+2. php artisan migrate
+
