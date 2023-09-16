@@ -36,7 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::delete('/users/{id}', [Controllers\UsersController::class, 'destroy'])->name('users.destroy');
 
-    Route::get('/edit/{id}', [Controllers\UsersController::class, 'edit'])->name('edit');
+    Route::get('/formEdit/{id}', [Controllers\UsersController::class, 'formEdit'])->name('formEdit');
+
+    Route::put('/edit/{id}', [Controllers\UsersController::class, 'edit'])->name('edit');
     
     Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 

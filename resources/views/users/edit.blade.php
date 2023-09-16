@@ -47,25 +47,8 @@
                             
                             </div>
 
-                            <div class="form-group mb-2">
-                                <label for="password" >{{ __('Senha') }}</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            
-                            </div>
-
-                            <div class="form-group mb-4">
-                                <label for="password-confirm">{{ __('Confirmação da senha') }}</label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" value="admin" id="role" for="role" name="role">
+                                <input class="form-check-input" type="checkbox" value="{{ $user->role }}" id="role" for="role" name="role">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Administrador
                                 </label>

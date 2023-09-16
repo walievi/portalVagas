@@ -57,7 +57,7 @@ class UsersController extends Controller
         return redirect()->route('users')->with('success', 'Usuário adicionado com sucesso.');
     }
 
-    public function edit($id) {
+    public function formEdit($id) {
         // Lógica para editar o usuário com o ID fornecido
         $user = User::find($id);
 
@@ -66,6 +66,27 @@ class UsersController extends Controller
         }
 
         return view('users.edit', compact('user'));
+    }
+
+    public function edit(Request $request, $id) {
+        // Lógica para editar o usuário com o ID fornecido
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('users')->with('error', 'Usuário não encontrado.');
+        }
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+
+        if ($request->input('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        $user->save();
+
+        return redirect()->route('users')->with('success', 'Usuário editado com sucesso.');
     }
     
     // public function listarUsuarios() {
