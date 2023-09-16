@@ -20,8 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');

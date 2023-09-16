@@ -35,6 +35,12 @@ class UsersController extends Controller
         return view('users.user');
     }
 
+     /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\Models\User
+     */
     public function create(array $data) {
         // Lógica para criar o usuário com os dados fornecidos       
         return User::create([
