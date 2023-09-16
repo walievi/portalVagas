@@ -22,17 +22,24 @@ Route::get('/', function () {
 
 Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
-Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
+Route::group(['middleware' => 'auth'], function () {
+    // Rotas de administração aqui
 
-Route::get('/formCreate', [Controllers\UsersController::class, 'formCreate'])->name('formCreate');
+    Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
-Route::post('/create', [Controllers\UsersController::class, 'create'])->name('create');
+    Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
+    
+    Route::get('/formCreate', [Controllers\UsersController::class, 'formCreate'])->name('formCreate');
+    
+    Route::post('/create', [Controllers\UsersController::class, 'create'])->name('create');
+    
+    Route::delete('/users/{id}', [Controllers\UsersController::class, 'destroy'])->name('users.destroy');
+    
+    Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
-Route::delete('/users/{id}', [Controllers\UsersController::class, 'destroy'])->name('users.destroy');
+});
 
-Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
 // Route::get('/login', [Controllers\AutenticacaoController::class, 'index'])->name('login');
 
