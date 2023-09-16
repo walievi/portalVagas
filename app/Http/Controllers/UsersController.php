@@ -30,7 +30,7 @@ class UsersController extends Controller
         return redirect()->route('users')->with('success', 'Usuário excluído com sucesso.');
     }
 
-    public function formCreate() {
+    public function formUser() {
         // Direcionar para página de inserir usuário   
         return view('users.user');
     }

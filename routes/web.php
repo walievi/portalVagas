@@ -28,9 +28,9 @@ Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas
 
 Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
 
-Route::get('/user', [Controllers\UsersController::class, 'formCreate'])->name('user');
+Route::get('/formUser', [Controllers\UsersController::class, 'formUser'])->name('formUser');
 
-Route::get('/createUser', [Controllers\UsersController::class, 'create'])->name('users.create');
+Route::post('/user', [Controllers\UsersController::class, 'create'])->name('user');
 
 Route::delete('/users/{id}', [Controllers\UsersController::class, 'destroy'])->name('users.destroy');
 
