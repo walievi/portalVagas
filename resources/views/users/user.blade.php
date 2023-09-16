@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" value="admin" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="admin" id="role">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Administrador
                                 </label>
@@ -72,7 +72,7 @@
 
                             <div class="form-group mb-2">
                                 <center>
-                                    <button type="submit" class="btn btn-warning">
+                                    <button type="submit" class="btn btn-dark">
                                         {{ __('Salvar') }}
                                     </button>
                                 </center>

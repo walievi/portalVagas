@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -38,15 +38,16 @@ class UsersController extends Controller
      /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array  $dados
      * @return \App\Models\User
      */
-    public function create(array $data) {
+    public function create(Request $request) {
         // Lógica para criar o usuário com os dados fornecidos       
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role' => $request->input('role'),
         ]);
     }
     
