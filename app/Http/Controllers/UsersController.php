@@ -31,24 +31,18 @@ class UsersController extends Controller
     }
 
     public function create(array $data) {
-        // Lógica para excluir o usuário com o ID fornecido        
+        // Lógica para criar o usuário com os dados fornecidos       
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
-
-
-
     
-    // public function listarUsuarios()
-    // {
+    // public function listarUsuarios() {
     //     $users = User::all();
     
     //     return view('users.users', ['users' => $users]);
     // }
     
-
-
 }
