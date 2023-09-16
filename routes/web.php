@@ -31,10 +31,10 @@ Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas
 //rota listar usuarios (home)
 Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
 
+Route::get('/user', [Controllers\UsersController::class, 'create'])->name('user');
+
 //rota excluir usuário
 Route::delete('/users/{id}', [Controllers\UsersController::class, 'destroy'])->name('users.destroy');
-
-
 
 Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
