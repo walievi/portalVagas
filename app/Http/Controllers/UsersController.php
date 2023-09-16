@@ -56,6 +56,17 @@ class UsersController extends Controller
 
         return redirect()->route('users')->with('success', 'Usuário adicionado com sucesso.');
     }
+
+    public function edit($id) {
+        // Lógica para editar o usuário com o ID fornecido
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('users')->with('error', 'Usuário não encontrado.');
+        }
+
+        return view('users.edit', compact('user'));
+    }
     
     // public function listarUsuarios() {
     //     $users = User::all();
