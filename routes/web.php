@@ -22,12 +22,16 @@ Route::get('/', function () {
 
 // Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
+//rota página inicial
 Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
+//rota listar vagas (home)
 Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
+//rota listar usuarios (home)
 Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
 
+//rota excluir usuário
 Route::delete('/users/{id}', [Controllers\UsersController::class, 'destroy'])->name('users.destroy');
 
 
