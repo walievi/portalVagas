@@ -13,7 +13,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body" style="margin: 0 auto">
+                    <div class="card-body card-body-home" style="margin: 0 auto">
                         <h5 class="card-title">Professor Ens. Fundamental</h5>
                         <div class="row">
                             <div class="col-md-1">
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body" style="margin: 0 auto">
+                    <div class="card-body card-body-home" style="margin: 0 auto">
                         <h5 class="card-title">Professor Graduação</h5>
                         <div class="row">
                             <div class="col-md-1">
@@ -115,7 +115,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body" style="margin: 0 auto">
+                    <div class="card-body card-body-home" style="margin: 0 auto">
                         <h5 class="card-title">Auxiliar </h5>
                         <div class="row">
                             <div class="col-md-1">
