@@ -49,6 +49,8 @@ class UsersController extends Controller
             'password' => Hash::make($request->input('password')),
             'role' => $request->input('role'),
         ]);
+
+        return view('users.users');
     }
     
     // public function listarUsuarios() {
