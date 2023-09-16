@@ -19,7 +19,7 @@
                                 <h4>  {{ __('Adicionar usuário') }}</h4>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('user') }}">
+                        <form method="POST" action="{{ route('create') }}">
                             @csrf
 
                             <div class="form-group mb-2">
@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" value="admin" id="role">
+                                <input class="form-check-input" type="checkbox" value="admin" id="role" for="role" name="role">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Administrador
                                 </label>
