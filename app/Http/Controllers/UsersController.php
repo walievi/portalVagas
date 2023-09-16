@@ -54,7 +54,7 @@ class UsersController extends Controller
             'role' => $request->input('role'),
         ]);
 
-        return redirect()->route('users')->with('success', 'Usuário excluído com sucesso.');
+        return redirect()->route('users')->with('success', 'Usuário adicionado com sucesso.');
     }
     
     // public function listarUsuarios() {
