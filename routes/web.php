@@ -28,7 +28,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
-    Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
+    Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
+        Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
+    });
+    
     
     Route::get('/formCreate', [Controllers\UsersController::class, 'formCreate'])->name('formCreate');
     
