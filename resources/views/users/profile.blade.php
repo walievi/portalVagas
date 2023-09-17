@@ -5,6 +5,29 @@
 
 <div class="background">
     <div class="container">
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                Tem certeza de que deseja apagar sua conta?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <form id="deleteUserForm" method="POST" action="">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <br><br>
     @if(session('success'))
       <div class="alert alert-success">
@@ -87,8 +110,18 @@
                         </form>
                     </div>
                 </div>
+                <a class='btn btn-danger btn-xs ml-4 delete-user-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('users.destroy', $user->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Apagar minha conta</a>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".delete-user-btn").click(function () {
+          var url = $(this).data("url");
+          $("#deleteUserForm").attr("action", url);
+        });
+    });
+</script>
 @endsection
