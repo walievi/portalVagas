@@ -48,8 +48,8 @@
                             </div>
 
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" value="{{ $user->role }}" id="role" for="role" name="role">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="{{ $user->role }}" id="role" for="role" name="role"  {{ $user->role == 'admin' ? 'checked' : ''}} >
+                                <label class="form-check-label" for="flexCheckDefault" for="role" >
                                     Administrador
                                 </label>
                             </div>
