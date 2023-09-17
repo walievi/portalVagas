@@ -72,6 +72,9 @@
 
                             <div class="form-group mb-2">
                                 <center>
+                                    <a type="button" href="{{route('users')}}" class="btn btn-secondary">
+                                        {{ __('Voltar') }}
+                                    </a>
                                     <button type="submit" class="btn btn-dark">
                                         {{ __('Salvar') }}
                                     </button>
