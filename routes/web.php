@@ -39,6 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/formEdit/{id}', [Controllers\UsersController::class, 'formEdit'])->name('formEdit');
 
     Route::put('/edit/{id}', [Controllers\UsersController::class, 'edit'])->name('edit');
+
+    Route::get('/profile', [Controllers\UsersController::class, 'profile'])->name('profile');
+
+    Route::put('/editProfile/{id}', [Controllers\UsersController::class, 'editProfile'])->name('editProfile');
     
     Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 

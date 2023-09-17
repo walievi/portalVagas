@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth; 
 
 class UsersController extends Controller
 {
@@ -69,7 +70,7 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request, $id) {
-        // Lógica para editar o usuário com o ID fornecido
+        // Lógica para editar o usuário com o ID fornecido - admin
         $user = User::find($id);
 
         if (!$user) {
@@ -89,10 +90,31 @@ class UsersController extends Controller
         return redirect()->route('users')->with('success', 'Usuário editado com sucesso.');
     }
     
-    // public function listarUsuarios() {
-    //     $users = User::all();
+    public function profile() {
+        $user = Auth::user();
     
-    //     return view('users.users', ['users' => $users]);
-    // }
+        return view('users.profile', compact('user'));
+    }
+
+    public function editProfile(Request $request, $id) {
+        // Lógica para editar o usuário com o ID fornecido - user
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('users')->with('error', 'Usuário não encontrado.');
+        }
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role') ?? 'user';
+
+        if ($request->input('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Usuário editado com sucesso.');
+    }
     
 }
