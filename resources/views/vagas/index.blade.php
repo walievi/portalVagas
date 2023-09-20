@@ -18,8 +18,8 @@
                 <div class="col-md-9">
                     <h4>  {{ __('Vagas') }}</h4>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <button type="button" class="btn btn-dark">Criar nova vaga</button>
+                <div class="col-md-3 mb-3"> 
+                  <a href="{{ route('formCreateVagas') }}" class="btn btn-dark" >Criar nova vaga</a>
                 </div>
             </div>
             <div class="table-responsive col-md-12">

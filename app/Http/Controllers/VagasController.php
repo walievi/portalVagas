@@ -16,6 +16,11 @@ class VagasController extends Controller
         return view('vagas.index', ['vagas' => $vagas]);
     }
 
+    public function formCreateVagas() {
+        // Direcionar para página de criar vaga   
+
+        return view('vagas.create');
+    }
 
     public function create(Request $request) {
         view('vagas.index');

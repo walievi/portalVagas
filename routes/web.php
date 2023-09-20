@@ -47,6 +47,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
+    Route::get('/formCreateVagas', [Controllers\VagasController::class, 'formCreateVagas'])->name('formCreateVagas');
+
+    Route::post('/createVaga', [Controllers\VagasController::class, 'create'])->name('createVaga');
+
 });
 
 

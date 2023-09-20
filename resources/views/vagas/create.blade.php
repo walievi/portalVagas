@@ -18,7 +18,7 @@
                                 <h4>  {{ __('Cadastrar vaga') }}</h4>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('create') }}">
+                        <form method="POST" action="{{ route('createVaga') }}">
                             @csrf
 
                             <div class="form-group mb-2">
@@ -34,8 +34,12 @@
                             </div>
 
                             <div class="form-group mb-2">
-                                <label for="status">{{ __('Email') }}</label>
-                                <input id="status" type="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required autocomplete="status">
+                                <label for="status">{{ __('Status') }}</label>
+                               
+                                <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status" type="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required autocomplete="status">
+                                    <option value="Aberta" selected>Aberta </option>
+                                    <option value="Fechada">Fechada</option>
+                                </select>
 
                                 @error('status')
                                     <span class="invalid-feedback" role="alert">
