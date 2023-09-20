@@ -10,12 +10,14 @@ use App\Models\Vagas;
 class VagasController extends Controller
 {
     public function index() {
-        return view('vagas.index');
+
+        $vagas = Vagas::all();
+
+        return view('vagas.index', ['vagas' => $vagas]);
     }
 
 
     public function create(Request $request) {
-        
         view('vagas.index');
 
         Vagas::create([
@@ -23,11 +25,6 @@ class VagasController extends Controller
             'status' => $request->input('status'),
         ]);
 
-
         return redirect()->route('vagas')->with('success', 'Vaga adicionada com sucesso.');
-
-
-
-
     }
 }

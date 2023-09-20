@@ -25,13 +25,9 @@ Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     // Rotas de administração aqui
-
-    Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
-
     Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
         Route::get('/users', [Controllers\UsersController::class, 'index'])->name('users');
     });
-    
     
     Route::get('/formCreate', [Controllers\UsersController::class, 'formCreate'])->name('formCreate');
     
@@ -48,6 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/editProfile/{id}', [Controllers\UsersController::class, 'editProfile'])->name('editProfile');
     
     Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
+
+    Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
 });
 

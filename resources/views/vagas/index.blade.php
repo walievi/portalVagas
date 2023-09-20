@@ -35,14 +35,16 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Professor Ens. Fundamental</td>
-                    <td>Aberta</td>
-                    <td>15/09/2023</td>
+                    @foreach ($vagas as $vaga)
+                    <td>{{ $vaga->titulo }} </td>
+                    <td>{{ $vaga->status }}</td>
+                    <td>{{$vaga->created_at}}</td>
                     <td class='actions'>
-                      <a class='btn btn-warning btn-xs' btn-block' href='#' data-toggle='modal' data-target='#autorizar' onClick=''><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
-                      <a class='btn btn-danger btn-xs' btn-block' href='#' data-toggle='modal' data-target='#autorizar' onClick=''><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                      <a class='btn btn-warning btn-xs'" ><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
+                      <a class='btn btn-danger btn-xs delete-user-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal'"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
