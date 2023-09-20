@@ -22,6 +22,48 @@ class VagasController extends Controller
         return view('vagas.create');
     }
 
+    public function destroy($id) {
+        // Lógica para excluir a vaga com o ID fornecido
+        $vagas = Vagas::find($id);
+
+        if (!$vagas) {
+            return redirect()->route('vagas')->with('error', 'Vaga não encontrada.');
+        }
+
+        $vagas->delete();
+
+        return redirect()->route('vagas')->with('success', 'Vaga excluída com sucesso.');
+    }
+
+
+    public function formEditVagas($id) {
+        // Lógica para editar o vaga com o ID fornecido
+        $vaga = Vagas::find($id);
+
+        if (!$vaga) {
+            return redirect()->route('vagas')->with('error', 'Vaga não encontrada.');
+        }
+
+        return view('vagas.edit', compact('vaga'));
+    }
+
+
+    public function editVaga(Request $request, $id) {
+        // Lógica para editar a vaga com o ID fornecido
+        $vagas = Vagas::find($id);
+
+        if (!$vagas) {
+            return redirect()->route('vagas')->with('error', 'Vaga não encontrada.');
+        }
+
+        $vagas->titulo = $request->input('titulo');
+        $vagas->status = $request->input('status');
+        $vagas->save();
+
+        return redirect()->route('vagas')->with('success', 'Vaga editada com sucesso.');
+    }
+
+
     public function create(Request $request) {
         view('vagas.index');
 

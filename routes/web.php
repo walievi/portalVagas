@@ -45,11 +45,22 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
+    # rotas para módulo vagas
+
     Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
     Route::get('/formCreateVagas', [Controllers\VagasController::class, 'formCreateVagas'])->name('formCreateVagas');
 
     Route::post('/createVaga', [Controllers\VagasController::class, 'create'])->name('createVaga');
+
+    Route::delete('/vagas/{id}', [Controllers\VagasController::class, 'destroy'])->name('vagas.destroy');
+
+    Route::put('/editVaga/{id}', [Controllers\VagasController::class, 'editVaga'])->name('editVaga');
+
+    Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
+
+     # fim rotas para módulo vagas
+
 
 });
 
