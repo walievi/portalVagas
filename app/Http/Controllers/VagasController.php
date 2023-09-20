@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vagas;
-
+use Illuminate\Support\Facades\Mail;
 
 class VagasController extends Controller
 {
@@ -71,6 +71,10 @@ class VagasController extends Controller
             'titulo' => $request->input('titulo'),
             'status' => $request->input('status'),
         ]);
+        // Agora, envie o email após a inclusão
+        if ($request->input('status') == 'Aberta') {
+        Mail::to('portalvagass@gmail.com')->send(new \App\Mail\NovoRegistroEmail($request->input('titulo')));
+        }
 
         return redirect()->route('vagas')->with('success', 'Vaga adicionada com sucesso.');
     }
