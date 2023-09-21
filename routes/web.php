@@ -59,8 +59,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
-     # fim rotas para módulo vagas
+    # rotas para módulo formulários
 
+    Route::get('/forms', [Controllers\FormulariosController::class, 'index'])->name('forms');
+
+    Route::get('/formCreateForm', [Controllers\FormulariosController::class, 'formCreateForm'])->name('formCreateForm');
+
+    Route::post('/createForm', [Controllers\FormulariosController::class, 'create'])->name('createForm');
+
+    Route::delete('/forms/{id}', [Controllers\FormulariosController::class, 'destroy'])->name('forms.destroy');
+
+    Route::put('/editForm/{id}', [Controllers\FormulariosController::class, 'editForm'])->name('editForm');
+
+    Route::get('/formEditForm/{id}', [Controllers\FormulariosController::class, 'formEditForm'])->name('formEditForm');
 
 });
 
