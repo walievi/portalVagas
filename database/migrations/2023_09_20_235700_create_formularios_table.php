@@ -15,7 +15,7 @@ class CreateFormulariosTable extends Migration
     {
         Schema::create('formularios', function (Blueprint $table) {
             $table->id();
-            $table->text('cursos_complementares')->nullable();
+            $table->text('pergunta')->nullable();
             $table->unsignedBigInteger('vaga_id')->nullable(); // Chave estrangeira
 
             // Definir a chave estrangeira
