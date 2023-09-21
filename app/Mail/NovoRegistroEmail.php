@@ -13,6 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class NovoRegistroEmail extends Mailable
 {
     public $vaga;
+    public $unidade;
     use Queueable, SerializesModels;
 
     /**
@@ -20,9 +21,10 @@ class NovoRegistroEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($vaga)
+    public function __construct($vaga, $unidade)
     {
         $this->vaga = $vaga;
+        $this->unidade = $unidade;
     }
 
     /**
@@ -38,7 +40,12 @@ class NovoRegistroEmail extends Mailable
                     ->subject($subject) // Defina o assunto do email aqui
                     ->with(['titulo' => $this->vaga,
                         // Outros dados da vaga que você deseja incluir na view
-                    ]);
+                    ])
+                    ->with(['unidade' => $this->unidade,
+                        // Outros dados da vaga que você deseja incluir na view
+                    ])
+                    ;
+
     }
 
 

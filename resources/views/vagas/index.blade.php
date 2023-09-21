@@ -62,6 +62,7 @@
                 <thead>
                   <tr>
                     <th>Título</th>
+                    <th>Unidade</th>
                     <th>Status</th>
                     <th>Data Criação</th>
 
@@ -72,6 +73,7 @@
                   <tr>
                     @foreach ($vagas as $vaga)
                     <td>{{ $vaga->titulo }} </td>
+                    <td>{{ $vaga->unidade }}</td>
                     <td>{{ $vaga->status }}</td>
                     <td>{{$vaga->created_at}}</td>
                     <td class='actions'>

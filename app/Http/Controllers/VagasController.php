@@ -57,6 +57,7 @@ class VagasController extends Controller
         }
 
         $vagas->titulo = $request->input('titulo');
+        $vagas->unidade = $request->input('unidade');
         $vagas->status = $request->input('status');
         $vagas->save();
 
@@ -69,11 +70,12 @@ class VagasController extends Controller
 
         Vagas::create([
             'titulo' => $request->input('titulo'),
+            'unidade' => $request->input('unidade'),
             'status' => $request->input('status'),
         ]);
         // Agora, envie o email após a inclusão
         if ($request->input('status') == 'Aberta') {
-        Mail::to('portalvagass@gmail.com')->send(new \App\Mail\NovoRegistroEmail($request->input('titulo')));
+        Mail::to('portalvagass@gmail.com')->send(new \App\Mail\NovoRegistroEmail($request->input('titulo'), $request->input('unidade'), $request->input('status')));
         }
 
         return redirect()->route('vagas')->with('success', 'Vaga adicionada com sucesso.');

@@ -34,6 +34,25 @@
                             </div>
 
                             <div class="form-group mb-2">
+                                <label for="unidade">{{ __('Unidade') }}</label>
+                               
+                                <select class="form-select form-select-md mb-3" aria-label="Large select example" id="unidade" type="unidade" class="form-control @error('unidade') is-invalid @enderror" name="unidade" value="{{ old('unidade') }}" required autocomplete="unidade">
+                                    <option value="Unidade Pindorama" selected>Unidade Pindorama</option>
+                                    <option value="Unidade Oswaldo Cruz">Unidade Oswaldo Cruz</option>
+                                    <option value="Unidade Fundação Evangélica">Unidade Fundação Evangélica</option>
+                                    <option value="Todos">Todos</option>
+
+                                </select>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            
+                            </div>
+
+                            <div class="form-group mb-2">
                                 <label for="status">{{ __('Status') }}</label>
                                
                                 <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status" type="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required autocomplete="status">

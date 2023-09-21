@@ -16,6 +16,7 @@ class Vagas extends Model
      */
     protected $fillable = [
         'titulo',
+        'unidade',
         'status'
     ];
 
