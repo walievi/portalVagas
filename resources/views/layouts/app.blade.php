@@ -113,6 +113,16 @@
                                     @csrf
                                 </form>
                             </div>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('home') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Home') }}
+                                </a>
+
+                                <form id="home-form" action="{{ route('home') }}" method="GET" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                         </li>
 
                         @endguest

@@ -24,7 +24,7 @@ class FormulariosController extends Controller
     public function destroy($id)
     {
         // Lógica para excluir a vaga com o ID fornecido
-        $forms = ::find($id);
+        $form = Formulario::find($id);
 
         if (!$forms) {
             return redirect()
