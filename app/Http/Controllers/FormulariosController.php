@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Formularios;
+use App\Models\Formulario;
 class FormulariosController extends Controller
 {
     public function index() {
 
-        $forms = Formularios::all();
+        $forms = Formulario::all();
 
         return view('forms.index', ['forms' => $forms]);
 
@@ -24,7 +24,7 @@ class FormulariosController extends Controller
     public function destroy($id)
     {
         // Lógica para excluir a vaga com o ID fornecido
-        $forms = Formularios::find($id);
+        $forms = ::find($id);
 
         if (!$forms) {
             return redirect()
@@ -42,7 +42,7 @@ class FormulariosController extends Controller
     public function formEditForm($id)
     {
         // Lógica para editar o vaga com o ID fornecido
-        $form = Formularios::find($id);
+        $form = Formulario::find($id);
 
         if (!$form) {
             return redirect()
@@ -56,7 +56,7 @@ class FormulariosController extends Controller
     public function editForm(Request $request, $id)
     {
         // Lógica para editar a vaga com o ID fornecido
-        $forms = Formularios::find($id);
+        $forms = Formulario::find($id);
 
         if (!$forms) {
             return redirect()
@@ -77,7 +77,7 @@ class FormulariosController extends Controller
     {
         view('forms.index');
 
-        Formularios::create([
+        Formulario::create([
             'pergunta' => $request->input('pergunta'),
             'id_vaga' => $request->input('id_vaga'),
         ]);

@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Formularios extends Model
+class Formulario extends Model
 {
     use HasFactory;
+
+    public $table = "formularios";
 
     /**
     * The attributes that are mass assignable.

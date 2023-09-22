@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Vagas;
+use App\Models\Vaga;
 use Illuminate\Support\Facades\Mail;
 
 class VagasController extends Controller
 {
     public function index()
     {
-        $vagas = Vagas::all();
+        $vagas = Vaga::all();
 
         return view('vagas.index', ['vagas' => $vagas]);
     }
@@ -26,7 +26,7 @@ class VagasController extends Controller
     public function destroy($id)
     {
         // Lógica para excluir a vaga com o ID fornecido
-        $vagas = Vagas::find($id);
+        $vagas = Vaga::find($id);
 
         if (!$vagas) {
             return redirect()
@@ -44,7 +44,7 @@ class VagasController extends Controller
     public function formEditVagas($id)
     {
         // Lógica para editar o vaga com o ID fornecido
-        $vaga = Vagas::find($id);
+        $vaga = Vaga::find($id);
 
         if (!$vaga) {
             return redirect()
@@ -58,7 +58,7 @@ class VagasController extends Controller
     public function editVaga(Request $request, $id)
     {
         // Lógica para editar a vaga com o ID fornecido
-        $vagas = Vagas::find($id);
+        $vagas = Vaga::find($id);
 
         if (!$vagas) {
             return redirect()
@@ -80,7 +80,7 @@ class VagasController extends Controller
     {
         view('vagas.index');
 
-        Vagas::create([
+        Vaga::create([
             'titulo' => $request->input('titulo'),
             'unidade' => $request->input('unidade'),
             'status' => $request->input('status'),
