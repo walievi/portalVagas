@@ -58,7 +58,7 @@
                 <a href="{{ route('formCreate') }}" class="btn btn-dark" >Adicionar usuário</a>
               </div>
           </div>
-          
+
           <div class="table-responsive col-md-12">
             <table class="table table-bordered" cellspacing="0" cellpadding="0">
               <thead>
@@ -80,7 +80,12 @@
                   <td>{{$user->created_at}}</td>
                   <td class='actions'>
                     <a class='btn btn-warning btn-xs' href="{{ route('formEdit', $user->id) }}" ><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
-                    <a class='btn btn-danger btn-xs delete-user-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('users.destroy', $user->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+
+                    @isnull($user->deleted_at)
+                      <a class='btn btn-danger btn-xs delete-user-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('users.destroy', $user->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                    @else
+                      <a class='btn btn-danger btn-xs delete-user-btn' href="{{ route('users.restore', $user->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Ativar</a>
+                    @endisnull
                   </td>
                 </tr>
                 @endforeach

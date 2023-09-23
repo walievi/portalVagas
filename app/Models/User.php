@@ -50,6 +50,11 @@ class User extends Authenticatable
     ];
 
 
+    public function respostas()
+    {
+        $this->hasMany(App\Models\Resposta::class);
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new meuResetDeSenha($token));

@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
     public function index() {
-        #return view('users/users');
-
-        $users = User::all();
+        $users = User::withTrashed()->get();
 
         return view('users.users', ['users' => $users]);
 
@@ -31,8 +29,17 @@ class UsersController extends Controller
         return redirect()->route('users')->with('success', 'Usuário excluído com sucesso.');
     }
 
+    public function restore($id)
+    {
+        // Lógica para excluir o usuário com o ID fornecido
+        $user = User::onlyTrashed()->where('id', $id)->first();
+        $user->restore();
+
+        return redirect()->route('users')->with('success', 'Usuário reativado com sucesso.');
+    }
+
     public function formCreate() {
-        // Direcionar para página de criar usuário   
+        // Direcionar para página de criar usuário
 
         return view('users.create');
     }
@@ -44,7 +51,7 @@ class UsersController extends Controller
      * @return \App\Models\User
      */
     public function create(Request $request) {
-        // Lógica para criar o usuário com os dados fornecidos   
+        // Lógica para criar o usuário com os dados fornecidos
 
         view('users.users');
 
@@ -69,10 +76,7 @@ class UsersController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function edit(Request $request, $id) {
-        // Lógica para editar o usuário com o ID fornecido - admin
-        $user = User::find($id);
-
+    public function edit(Request $request, User $user) {
         if (!$user) {
             return redirect()->route('users')->with('error', 'Usuário não encontrado.');
         }
@@ -89,10 +93,10 @@ class UsersController extends Controller
 
         return redirect()->route('users')->with('success', 'Usuário editado com sucesso.');
     }
-    
+
     public function profile() {
         $user = Auth::user();
-    
+
         return view('users.profile', compact('user'));
     }
 
@@ -116,5 +120,5 @@ class UsersController extends Controller
 
         return redirect()->route('profile')->with('success', 'Usuário editado com sucesso.');
     }
-    
+
 }

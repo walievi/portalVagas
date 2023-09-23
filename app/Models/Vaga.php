@@ -23,5 +23,13 @@ class Vaga extends Model
         'status'
     ];
 
+    public function perguntas()
+    {
+        return null;
+    }
 
+    public function respostas()
+    {
+        $this->hasMany(Resposta::class, 'vaga_id')
+    }
 }
