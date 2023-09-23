@@ -59,7 +59,7 @@ class UsersController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'role' => $request->input('role'),
+            'role' => $request->input('role') || 'user',
         ]);
 
         return redirect()->route('users')->with('success', 'Usuário adicionado com sucesso.');

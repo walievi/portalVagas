@@ -30,6 +30,6 @@ class Vaga extends Model
 
     public function respostas()
     {
-        $this->hasMany(Resposta::class, 'vaga_id')
+        $this->hasMany(Resposta::class, 'vaga_id');
     }
 }
