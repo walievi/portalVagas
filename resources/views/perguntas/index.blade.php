@@ -62,7 +62,7 @@
                 <thead>
                     <tr>
                     <th>Pergunta</th>
-                    <th>Options</th>
+                    <th>Opções</th>
                     <th>Multiplas respostas</th>
                     <th>Data Criação</th>
 
