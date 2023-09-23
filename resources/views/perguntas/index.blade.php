@@ -63,7 +63,7 @@
                     <tr>
                     <th>Pergunta</th>
                     <th>Options</th>
-                    <th>Status</th>
+                    <th>Multiplas respostas</th>
                     <th>Data Criação</th>
 
                     <th class="actions">Ações</th>

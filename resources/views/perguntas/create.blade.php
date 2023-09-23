@@ -45,39 +45,29 @@
                         
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label for="mult_resps">{{ __('Múltiplas respostas') }}</label>
-                            <input id="mult_resps" type="text" class="form-control @error('mult_resps') is-invalid @enderror" name="mult_resps" value="{{ old('mult_resps') }}" required autocomplete="mult_resps" autofocus>
-
-                            @error('status')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="mult_resps" for="mult_resps" name="mult_resps">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Permitir múltiplas respostas
+                            </label>
                         </div>
 
-                        <div class="form-group mb-2">
+                        <div class="form-group mb-2 mt-3">
                         @csrf
                         <!-- Outros campos da pergunta -->
-                            <label for="vagas">Vincular pergunta à vaga:</label>
-                            <a href="#" data-toggle="collapse" data-target="#vagas-collapse">Mostrar Vagas</a>
-                                <div id="vagas-collapse" class="collapse">
-                                    <div class="list-group">
-                                        @foreach ($vagas as $vaga)
-                                            <label class="list-group-item">
-                                                <input type="checkbox" name="vagas[]" value="{{ $vaga->id }}" class="form-check-input">
-                                                {{ $vaga->titulo }}
-                                            </label>
-                                    @endforeach
-                                    </div>
+                        <label for="vagas">Vincular pergunta à vaga:</label>
+                        <a href="#" data-toggle="collapse" data-target="#vagas-collapse">Mostrar Vagas</a>
+                            <div id="vagas-collapse" class="collapse">
+                                <div class="list-group">
+                                    @foreach ($vagas as $vaga)
+                                        <label class="list-group-item">
+                                            <input type="checkbox" name="vagas[]" value="{{ $vaga->id }}" class="form-check-input">
+                                            {{ $vaga->titulo }}
+                                        </label>
+                                @endforeach
                                 </div>
-                        </div>
-
-
-
-                        
-
+                            </div>
+                        </div>                       
 
                         <div class="form-group mb-2">
                             <center>

@@ -70,7 +70,7 @@ class PerguntasController extends Controller
 
         $perguntas->pergunta = $request->input('pergunta');
         $perguntas->options = $request->input('options');
-        $perguntas->mult_resps = $request->input('mult_resps');
+        $perguntas->mult_resps = $request->input('mult_resps') ?? 0;
         $perguntas->save();
 
         return redirect()
@@ -86,7 +86,7 @@ class PerguntasController extends Controller
         $pergunta = new Pergunta([
             'pergunta' => $request->input('pergunta'),
             'options' => $request->input('options'),
-            'mult_resps' => $request->input('mult_resps'),
+            'mult_resps' => $request->input('mult_resps') ?? 0,
         ]);      
 
         $pergunta->save();
