@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEdit/{id}', [Controllers\UsersController::class, 'formEdit'])->name('formEdit');
 
-    Route::put('/edit/{user}', [Controllers\UsersController::class, 'edit'])->name('edit');
+    Route::put('/edit/{id}', [Controllers\UsersController::class, 'edit'])->name('edit');
 
     Route::get('/profile', [Controllers\UsersController::class, 'profile'])->name('profile');
 
