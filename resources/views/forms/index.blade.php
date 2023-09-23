@@ -50,11 +50,11 @@
             @endif
 
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <h4>  {{ __('Formulários') }}</h4>
                 </div>
-                <div class="col-md-3 mb-3"> 
-                  <a href="{{ route('formCreateForm') }}" class="btn btn-dark" >Criar nova vaga</a>
+                <div class="col-md-4 mb-3"> 
+                  <a href="{{ route('formCreateForm') }}" class="btn btn-dark" >Criar novo formulário</a>
                 </div>
             </div>
             <div class="table-responsive col-md-12">
@@ -75,7 +75,7 @@
                     <td>{{ $form->vaga_id }}</td>
                     <td>{{$form->created_at}}</td>
                     <td class='actions'>
-                      <a class='btn btn-warning btn-xs'" href="{{ route('formEditForm', $form->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
+                      <a class='btn btn-warning btn-xs' href="{{ route('formEditForm', $form->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
                       <a class='btn btn-danger btn-xs delete-form-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('forms.destroy', $form->id) }}""><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
                     </td>
                   </tr>
