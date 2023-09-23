@@ -23,8 +23,8 @@
                             @method('PUT')
 
                             <div class="form-group mb-2">
-                                <label for="pergunta">{{ __('Pergunta') }}</label>
-                                <input id="pergunta" type="text" class="form-control @error('pergunta') is-invalid @enderror" name="pergunta" value="{{ $form->pergunta }}" required autocomplete="pergunta" autofocus>
+                                <label for="pergunta">{{ __('Nome') }}</label>
+                                <input id="pergunta" type="text" class="form-control @error('pergunta') is-invalid @enderror" name="pergunta" value="{{ $form->nome_formulario }}" required autocomplete="pergunta" autofocus>
 
                                 @error('pergunta')
                                     <span class="invalid-feedback" role="alert">
