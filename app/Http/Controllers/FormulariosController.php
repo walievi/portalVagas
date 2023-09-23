@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Formulario;
+use App\Models\Vaga;
+
 class FormulariosController extends Controller
 {
     public function index() {
@@ -17,8 +19,10 @@ class FormulariosController extends Controller
     public function formCreateform()
     {
         // Direcionar para página de criar vaga
+        $vagas = Vaga::all();
 
-        return view('forms.create');
+
+        return view('forms.create', ['vagas' => $vagas]);
     }
 
     public function destroy($id)
@@ -64,7 +68,7 @@ class FormulariosController extends Controller
                 ->with('error', 'Formulário não encontrado.');
         }
 
-        $forms->pergunta = $request->input('pergunta');
+        $forms->nome_formulario = $request->input('nome_formulario');
         $forms->vaga_id = $request->input('vaga_id');
         $forms->save();
 
@@ -78,7 +82,7 @@ class FormulariosController extends Controller
         view('forms.index');
 
         Formulario::create([
-            'pergunta' => $request->input('pergunta'),
+            'nome_formulario' => $request->input('nome_formulario'),
             'id_vaga' => $request->input('id_vaga'),
         ]);
 

@@ -22,10 +22,10 @@
                             @csrf
 
                             <div class="form-group mb-2">
-                                <label for="pergunta">{{ __('Pergunta') }}</label>
-                                <input id="pergunta" type="text" class="form-control @error('pergunta') is-invalid @enderror" name="pergunta" value="{{ old('pergunta') }}" required autocomplete="pergunta" autofocus>
+                                <label for="nome_formulario">{{ __('Nome') }}</label>
+                                <input id="nome_formulario" type="text" class="form-control @error('nome_formulario') is-invalid @enderror" name="nome_formulario" value="{{ old('nome_formulario') }}" required autocomplete="nome_formulario" autofocus>
 
-                                @error('pergunta')
+                                @error('nome_formulario')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -34,20 +34,26 @@
                             </div>
 
                             <div class="form-group mb-2">
-                                <label for="vaga_id">{{ __('ID da vaga') }}</label>
-                                <input id="vaga_id" type="text" class="form-control @error('vaga_id') is-invalid @enderror" name="vaga_id" value="{{ old('vaga_id') }}" required autocomplete="vaga_id" autofocus>
-
-                                @error('vaga_id')
+                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="vaga" name="vaga" required autocomplete="vaga">
+                                @foreach($vagas as $vaga)
+                                <option value="{{ $vaga->id }}">{{ $vaga->titulo }}</option>
+                                @endforeach                         
+                            </select>
+                                @error('vaga')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $vaga }}</strong>
                                     </span>
                                 @enderror
-                            
                             </div>
+
+
+
+
+
 
                             <div class="form-group mb-2">
                                 <center>
-                                    <a type="button" href="{{route('vagas')}}" class="btn btn-secondary">
+                                    <a type="button" href="{{route('forms')}}" class="btn btn-secondary">
                                         {{ __('Voltar') }}
                                     </a>
                                     <button type="submit" class="btn btn-dark">

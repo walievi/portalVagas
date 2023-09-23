@@ -61,7 +61,7 @@
               <table class="table table-bordered" cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>
-                    <th>Pergunta</th>
+                    <th>Nome</th>
                     <th>Id da vaga</th>
                     <th>Data Criação</th>
 
