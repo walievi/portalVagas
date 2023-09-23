@@ -69,7 +69,7 @@ class FormulariosController extends Controller
         }
 
         $forms->nome_formulario = $request->input('nome_formulario');
-        $forms->vaga_id = $request->input('vaga_id');
+        $forms->vaga_id = $request->input('id_vaga');
         $forms->save();
 
         return redirect()
