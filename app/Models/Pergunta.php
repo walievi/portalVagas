@@ -17,7 +17,9 @@ class Pergunta extends Model
 
     public function vagas()
     {
-        return null;
+        return $this->belongsToMany(Vaga::class, 'pergunta_vaga')
+        ->using(PerguntaVaga::class) // Use a model de pivot personalizada
+        ->withPivot('required'); // Outras colunas pivot, se necessário
     }
 
     public function respostas()

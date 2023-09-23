@@ -57,6 +57,27 @@
                         
                         </div>
 
+                        <div class="form-group mb-2">
+                        @csrf
+                        <!-- Outros campos da pergunta -->
+                            <label for="vagas">Vincular pergunta à vaga:</label>
+                            <a href="#" data-toggle="collapse" data-target="#vagas-collapse">Mostrar Vagas</a>
+                                <div id="vagas-collapse" class="collapse">
+                                    <div class="list-group">
+                                        @foreach ($vagas as $vaga)
+                                            <label class="list-group-item">
+                                                <input type="checkbox" name="vagas[]" value="{{ $vaga->id }}" class="form-check-input">
+                                                {{ $vaga->titulo }}
+                                            </label>
+                                    @endforeach
+                                    </div>
+                                </div>
+                        </div>
+
+
+
+                        
+
 
                         <div class="form-group mb-2">
                             <center>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pergunta;
+use App\Models\Vaga;
 
 class PerguntasController extends Controller
 {
@@ -19,8 +20,9 @@ class PerguntasController extends Controller
     public function formCreatePergunta()
     {
         // Direcionar para página de criar Pergunta
+        $vagas = Vaga::all();
 
-        return view('perguntas.create');
+        return view('perguntas.create', ['vagas' => $vagas]);
     }
 
     public function destroy($id)
@@ -79,12 +81,20 @@ class PerguntasController extends Controller
     public function create(Request $request)
     {
         view('perguntas.index');
-
-        Pergunta::create([
+ 
+        
+        $pergunta = new Pergunta([
             'pergunta' => $request->input('pergunta'),
             'options' => $request->input('options'),
             'mult_resps' => $request->input('mult_resps'),
-        ]);        
+        ]);      
+
+        $pergunta->save();
+        // Receba as vagas selecionadas do array 'vagas[]'
+        $vagasSelecionadas = $request->input('vagas', []);
+
+        // Associe as vagas selecionadas à pergunta
+        $pergunta->vagas()->attach($vagasSelecionadas);
 
         return redirect()
             ->route('perguntas')
