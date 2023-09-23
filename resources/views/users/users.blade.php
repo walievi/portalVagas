@@ -2,7 +2,7 @@
 @extends('general')
 
 @section('content')
-<div class="background">
+
 <div class="container">
   <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -96,7 +96,7 @@
     </div>
   </div>
 </div>
-</div>
+
 <script>
     $(document).ready(function () {
         $(".delete-user-btn").click(function () {

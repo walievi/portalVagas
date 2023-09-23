@@ -9,6 +9,12 @@ class Pergunta extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'pergunta',
+        'options',
+        'mult_resps'
+    ];
+
     public function vagas()
     {
         return null;
@@ -16,6 +22,6 @@ class Pergunta extends Model
 
     public function respostas()
     {
-        $this->hasMany(Resposta::class, 'pergunta_id')
+        $this->hasMany(Resposta::class, 'pergunta_id');
     }
 }

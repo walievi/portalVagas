@@ -60,17 +60,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     # rotas para módulo formulários
 
-    Route::get('/forms', [Controllers\FormulariosController::class, 'index'])->name('forms');
+    Route::get('/perguntas', [Controllers\PerguntasController::class, 'index'])->name('perguntas');
 
-    Route::get('/formCreateForm', [Controllers\FormulariosController::class, 'formCreateForm'])->name('formCreateForm');
+    Route::get('/formCreatePergunta', [Controllers\PerguntasController::class, 'formCreatePergunta'])->name('formCreatePergunta');
 
-    Route::post('/createForm', [Controllers\FormulariosController::class, 'create'])->name('createForm');
+    Route::post('/createPergunta', [Controllers\PerguntasController::class, 'create'])->name('createPergunta');
 
-    Route::delete('/forms/{id}', [Controllers\FormulariosController::class, 'destroy'])->name('forms.destroy');
+    Route::delete('/perguntas/{id}', [Controllers\PerguntasController::class, 'destroy'])->name('perguntas.destroy');
 
-    Route::put('/editForm/{id}', [Controllers\FormulariosController::class, 'editForm'])->name('editForm');
+    Route::put('/editPergunta/{id}', [Controllers\PerguntasController::class, 'editPergunta'])->name('editPergunta');
 
-    Route::get('/formEditForm/{id}', [Controllers\FormulariosController::class, 'formEditForm'])->name('formEditForm');
+    Route::get('/formEditPerguntas/{id}', [Controllers\PerguntasController::class, 'formEditPerguntas'])->name('formEditPerguntas');
 
 });
 

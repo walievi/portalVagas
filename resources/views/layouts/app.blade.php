@@ -27,7 +27,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="background">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -68,7 +68,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('forms') }}">{{ __('Formulários') }}</a>
+                            <a class="nav-link" href="{{ route('perguntas') }}">{{ __('Perguntas') }}</a>
                         </li>
 
                         <li class="nav-item">

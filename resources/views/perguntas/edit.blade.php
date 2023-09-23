@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @extends('general')
-
 @section('content')
 
 
@@ -16,18 +15,18 @@
                     @endif
                     <div class="row mb-3">
                         <div class="col-md-9">
-                            <h4>{{ __('Editar usuário') }}</h4>
+                            <h4>  {{ __('Editar pergunta') }}</h4>
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('edit', ['id' => $user->id]) }}">
+                    <form method="POST" action="{{ route('editPergunta',  ['id' => $perguntas->id]) }}">
                         @csrf
                         @method('PUT')
 
                         <div class="form-group mb-2">
-                            <label for="name">{{ __('Nome') }}</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus value="{{ $user->nome }}">
+                            <label for="pergunta">{{ __('Pergunta') }}</label>
+                            <input id="pergunta" type="text" class="form-control @error('pergunta') is-invalid @enderror" name="pergunta" value="{{ $perguntas->pergunta }}" required autocomplete="pergunta" autofocus>
 
-                            @error('name')
+                            @error('pergunta')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -36,10 +35,10 @@
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="email">{{ __('Email') }}</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                            <label for="options">{{ __('Opções') }}</label>
+                            <input id="options" type="text" class="form-control @error('options') is-invalid @enderror" name="options" value="{{ $perguntas->options }}" required autocomplete="options" autofocus>
 
-                            @error('email')
+                            @error('status')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -47,16 +46,22 @@
                         
                         </div>
 
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="admin" id="role" name="role" {{ $user->role == 'admin' ? 'checked' : ''}}>
-                        <label class="form-check-label" for="role">
-                            Administrador
-                        </label>
-                    </div>
+                        <div class="form-group mb-2">
+                            <label for="mult_resps">{{ __('Múltiplas respostas') }}</label>
+                            <input id="mult_resps" type="text" class="form-control @error('mult_resps') is-invalid @enderror" name="mult_resps" value="{{ $perguntas->mult_resps }}" required autocomplete="mult_resps" autofocus>
+
+                            @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        
+                        </div>
+
 
                         <div class="form-group mb-2">
                             <center>
-                                <a type="button" href="{{route('users')}}" class="btn btn-secondary">
+                                <a type="button" href="{{route('perguntas')}}" class="btn btn-secondary">
                                     {{ __('Voltar') }}
                                 </a>
                                 <button type="submit" class="btn btn-dark">
