@@ -21,7 +21,6 @@ class FormulariosController extends Controller
         // Direcionar para página de criar vaga
         $vagas = Vaga::all();
 
-
         return view('forms.create', ['vagas' => $vagas]);
     }
 
@@ -47,6 +46,7 @@ class FormulariosController extends Controller
     {
         // Lógica para editar o vaga com o ID fornecido
         $form = Formulario::find($id);
+        $vagas = Vaga::all();
 
         if (!$form) {
             return redirect()
@@ -54,7 +54,7 @@ class FormulariosController extends Controller
                 ->with('error', 'Formulário não encontrado.');
         }
 
-        return view('forms.edit', compact('form'));
+        return view('forms.edit', compact('form', 'vagas'));
     }
 
     public function editForm(Request $request, $id)
