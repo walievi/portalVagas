@@ -30,13 +30,13 @@ class FormulariosController extends Controller
         // Lógica para excluir a vaga com o ID fornecido
         $form = Formulario::find($id);
 
-        if (!$forms) {
+        if (!$form) {
             return redirect()
                 ->route('forms')
                 ->with('error', 'forms não encontrado.');
         }
 
-        $forms->delete();
+        $form->delete();
 
         return redirect()
             ->route('forms')
@@ -83,7 +83,7 @@ class FormulariosController extends Controller
 
         Formulario::create([
             'nome_formulario' => $request->input('nome_formulario'),
-            'id_vaga' => $request->input('id_vaga'),
+            'vaga_id' => $request->input('id_vaga'),
         ]);
 
         return redirect()

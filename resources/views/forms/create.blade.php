@@ -34,10 +34,14 @@
                             </div>
 
                             <div class="form-group mb-2">
-                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="vaga" name="vaga" required autocomplete="vaga">
+                            <label for="id_vaga">{{ __('Vaga') }}</label>
+                    
+                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="id_vaga" type="id_vaga" class="form-control @error('id_vaga') is-invalid @enderror" name="id_vaga" value="{{ old('id_vaga') }}" required autocomplete="id_vaga">
                                 @foreach($vagas as $vaga)
-                                <option value="{{ $vaga->id }}">{{ $vaga->titulo }}</option>
+                                <option value="{{$vaga->id }}">{{ $vaga->titulo }}</option>
                                 @endforeach                         
+
+
                             </select>
                                 @error('vaga')
                                     <span class="invalid-feedback" role="alert">

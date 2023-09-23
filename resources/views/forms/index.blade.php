@@ -71,7 +71,7 @@
                 <tbody>
                   <tr>
                     @foreach ($forms as $form)
-                    <td>{{ $form->pergunta }} </td>
+                    <td>{{ $form->nome_formulario }} </td>
                     <td>{{ $form->vaga_id }}</td>
                     <td>{{$form->created_at}}</td>
                     <td class='actions'>

@@ -17,7 +17,7 @@ class Formulario extends Model
     * @var array<int, string>
     */
     protected $fillable = [
-        'pergunta',
+        'nome_formulario',
         'vaga_id'
     ];
 }
