@@ -74,7 +74,7 @@
                     @foreach ($perguntas as $pergunta)
                     <td>{{ $pergunta->pergunta }} </td>
                     <td>{{ $pergunta->options }}</td>
-                    <td>{{ $pergunta->mult_resps }}</td>
+                    <td>{{ $pergunta->mult_resps == 1 ? 'Sim' : 'Não' }}</td>
                     <td>{{$pergunta->created_at}}</td>
                     <td class='actions'>
                         <a class='btn btn-warning btn-xs'" href="{{ route('formEditPerguntas', $pergunta->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>

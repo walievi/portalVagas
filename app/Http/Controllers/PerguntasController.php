@@ -81,11 +81,17 @@ class PerguntasController extends Controller
     public function create(Request $request)
     {
         view('perguntas.index');
- 
         
+
+        // Obtenha as opções do formulário como um array
+        $options = $request->input('options', []);
+
+        // Converta o array de opções em JSON
+        $opcoesJson = json_encode($options);
+
         $pergunta = new Pergunta([
             'pergunta' => $request->input('pergunta'),
-            'options' => $request->input('options'),
+            'options' => $opcoesJson,
             'mult_resps' => $request->input('mult_resps') ?? 0,
         ]);      
 

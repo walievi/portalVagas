@@ -9,11 +9,15 @@ class Pergunta extends Model
 {
     use HasFactory;
 
+
+    
     protected $fillable = [
         'pergunta',
-        'options',
+        'options' => 'array',
         'mult_resps'
     ];
+
+    
 
     public function vagas()
     {

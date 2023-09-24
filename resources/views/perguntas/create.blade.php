@@ -33,17 +33,31 @@
                         
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label for="options">{{ __('Opções') }}</label>
-                            <input id="options" type="text" class="form-control @error('options') is-invalid @enderror" name="options" value="{{ old('options') }}" required autocomplete="options" autofocus>
+                        <div class="form-group mb-2" id="opcoes-container">
+                            @if (isset($pergunta) && !empty($pergunta->options))
+                                @php
+                                    $opcoes = unserialize($pergunta->options); // Desserialize as opções
+                                @endphp
 
+                                @foreach ($opcoes as $key => $opcao)
+                                    <input type="text" class="form-control @error('options.' . $key) is-invalid @enderror" name="options[]" value="{{ $opcao }}" required autocomplete="options" autofocus>
+                                    <br>
+                                @endforeach
+                            @endif
+                        </div>
+
+
+
+
+                            <!-- Campo para adicionar novas opções -->
+                            <button type="button" class="btn btn-primary" id="adicionar-opcao">Adicionar Opção</button>
                             @error('status')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        
                         </div>
+
 
                         <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="1" id="mult_resps" for="mult_resps" name="mult_resps">
@@ -85,5 +99,16 @@
         </div>
     </div>
 </div>
-
+<script>
+    document.getElementById('adicionar-opcao').addEventListener('click', function() {
+        var container = document.getElementById('opcoes-container');
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'opcoes[]';
+        input.className = 'form-control';
+        input.required = true;
+        
+        container.appendChild(input);
+    });
+</script>
 @endsection

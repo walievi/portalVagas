@@ -26,7 +26,7 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users')->with('success', 'Usuário excluído com sucesso.');
+        return redirect()->route('users')->with('success', 'Usuário desativado com sucesso.');
     }
 
     public function restore($id)
@@ -76,10 +76,13 @@ class UsersController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function edit(Request $request, User $user) {
+    public function edit(Request $request, $id) {
+        $user = User::find($id);
+
         if (!$user) {
             return redirect()->route('users')->with('error', 'Usuário não encontrado.');
         }
+
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
