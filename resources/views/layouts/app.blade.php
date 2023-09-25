@@ -68,7 +68,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('perguntas') }}">{{ __('Perguntas') }}</a>
+                            <a class="nav-link" href="{{ route('pergunta.index') }}">{{ __('Perguntas') }}</a>
                         </li>
 
                         <li class="nav-item">
@@ -123,7 +123,7 @@
                                 </form>
                             </div>
 
-                            
+
                         </li>
 
                         @endguest

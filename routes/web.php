@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
+use App\Http\Controllers\PerguntaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,20 +60,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
-    # rotas para módulo formulários
 
-    Route::get('/perguntas', [Controllers\PerguntasController::class, 'index'])->name('perguntas');
 
-    Route::get('/formCreatePergunta', [Controllers\PerguntasController::class, 'formCreatePergunta'])->name('formCreatePergunta');
-
-    Route::post('/createPergunta', [Controllers\PerguntasController::class, 'create'])->name('createPergunta');
-
-    Route::delete('/perguntas/{id}', [Controllers\PerguntasController::class, 'destroy'])->name('perguntas.destroy');
-
-    Route::put('/editPergunta/{id}', [Controllers\PerguntasController::class, 'editPergunta'])->name('editPergunta');
-
-    Route::get('/formEditPerguntas/{id}', [Controllers\PerguntasController::class, 'formEditPerguntas'])->name('formEditPerguntas');
-
+    # rotas para perguntas
+    Route::name('pergunta.')->prefix('pergunta')->group(function () {
+        $class = PerguntaController::class;
+        Route::name('index')   ->get('',                [$class, 'index']);
+        Route::name('create')  ->get('create',          [$class, 'create']);
+        Route::name('show')    ->get('{pergunta}',      [$class, 'show']);
+        Route::name('edit')    ->get('{pergunta}/edit', [$class, 'edit']);
+        Route::name('store')   ->post('',               [$class, 'store']);
+        Route::name('update')  ->put('{pergunta}',      [$class, 'update']);
+        Route::name('destroy') ->delete('{pergunta}',   [$class, 'destroy']);
+    });
 });
 
 

@@ -10,14 +10,14 @@ class Pergunta extends Model
     use HasFactory;
 
 
-    
+
     protected $fillable = [
         'pergunta',
-        'options' => 'array',
+        'options',
         'mult_resps'
     ];
 
-    
+
 
     public function vagas()
     {
@@ -28,6 +28,17 @@ class Pergunta extends Model
 
     public function respostas()
     {
-        $this->hasMany(Resposta::class, 'pergunta_id');
+        return $this->hasMany(Resposta::class, 'pergunta_id');
+    }
+
+
+    public function getFreeTextAttribute()
+    {
+        return $this->options == null;
+    }
+
+    public function getOptionsListAttribute()
+    {
+        return ($this->options != null) ? json_decode($this->options) : array();
     }
 }

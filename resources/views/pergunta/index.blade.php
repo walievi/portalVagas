@@ -53,8 +53,8 @@
                 <div class="col-md-9">
                     <h4>  {{ __('Perguntas') }}</h4>
                 </div>
-                <div class="col-md-3 mb-3"> 
-                    <a href="{{ route('formCreatePergunta') }}" class="btn btn-dark" >Criar nova pergunta</a>
+                <div class="col-md-3 mb-3">
+                    <a href="{{ route('pergunta.create') }}" class="btn btn-dark" >Criar nova pergunta</a>
                 </div>
             </div>
             <div class="table-responsive col-md-12">
@@ -72,13 +72,13 @@
                 <tbody>
                     <tr>
                     @foreach ($perguntas as $pergunta)
-                    <td>{{ $pergunta->pergunta }} </td>
-                    <td>{{ $pergunta->options }}</td>
-                    <td>{{ $pergunta->mult_resps == 1 ? 'Sim' : 'Não' }}</td>
-                    <td>{{$pergunta->created_at}}</td>
+                    <td><a href="{{ route('pergunta.show', ['pergunta' => $pergunta->id]) }}">{{ $pergunta->pergunta }}</a></td>
+                    <td><?= ($pergunta->freeText) ? '<i>Resposta de texto Livre</i>' : implode('<br>', $pergunta->optionsList) ?></td>
+                    <td>{{ $pergunta->freeText ? 'N/A' : ($pergunta->mult_resps ? 'Sim' : 'Não') }}</td>
+                    <td>{{ $pergunta->created_at->format('d/m/Y H:i:s'); }}</td>
                     <td class='actions'>
-                        <a class='btn btn-warning btn-xs'" href="{{ route('formEditPerguntas', $pergunta->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
-                        <a class='btn btn-danger btn-xs delete-pergunta-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('perguntas.destroy', $pergunta->id) }}""><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                        <a class='btn btn-warning btn-xs'" href="{{ route('pergunta.edit', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
+                        <a class='btn btn-danger btn-xs delete-pergunta-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('pergunta.destroy', ['pergunta' => $pergunta->id]) }}""><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
                     </td>
                     </tr>
                     @endforeach
