@@ -39,6 +39,6 @@ class Pergunta extends Model
 
     public function getOptionsListAttribute()
     {
-        return ($this->options != null) ? json_decode($this->options) : array();
+        return ($this->options != null) ? json_decode($this->options) : null;
     }
 }

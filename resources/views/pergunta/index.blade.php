@@ -70,16 +70,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    
                     @foreach ($perguntas as $pergunta)
-                    <td><a href="{{ route('pergunta.show', ['pergunta' => $pergunta->id]) }}">{{ $pergunta->pergunta }}</a></td>
-                    <td><?= ($pergunta->freeText) ? '<i>Resposta de texto Livre</i>' : implode('<br>', $pergunta->optionsList) ?></td>
-                    <td>{{ $pergunta->freeText ? 'N/A' : ($pergunta->mult_resps ? 'Sim' : 'Não') }}</td>
-                    <td>{{ $pergunta->created_at->format('d/m/Y H:i:s'); }}</td>
-                    <td class='actions'>
-                        <a class='btn btn-warning btn-xs'" href="{{ route('pergunta.edit', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
-                        <a class='btn btn-danger btn-xs delete-pergunta-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('pergunta.destroy', ['pergunta' => $pergunta->id]) }}""><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
-                    </td>
+                    <tr>
+                        <td><a href="{{ route('pergunta.show', ['pergunta' => $pergunta->id]) }}">{{ $pergunta->pergunta }}</a></td>
+                        <td><?= ($pergunta->freeText) ? '<i>Resposta de texto Livre</i>' : implode('<br>', $pergunta->optionsList) ?></td>
+                        <td>{{ $pergunta->freeText ? 'N/A' : ($pergunta->mult_resps ? 'Sim' : 'Não') }}</td>
+                        <td>{{ $pergunta->created_at->format('d/m/Y H:i:s') }}</td>
+                        <td class='actions'>
+                            <a class='btn btn-warning btn-xs' href="{{ route('pergunta.edit', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
+                            <a class='btn btn-danger btn-xs delete-pergunta-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('pergunta.destroy', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
