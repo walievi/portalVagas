@@ -40,7 +40,7 @@
       </div>
   @endif
   <div class="row justify-content-center">
-    <div class="col-md-10 mt-5">
+    <div class="col-md-12 mt-5">
       <div class="card">
         <div class="card-body">
           @if (session('status'))
@@ -50,7 +50,7 @@
           @endif
 
           <div class="row">
-              <div class="col-md-9">
+              <div class="col-md-11">
                   <h4>  {{ __('Vagas') }}</h4>
               </div>
               <div class="col-md-3 mb-3"> 
