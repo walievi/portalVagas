@@ -45,7 +45,7 @@
                         <div class="form-group mb-2 mt-3">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <td>Respotas</td>
+                                    <td>Respostas</td>
                                     <td>Quantidade</td>
                                 </thead>
                                 <tbody>
