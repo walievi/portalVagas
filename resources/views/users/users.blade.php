@@ -52,7 +52,7 @@
 
           <div class="row">
               <div class="col-md-9">
-              <h4>  {{ __('Usuarios') }}</h4>
+              <h4>  {{ __('Usuários') }}</h4>
               </div>
               <div class="col-md-3 mb-3">
                 <a href="{{ route('formCreate') }}" class="btn btn-dark" >Adicionar usuário</a>
