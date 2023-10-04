@@ -24,3 +24,6 @@
 
 ## Criar model
 1. php artisan make:model Post
+
+## link cidades e estados sql
+https://zerobugs.com.br/ver-post/codigo-sql-com-todas-as-cidades-e-estados-do-brasil-62/
