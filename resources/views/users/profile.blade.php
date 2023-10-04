@@ -52,7 +52,7 @@
                     @endif
                     <div class="row mb-3">
                         <div class="col-md-9">
-                            <h4>{{ __('Editar usuário') }}</h4>
+                            <h4>{{ __('Perfil') }}</h4>
                         </div>
                     </div>
                     <form method="POST" action="{{ route('editProfile', ['id' => $user->id]) }}">
@@ -99,6 +99,114 @@
                             <label for="password-confirm">{{ __('Confirmação da nova senha') }}</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                         </div>
+
+                        <div class="form-group mb-2">
+                            <center>
+                                <button type="submit" class="btn btn-dark">
+                                    {{ __('Salvar') }}
+                                </button>
+                            </center>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <div class="row mb-3">
+                        <div class="col-md-9">
+                            <h4>{{ __('Dados pessoais') }}</h4>
+                        </div>
+                    </div>
+                    <!-- Adicionar metodo action="{{ route('editProfile', ['id' => $user->id]) }}" -->
+                    <form method="POST" > 
+                        @csrf
+
+                        <div class="form-group mb-2">
+                            <label for="nascimento">{{ __('Data de nascimento') }}</label>
+                            <input id="nascimento" type="text" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" value="{{ $user->nascimento }}" required autocomplete="nascimento" autofocus value="{{ $user->nascimento }}">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="telefone">{{ __('Telefone') }}</label>
+                            <input id="telefone" type="tel" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ $user->telefone }}" required autocomplete="telefone">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="cep" >{{ __('CEP') }}</label>
+                            <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" autocomplete="new-cep">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="rua" >{{ __('Rua') }}</label>
+                            <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror" name="rua" autocomplete="new-rua">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="numero">{{ __('Numero') }}</label>
+                            <input id="numero" type="text" class="form-control" name="numero" autocomplete="new-numero">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="bairro">{{ __('Bairro') }}</label>
+                            <input id="bairro" type="text" class="form-control" name="bairro" autocomplete="new-bairro">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="cidade">{{ __('Cidade') }}</label>
+                            
+                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="cidade" type="cidade" class="form-control @error('cidade') is-invalid @enderror" name="cidade" value="{{ old('cidade') }}" required autocomplete="cidade">
+                                <option value="Novo Hamburgo" selected>Novo Hamburgo</option>
+                                <option value="Campo Bom">Campo Bom</option>
+                                <option value="Ivoti">Ivoti</option>
+                                <option value="Sapiranga">Sapiranga</option>
+                            </select>
+
+                            @error('cidade')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="estado">{{ __('Estado') }}</label>
+                            
+                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="estado" type="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" value="{{ old('estado') }}" required autocomplete="estado">
+                                <option value="RS" selected>RS</option>
+                                <option value="SC">SC</option>
+                                <option value="PR">PR</option>
+                                <option value="MT">MT</option>
+                            </select>
+
+                            @error('estado')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="objetivo">{{ __('Objetivo com a vaga') }}</label>
+                            <input id="objetivo" type="text" class="form-control" name="objetivo" autocomplete="new-objetivo">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="habilidades">{{ __('Principais Habilidades') }}</label>
+                            <input id="habilidades" type="text" class="form-control" name="habilidades" autocomplete="new-habilidades">
+                        </div>
+
 
                         <div class="form-group mb-2">
                             <center>
