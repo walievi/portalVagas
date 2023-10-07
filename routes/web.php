@@ -66,6 +66,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
+    # rotas para perfil
+    Route::name('perfil.')->prefix('perfil')->group(function () {
+        $class = PerfilController::class;
+        Route::name('index')   ->get('',                [$class, 'index']);
+        Route::name('create')  ->get('create',          [$class, 'create']);
+        Route::name('show')    ->get('{perfil}',      [$class, 'show']);
+        Route::name('edit')    ->get('{perfil}/edit', [$class, 'edit']);
+        Route::name('store')   ->post('',               [$class, 'store']);
+        Route::name('update')  ->put('{perfil}',      [$class, 'update']);
+        Route::name('destroy') ->delete('{perfil}',   [$class, 'destroy']);
+    });
 
 
     # rotas para perguntas

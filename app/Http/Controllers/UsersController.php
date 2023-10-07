@@ -11,6 +11,7 @@ use App\Models\Cidade;
 use App\Models\DadosPessoais;
 use App\Models\Contato;
 use App\Models\Endereco;
+use App\Http\Requests\DadoPessoalRequest;
 
 class UsersController extends Controller
 {
@@ -152,7 +153,7 @@ class UsersController extends Controller
         return redirect()->route('profile')->with('success', 'Usuário editado com sucesso.');
     }
 
-    public function editDadosPessoais(Request $request, $id) {
+    public function editDadosPessoais(request $request, $id) {
         // Lógica para editar o usuário com o ID fornecido - user
         $user = User::find($id);
     
@@ -173,6 +174,7 @@ class UsersController extends Controller
         // Verifique se já existe um registro de contato para este usuário
         $contato = $user->dadosPessoais->contato ?? new Contato();
         $contato->telefone = $request->input('telefone');
+        $contato->celular = $request->input('celular');
         $contato->email = $user->email;
         $contato->save();
     
