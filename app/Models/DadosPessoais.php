@@ -20,4 +20,15 @@ class DadosPessoais extends Model
         'habilidades',
     ];
 
+    public function contato()
+    {
+        return $this->belongsTo(Contato::class, 'contato_id');
+    }
+    
+
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class, 'endereco_id');
+    }
+    
 }

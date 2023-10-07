@@ -2,8 +2,6 @@
 @extends('general')
 
 @section('content')
-
-
 <div class="container">
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -128,47 +126,72 @@
                         </div>
                     </div>
                     <!-- Adicionar metodo action="{{ route('editProfile', ['id' => $user->id]) }}" -->
-                    <form method="POST" > 
-                        @csrf
 
+                    <form method="POST" action="{{ route('editDadosPessoais', ['id' => $user->id]) }}" > 
+                        @csrf
+                        @method('PUT')
                         <div class="form-group mb-2">
                             <label for="nascimento">{{ __('Data de nascimento') }}</label>
-                            <input id="nascimento" type="text" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" value="{{ $user->nascimento }}" required autocomplete="nascimento" autofocus value="{{ $user->nascimento }}">
+                            <input id="data_nascimento" type="date" class="form-control @error('nascimento') is-invalid @enderror" name="data_nascimento" value="{{ optional($user->dadosPessoais)->data_nascimento }}" required autocomplete="data_nascimento" autofocus>
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="telefone">{{ __('Telefone') }}</label>
-                            <input id="telefone" type="tel" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ $user->telefone }}" required autocomplete="telefone">
+                            <input id="telefone" type="tel" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ isset($user->dadosPessoais->contato) ? $user->dadosPessoais->contato->telefone : '' }}" required autocomplete="telefone">
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="cep" >{{ __('CEP') }}</label>
-                            <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" autocomplete="new-cep">
+                            <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" autocomplete="new-cep" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->cep : '' }}">
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="rua" >{{ __('Rua') }}</label>
-                            <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror" name="rua" autocomplete="new-rua">
+                            <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror" name="rua" autocomplete="new-rua" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->rua : '' }}">
                         </div>
 
                         <div class="form-group mb-4">
                             <label for="numero">{{ __('Numero') }}</label>
-                            <input id="numero" type="text" class="form-control" name="numero" autocomplete="new-numero">
+                            <input id="numero" type="text" class="form-control" name="numero" autocomplete="new-numero" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->numero : '' }}">
                         </div>
 
                         <div class="form-group mb-4">
                             <label for="bairro">{{ __('Bairro') }}</label>
-                            <input id="bairro" type="text" class="form-control" name="bairro" autocomplete="new-bairro">
+                            <input id="bairro" type="text" class="form-control" name="bairro" autocomplete="new-bairro" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->bairro : '' }}">
                         </div>
+
+                        <div class="form-group mb-2">
+                            <label for="estado">{{ __('Estado') }}</label>
+                            
+                                <div class="list-group">
+                                <select class="form-select form-select-md mb-3" aria-label="Large select example" id="estado" type="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" value="{{ old('estado') }}" required autocomplete="estado">
+                                    @foreach ($estados as $estado)
+                                        <label class="list-group-item">
+                                        <option value="{{ $estado->id }}" @if ($estado->nome === 'Rio Grande do Sul') selected @endif>
+                                            {{ $estado->nome }}
+                                        </option>
+                                        </label>
+                                    @endforeach
+
+                                </select>
+                         
+                                </div>
+
+                            @error('estado')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        
+                        </div>
+
 
                         <div class="form-group mb-2">
                             <label for="cidade">{{ __('Cidade') }}</label>
                             
-                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="cidade" type="cidade" class="form-control @error('cidade') is-invalid @enderror" name="cidade" value="{{ old('cidade') }}" required autocomplete="cidade">
-                                <option value="Novo Hamburgo" selected>Novo Hamburgo</option>
-                                <option value="Campo Bom">Campo Bom</option>
-                                <option value="Ivoti">Ivoti</option>
-                                <option value="Sapiranga">Sapiranga</option>
+                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="cidade" type="cidade" class="form-control @error('cidade') is-invalid @enderror" name="cidade"  required autocomplete="cidade">
+                            <option value="">Selecione um estado primeiro</option>
+
                             </select>
 
                             @error('cidade')
@@ -179,32 +202,16 @@
                         
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label for="estado">{{ __('Estado') }}</label>
-                            
-                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="estado" type="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" value="{{ old('estado') }}" required autocomplete="estado">
-                                <option value="RS" selected>RS</option>
-                                <option value="SC">SC</option>
-                                <option value="PR">PR</option>
-                                <option value="MT">MT</option>
-                            </select>
-
-                            @error('estado')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        
-                        </div>
+   
 
                         <div class="form-group mb-4">
                             <label for="objetivo">{{ __('Objetivo com a vaga') }}</label>
-                            <input id="objetivo" type="text" class="form-control" name="objetivo" autocomplete="new-objetivo">
+                            <textarea id="objetivo" type="text" class="form-control" name="objetivo" autocomplete="new-objetivo" placeholder="Breve descrição com seu objetivo com a vaga">{{ isset($user->dadosPessoais) ? $user->dadosPessoais->objetivo_vaga : '' }}</textarea>
                         </div>
 
                         <div class="form-group mb-4">
                             <label for="habilidades">{{ __('Principais Habilidades') }}</label>
-                            <input id="habilidades" type="text" class="form-control" name="habilidades" autocomplete="new-habilidades">
+                            <textarea id="habilidades" type="text" class="form-control" name="habilidades" autocomplete="new-habilidades" placeholder="Descreva aqui as suas principais habilidades, hardskills e softskills">{{ isset($user->dadosPessoais) ? $user->dadosPessoais->habilidades : '' }}</textarea>
                         </div>
 
 
@@ -267,7 +274,7 @@
                         </div>
 
                         <div class="form-group mb-4">
-                            <label for="fim_superior">{{ __('Previsão de conclusão') }}</label>
+                            <label for="fim_superior">{{ __('Ano de conclusão ou previsto') }}</label>
                             <input id="fim_superior" type="text" class="form-control" name="fim_superior" autocomplete="new-fim_superior">
                         </div>
 
@@ -289,7 +296,7 @@
 
 
                         <div class="form-group mb-4">
-                            <label for="fim_graduacao">{{ __('Conclusão') }}</label>
+                            <label for="fim_graduacao">{{ __('Ano de conclusão ou previsto') }}</label>
                             <input id="fim_graduacao" type="text" class="form-control" name="fim_graduacao" autocomplete="new-fim_graduacao">
                         </div>
 
@@ -297,14 +304,14 @@
                         <div class="form-group mb-4">
                             <label for="ingles">{{ __('Língua Inglesa:') }}</label><br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="flexRadioLinguaInglesa" id="flexRadioLinguaInglesa">
+                                <label class="form-check-label" for="flexRadioLinguaInglesa">
                                 Sim
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioLinguaInglesa" id="flexRadioLinguaInglesa" checked>
+                                <label class="form-check-label" for="flexRadioLinguaInglesa">
                                     Não
                                 </label>
                             </div>
@@ -323,14 +330,14 @@
                         <div class="form-group mb-4">
                             <label for="idioma">{{ __('Fluência em outro idioma?') }}</label><br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="flexRadioDefaultOutroIdioma" id="flexRadioDefaultOutroIdioma">
+                                <label class="form-check-label" for="flexRadioDefaultOutroIdioma">
                                 Sim
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefaultOutroIdioma" id="flexRadioDefaultOutroIdioma" checked>
+                                <label class="form-check-label" for="flexRadioDefaultOutroIdioma">
                                     Não
                                 </label>
                             </div>
@@ -360,14 +367,62 @@
         </div>
     </div>
 </div>
-
+<!-- Modal -->
 
 <script>
+    // exclusao do perfil, pega o click do botao e seta o action do form
     $(document).ready(function () {
         $(".delete-user-btn").click(function () {
           var url = $(this).data("url");
           $("#deleteUserForm").attr("action", url);
         });
     });
+    // mascara para o formatar input de celular
+    $("#telefone, #celular").mask("(00) 0 0000-0000");
+    // mascara para formatar input de cep
+    $("#cep").mask("00000-000");
+    // mascara para formatar ano de conslusão entino medio
+    $("#ensino_medio_conclusao").mask("0000");
+
 </script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Função para carregar cidades com base no estado pré-selecionado
+    function carregarCidadesParaEstadoSelecionado() {
+        var estadoId = $('#estado').val();
+        
+        if (estadoId) {
+            $.ajax({
+                url: '/cidades/' + estadoId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#cidade').empty();
+                    $('#cidade').append('<option value="">Selecione uma cidade</option>');
+                    $.each(data, function(key, value) {
+                        $('#cidade').append('<option value="' + value.id + '">' + value.nome + '</option>');
+                    });
+
+                }
+            });
+        } else {
+            $('#cidade').empty();
+            $('#cidade').append('<option value="">Selecione um estado primeiro</option>');
+        }
+    }
+
+    // Chame a função quando a página for carregada
+    $(document).ready(function() {
+        carregarCidadesParaEstadoSelecionado();
+    });
+
+    // Adicione um evento change para carregar cidades quando o estado for alterado
+    $('#estado').change(function() {
+        carregarCidadesParaEstadoSelecionado();
+    });
+</script>
+
 @endsection

@@ -42,7 +42,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/profile', [Controllers\UsersController::class, 'profile'])->name('profile');
 
+    Route::get('/cidades/{estado_id}', [Controllers\UsersController::class, 'cidadesPorEstado'])->name('cidadesPorEstado');
+
+    # rota para editar perfil dados padrão, nome, senha, email
     Route::put('/editProfile/{id}', [Controllers\UsersController::class, 'editProfile'])->name('editProfile');
+
+    # rota para editar dados pessoais
+    Route::put('/editDadosPessoais/{id}', [Controllers\UsersController::class, 'editDadosPessoais'])->name('editDadosPessoais');
 
     Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
