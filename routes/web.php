@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
 use App\Http\Controllers\PerguntaController;
+use App\Http\Controllers\CandidatoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,17 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
-    # rotas para perfil
-    Route::name('perfil.')->prefix('perfil')->group(function () {
-        $class = PerfilController::class;
-        Route::name('index')   ->get('',                [$class, 'index']);
-        Route::name('create')  ->get('create',          [$class, 'create']);
-        Route::name('show')    ->get('{perfil}',      [$class, 'show']);
-        Route::name('edit')    ->get('{perfil}/edit', [$class, 'edit']);
-        Route::name('store')   ->post('',               [$class, 'store']);
-        Route::name('update')  ->put('{perfil}',      [$class, 'update']);
-        Route::name('destroy') ->delete('{perfil}',   [$class, 'destroy']);
-    });
+
 
 
     # rotas para perguntas
@@ -90,6 +81,40 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('update')  ->put('{pergunta}',      [$class, 'update']);
         Route::name('destroy') ->delete('{pergunta}',   [$class, 'destroy']);
     });
+
+
+
+
+    # rotas do perfil do candidado
+    Route::name('candidato.')->prefix('candidato')->group(function () {
+        $class = CandidatoController::class;
+        Route::name('index')   ->get('',      [$class, 'index']);
+        Route::name('edit')    ->get('/edit', [$class, 'edit']);
+        Route::name('update')  ->put('',      [$class, 'update']);
+    });
+
+    # rotas para perfil
+    Route::name('perfil.')->prefix('perfil')->group(function () {
+        $class = PerfilController::class;
+        Route::name('store')   ->post('',        [$class, 'store']);
+        Route::name('update')  ->put('{perfil}', [$class, 'update']);
+    });
+
+
+    # rotas para formações
+    Route::name('formacao.')->prefix('formacao')->group(function () {
+        $class = FormacaoController::class;
+        Route::name('index')   ->get('',                [$class, 'index']);
+        Route::name('create')  ->get('create',          [$class, 'create']);
+        Route::name('show')    ->get('{formacao}',      [$class, 'show']);
+        Route::name('edit')    ->get('{formacao}/edit', [$class, 'edit']);
+        Route::name('store')   ->post('',               [$class, 'store']);
+        Route::name('update')  ->put('{formacao}',      [$class, 'update']);
+        Route::name('destroy') ->delete('{formacao}',   [$class, 'destroy']);
+    });
+
+
+
 });
 
 
