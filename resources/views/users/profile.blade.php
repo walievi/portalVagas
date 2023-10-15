@@ -355,6 +355,43 @@
                     </form>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                <div class="row mb-3">
+                    <div class="col-md-9">
+                        <h4>{{ __('Currículo') }}</h4>
+                    </div>
+                </div>
+                @if ($curriculo)
+                    <p><h6>Você já possui um currículo em nosso sistema! E pode atualizá-lo no formulário abaixo:</h6></p>
+                    <p>Data do primeiro envio: {{ $curriculo->created_at->format('d/m/Y') }}</p>
+                    <p>Última atualização: {{ $curriculo->updated_at->format('d/m/Y') }}</p>
+                    <a href="{{ route('curriculo.show', [$curriculo->id]) }}" class="btn btn-primary">Visualizar Currículo existente</a>
+                @else
+                @endif
+                <br>
+                <form method="POST" action="{{route('curriculo.store')}}" enctype="multipart/form-data">
+                @csrf
+
+                <div class="form-group mb-4">
+                    <label for="curriculo">{{ __('Anexar no formato PDF') }}</label>
+                    <input id="curriculo" type="file" class="form-control @error('curriculo') is-invalid @enderror" name="curriculo" required autofocus>                        </div>
+                </div>
+                <div class="form-group mb-2">
+                    <center>
+                        <button type="submit" class="btn btn-dark">
+                            {{ __('Salvar') }}
+                        </button>
+                    </center>
+                </div>
+            </div>
+
             <a class='btn btn-danger btn-xs ml-4 delete-user-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('users.destroy', $user->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Apagar minha conta</a>
         </div>
     </div>

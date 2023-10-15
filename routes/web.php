@@ -66,12 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
-<<<<<<< HEAD
-    
-
-
-=======
->>>>>>> 5b5af3859e01da1d3466474b9fc8bf67e5a4a748
     # rotas para perguntas
     Route::name('pergunta.')->prefix('pergunta')->group(function () {
         $class = PerguntaController::class;
@@ -117,6 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
         $class = Controllers\CurriculoController::class;
         Route::name('store')   ->post('',        [$class, 'store']);
         Route::name('update')  ->put('{curriculo}', [$class, 'update']);
+        Route::name('show')->get('show/{curriculo}', [$class, 'show']);
     });
 
 

@@ -12,6 +12,7 @@ use App\Models\DadosPessoais;
 use App\Models\Contato;
 use App\Models\Endereco;
 use App\Http\Requests\DadoPessoalRequest;
+use App\Models\Curriculo;
 
 class UsersController extends Controller
 {
@@ -110,7 +111,8 @@ class UsersController extends Controller
         // Carregue os dados pessoais do usuário, juntamente com os relacionamentos de contato e endereço
         $user->load('dadosPessoais', 'dadosPessoais.contato', 'dadosPessoais.endereco');
 
-   
+        // carreguar o curriculo do usuario
+        $curriculo = Curriculo::where('user_id', $user->id)->first();
 
         #retorna os estados para o select
         $estados = Estado::all();
@@ -121,7 +123,7 @@ class UsersController extends Controller
             $cidade = null;
         }
                 #pega o nome da cidade pelo id acima
-        return view('users.profile', compact('user', 'estados', 'cidade'));
+        return view('users.profile', compact('user', 'estados', 'cidade', 'curriculo'));
 
     }
     
