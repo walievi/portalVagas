@@ -183,7 +183,6 @@ class UsersController extends Controller
     
         // Preencha os campos dos dados pessoais com base no request
         $dadosPessoais->data_nascimento = $request->input('data_nascimento');
-        $dadosPessoais->objetivo_vaga = $request->input('objetivo');
         $dadosPessoais->habilidades = $request->input('habilidades');
         $dadosPessoais->endereco_id = $endereco->id;
         $dadosPessoais->contato_id = $contato->id;

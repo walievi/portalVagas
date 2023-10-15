@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PerfilRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Estado;
+use App\Models\Cidade;
+use App\Models\DadosPessoais;
+use App\Models\Contato;
+use App\Models\Endereco;
 
 class PerfilController extends Controller
 {
@@ -80,7 +87,24 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Lógica para editar o usuário com o ID fornecido - user
+       $user = User::find($id);
+
+       if (!$user) {
+           return redirect()->route('perfil')->with('error', 'Usuário não encontrado.');
+       }
+
+       $user->name = $request->input('name');
+       $user->email = $request->input('email');
+       $user->role = 'user';
+
+       if ($request->input('password')) {
+           $user->password = Hash::make($request->input('password'));
+       }
+
+       $user->save();
+
+       return redirect()->route('profile')->with('success', 'Usuário editado com sucesso.');
     }
 
     /**
