@@ -53,7 +53,7 @@
                             <h4>{{ __('Perfil') }}</h4>
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('editProfile', ['id' => $user->id]) }}">
+                    <form method="POST" action="{{ route('perfil.update', ['perfil' => $user->id]) }}">
                         @csrf
                         @method('PUT')
 
@@ -125,95 +125,87 @@
                             <h4>{{ __('Dados pessoais') }}</h4>
                         </div>
                     </div>
-                    <!-- Adicionar metodo action="{{ route('editProfile', ['id' => $user->id]) }}" -->
 
-                    <form method="POST" action="{{ route('editDadosPessoais', ['id' => $user->id]) }}" > 
+                    <form method="POST" action="{{ route('candidato.update', ['candidato' => $user->id]) }}" > 
                         @csrf
                         @method('PUT')
-                        <div class="form-group mb-2">
-                            <label for="nascimento">{{ __('Data de nascimento') }}</label>
-                            <input id="data_nascimento" type="date" class="form-control @error('nascimento') is-invalid @enderror" name="data_nascimento" value="{{ optional($user->dadosPessoais)->data_nascimento }}" required autocomplete="data_nascimento" autofocus>
+
+                        <div class="form-group row mb-2">
+                            <div class="col">
+                                <label for="nascimento">{{ __('Data de nascimento') }}</label>
+                                <input id="data_nascimento" type="date" class="form-control @error('nascimento') is-invalid @enderror" name="data_nascimento" value="{{ optional($user->dadosPessoais)->data_nascimento }}" required autocomplete="data_nascimento" autofocus>
+                            </div>
+                            <div class="col">
+                                <label for="celular">{{ __('Celular') }}</label>
+                                <input id="celular" type="tel" class="form-control @error('celular') is-invalid @enderror" name="celular" value="{{ isset($user->dadosPessoais->contato) ? $user->dadosPessoais->contato->celular : '' }}" required autocomplete="celular">
+                            </div>
+                            <div class="col">
+                                <label for="telefone">{{ __('Telefone') }}</label>
+                                <input id="telefone" type="tel" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ isset($user->dadosPessoais->contato) ? $user->dadosPessoais->contato->telefone : '' }}" required autocomplete="telefone">
+                            </div>
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label for="telefone">{{ __('Telefone') }}</label>
-                            <input id="telefone" type="tel" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ isset($user->dadosPessoais->contato) ? $user->dadosPessoais->contato->telefone : '' }}" required autocomplete="telefone">
+                        <div class="form-group row mb-2">
+                            <div class="col">
+                                <label for="cep" >{{ __('CEP') }}</label>
+                                <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" autocomplete="new-cep" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->cep : '' }}">
+                            </div>
+                            <div class="col">
+                                <label for="rua" >{{ __('Rua') }}</label>
+                                <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror" name="rua" autocomplete="new-rua" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->rua : '' }}">
+                            </div>
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label for="cep" >{{ __('CEP') }}</label>
-                            <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" autocomplete="new-cep" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->cep : '' }}">
+                        <div class="form-group row mb-2">
+                            <div class="col">
+                                <label for="numero">{{ __('Numero') }}</label>
+                                <input id="numero" type="text" class="form-control" name="numero" autocomplete="new-numero" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->numero : '' }}">
+                            </div>
+                            <div class="col">
+                                <label for="bairro">{{ __('Bairro') }}</label>
+                                <input id="bairro" type="text" class="form-control" name="bairro" autocomplete="new-bairro" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->bairro : '' }}">
+                            </div>
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label for="rua" >{{ __('Rua') }}</label>
-                            <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror" name="rua" autocomplete="new-rua" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->rua : '' }}">
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="numero">{{ __('Numero') }}</label>
-                            <input id="numero" type="text" class="form-control" name="numero" autocomplete="new-numero" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->numero : '' }}">
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="bairro">{{ __('Bairro') }}</label>
-                            <input id="bairro" type="text" class="form-control" name="bairro" autocomplete="new-bairro" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->bairro : '' }}">
-                        </div>
-
-                        <div class="form-group mb-2">
-                            <label for="estado">{{ __('Estado') }}</label>
-                            
+                        <div class="form-group row mb-2">
+                            <div class="col">
+                                <label for="estado">{{ __('Estado') }}</label>
                                 <div class="list-group">
-                                <select class="form-select form-select-md mb-3" aria-label="Large select example" id="estado" type="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" value="{{ old('estado') }}" required autocomplete="estado">
-                                    @foreach ($estados as $estado)
-                                        <label class="list-group-item">
-                                        <option value="{{ $estado->id }}" @if ($estado->nome === 'Rio Grande do Sul') selected @endif>
-                                            {{ $estado->nome }}
-                                        </option>
-                                        </label>
-                                    @endforeach
-
-                                </select>
-                         
+                                    <select class="form-select form-select-md mb-3" aria-label="Large select example" id="estado" type="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" value="{{ old('estado') }}" required autocomplete="estado">
+                                        @foreach ($estados as $estado)
+                                            <label class="list-group-item">
+                                            <option value="{{ $estado->id }}" @if ($estado->nome === 'Rio Grande do Sul') selected @endif>
+                                                {{ $estado->nome }}
+                                            </option>
+                                            </label>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-                            @error('estado')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        
-                        </div>
+                                @error('estado')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col">
+                                <label for="cidade">{{ __('Cidade') }}</label>
+                                <select class="form-select form-select-md mb-3" aria-label="Large select example" id="cidade" type="cidade" class="form-control @error('cidade') is-invalid @enderror" name="cidade"  required autocomplete="cidade">
+                                    <option value="">Selecione um estado primeiro</option>
+                                </select>
 
-
-                        <div class="form-group mb-2">
-                            <label for="cidade">{{ __('Cidade') }}</label>
-                            
-                            <select class="form-select form-select-md mb-3" aria-label="Large select example" id="cidade" type="cidade" class="form-control @error('cidade') is-invalid @enderror" name="cidade"  required autocomplete="cidade">
-                            <option value="">Selecione um estado primeiro</option>
-
-                            </select>
-
-                            @error('cidade')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        
-                        </div>
-
-   
-
-                        <div class="form-group mb-4">
-                            <label for="objetivo">{{ __('Objetivo com a vaga') }}</label>
-                            <textarea id="objetivo" type="text" class="form-control" name="objetivo" autocomplete="new-objetivo" placeholder="Breve descrição com seu objetivo com a vaga">{{ isset($user->dadosPessoais) ? $user->dadosPessoais->objetivo_vaga : '' }}</textarea>
+                                @error('cidade')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>                        
                         </div>
 
                         <div class="form-group mb-4">
                             <label for="habilidades">{{ __('Principais Habilidades') }}</label>
                             <textarea id="habilidades" type="text" class="form-control" name="habilidades" autocomplete="new-habilidades" placeholder="Descreva aqui as suas principais habilidades, hardskills e softskills">{{ isset($user->dadosPessoais) ? $user->dadosPessoais->habilidades : '' }}</textarea>
                         </div>
-
 
                         <div class="form-group mb-2">
                             <center>

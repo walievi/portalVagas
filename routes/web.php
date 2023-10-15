@@ -67,9 +67,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
-
-
-
     # rotas para perguntas
     Route::name('pergunta.')->prefix('pergunta')->group(function () {
         $class = PerguntaController::class;
@@ -83,27 +80,24 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-
-
     # rotas do perfil do candidado
     Route::name('candidato.')->prefix('candidato')->group(function () {
-        $class = CandidatoController::class;
-        Route::name('index')   ->get('',      [$class, 'index']);
-        Route::name('edit')    ->get('/edit', [$class, 'edit']);
-        Route::name('update')  ->put('',      [$class, 'update']);
+        $class = Controllers\CandidatoController::class;
+        Route::name('index')   ->get('',          [$class, 'index']);
+        Route::name('edit')    ->get('/edit',     [$class, 'edit']);
+        Route::name('update')  ->put('{candidato}',      [$class, 'update']);
     });
 
     # rotas para perfil
     Route::name('perfil.')->prefix('perfil')->group(function () {
-        $class = PerfilController::class;
+        $class = Controllers\PerfilController::class;
         Route::name('store')   ->post('',        [$class, 'store']);
         Route::name('update')  ->put('{perfil}', [$class, 'update']);
     });
 
-
     # rotas para formações
     Route::name('formacao.')->prefix('formacao')->group(function () {
-        $class = FormacaoController::class;
+        $class = Controllers\FormacaoController::class;
         Route::name('index')   ->get('',                [$class, 'index']);
         Route::name('create')  ->get('create',          [$class, 'create']);
         Route::name('show')    ->get('{formacao}',      [$class, 'show']);
