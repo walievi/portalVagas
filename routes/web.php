@@ -51,7 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
     # rota para editar dados pessoais
     Route::put('/editDadosPessoais/{id}', [Controllers\UsersController::class, 'editDadosPessoais'])->name('editDadosPessoais');
 
-    Route::middleware('web')->resource('curriculo', Controllers\CurriculoController::class);
 
     # rotas para módulo vagas
 
@@ -67,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
-
+    
 
 
     # rotas para perguntas
@@ -112,6 +111,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('update')  ->put('{formacao}',      [$class, 'update']);
         Route::name('destroy') ->delete('{formacao}',   [$class, 'destroy']);
     });
+
+    # rotas para curriculos
+    Route::name('curriculo.')->prefix('curriculo')->group(function () {
+        $class = Controllers\CurriculoController::class;
+        Route::name('store')   ->post('',        [$class, 'store']);
+        Route::name('update')  ->put('{curriculo}', [$class, 'update']);
+    });
+
 
 
 

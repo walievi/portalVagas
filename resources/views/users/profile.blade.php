@@ -141,6 +141,11 @@
                         </div>
 
                         <div class="form-group mb-2">
+                            <label for="celular">{{ __('Celular') }}</label>
+                            <input id="celular" type="tel" class="form-control @error('celular') is-invalid @enderror" name="celular" value="{{ isset($user->dadosPessoais->contato) ? $user->dadosPessoais->contato->celular : '' }}" required autocomplete="celular">
+                        </div>
+
+                        <div class="form-group mb-2">
                             <label for="cep" >{{ __('CEP') }}</label>
                             <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" autocomplete="new-cep" value="{{ isset($user->dadosPessoais->endereco) ? $user->dadosPessoais->endereco->cep : '' }}">
                         </div>
@@ -200,13 +205,6 @@
                                 </span>
                             @enderror
                         
-                        </div>
-
-   
-
-                        <div class="form-group mb-4">
-                            <label for="objetivo">{{ __('Objetivo com a vaga') }}</label>
-                            <textarea id="objetivo" type="text" class="form-control" name="objetivo" autocomplete="new-objetivo" placeholder="Breve descrição com seu objetivo com a vaga">{{ isset($user->dadosPessoais) ? $user->dadosPessoais->objetivo_vaga : '' }}</textarea>
                         </div>
 
                         <div class="form-group mb-4">
@@ -363,10 +361,46 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 mb-5">
+            <div class="card">
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <div class="row mb-3">
+                        <div class="col-md-9">
+                            <h4>{{ __('Anexar Currículo') }}</h4>
+                        </div>
+                    </div>
+                    <form method="POST" action="{{ route('curriculo.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group mb-2">
+                        <label for="curriculo">{{ __('Anexar no formato PDF') }}</label>
+                        <input id="curriculo" type="file" class="form-control @error('curriculo') is-invalid @enderror" name="curriculo" required autofocus>
+                    </div>
+
+                </div>
+                    <div class="form-group mb-2">
+                        <center>
+                            <button type="submit" class="btn btn-dark">
+                                {{ __('Salvar') }}
+                            </button>
+                        </center>
+                    </div>
+                    </form>
+            </div>
             <a class='btn btn-danger btn-xs ml-4 delete-user-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('users.destroy', $user->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Apagar minha conta</a>
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 
 <script>

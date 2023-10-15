@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasOne(Endereco::class);
     }
 
+    public function curriculo()
+    {
+        return $this->hasOne(Curriculo::class);
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new meuResetDeSenha($token));

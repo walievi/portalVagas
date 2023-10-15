@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Curriculo;
 use Illuminate\Http\Request;
+use App\Models\Curriculo;
 
 class CurriculoController extends Controller
 {
@@ -14,7 +14,7 @@ class CurriculoController extends Controller
      */
     public function index()
     {
-        return view('curriculo.index');
+        //
     }
 
     /**
@@ -35,16 +35,30 @@ class CurriculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $pdfFile = $request->file('curriculo');
+        if ($pdfFile) {
+            $pdfData = file_get_contents($pdfFile);
+ 
+        $curriculo = new Curriculo();
+        $curriculo->user_id = auth()->user()->id;
+        $curriculo->pdf = $pdfData;
+        $curriculo->save();
+        }
+    
+        return redirect()->route('profile')
+            ->with('success','Curriculo enviado com sucesso.');
     }
+    
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Curriculo  $curriculo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Curriculo $curriculo)
+    public function show($id)
     {
         //
     }
@@ -52,10 +66,10 @@ class CurriculoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Curriculo  $curriculo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Curriculo $curriculo)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +78,10 @@ class CurriculoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Curriculo  $curriculo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Curriculo $curriculo)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +89,10 @@ class CurriculoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Curriculo  $curriculo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Curriculo $curriculo)
+    public function destroy($id)
     {
         //
     }
