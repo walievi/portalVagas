@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\meuResetDeSenha;
 
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
@@ -53,6 +54,26 @@ class User extends Authenticatable
     public function respostas()
     {
         $this->hasMany(App\Models\Resposta::class);
+    }
+
+    public function dadosPessoais()
+    {
+        return $this->hasOne(DadosPessoais::class);
+    }
+
+    public function contato()
+    {
+        return $this->hasMany(Contato::class);
+    }
+
+    public function endereco()
+    {
+        return $this->hasOne(Endereco::class);
+    }
+
+    public function curriculo()
+    {
+        return $this->hasOne(Curriculo::class);
     }
 
     public function sendPasswordResetNotification($token)
