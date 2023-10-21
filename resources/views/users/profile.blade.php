@@ -234,63 +234,46 @@
                             <h4>{{ __('Formação') }}</h4>
                         </div>
                     </div>
-                    <!-- Adicionar metodo action="{{ route('editProfile', ['id' => $user->id]) }}" -->
-                    <form method="POST" > 
+                   
+                    <form method="POST" action="{{ route('formacao.update', ['formacao' => $user->id]) }}"> 
                         @csrf
+                        @method('PUT')
 
                         <h6>Ensino Médio</h6>
-                        <div class="form-group mb-2">
-                            <label for="ensino_medio_local">{{ __('Local') }}</label>
-                            <input id="ensino_medio_local" type="text" class="form-control @error('ensino_medio_local') is-invalid @enderror" name="ensino_medio_local" value="{{ $user->ensino_medio_local }}" required autocomplete="ensino_medio_local" autofocus value="{{ $user->ensino_medio_local }}">
-                        </div>
-
-                        <div class="form-group mb-2">
-                            <label for="ensino_medio_conclusao">{{ __('Ano de conclusão') }}</label>
-                            <input id="ensino_medio_conclusao" type="text" class="form-control @error('ensino_medio_conclusao') is-invalid @enderror" name="ensino_medio_conclusao" value="{{ $user->ensino_medio_conclusao }}" required autocomplete="ensino_medio_conclusao" autofocus value="{{ $user->ensino_medio_conclusao }}">
-                        </div>
+                        <div class="form-group row mb-2">
+                            <div class="col-md-8">
+                                <label for="local_medio">{{ __('Local') }}</label>
+                                <input id="local_medio" type="text" class="form-control @error('local_medio') is-invalid @enderror" name="local_medio"  required autocomplete="local_medio" autofocus>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ano_conclusao_medio">{{ __('Ano de conclusão') }}</label>
+                                <input id="ano_conclusao_medio" type="text" class="form-control @error('ano_conclusao_medio') is-invalid @enderror" name="ano_conclusao_medio"  required autocomplete="ano_conclusao_medio" autofocus>
+                            </div>
+                        </div><br>
 
                         <h6>Ensino Superior</h6>
-                        <div class="form-group mb-2">
-                            <label for="curso">{{ __('Curso') }}</label>
-                            <input id="curso" type="tel" class="form-control @error('curso') is-invalid @enderror" name="curso" value="{{ $user->curso }}" required autocomplete="curso">
+                        <div class="form-group row mb-2">
+                            <div class="col-md-8">
+                                <label for="curso_superior">{{ __('Curso') }}</label>
+                                <input id="curso_superior" type="tel" class="form-control @error('curso_superior') is-invalid @enderror" name="curso_superior" required autocomplete="curso_superior">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="universidade_superior" >{{ __('Universidade') }}</label>
+                                <input id="universidade_superior" type="text" class="form-control @error('universidade_superior') is-invalid @enderror" name="universidade_superior" autocomplete="new-universidade_superior">
+                            </div>
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label for="universidade" >{{ __('Universidade') }}</label>
-                            <input id="universidade" type="text" class="form-control @error('universidade') is-invalid @enderror" name="universidade" autocomplete="new-universidade">
-                        </div>
-
-                        <div class="form-group mb-2">
-                            <label for="inicio_superior" >{{ __('Data de início') }}</label>
-                            <input id="inicio_superior" type="date" class="form-control @error('inicio_superior') is-invalid @enderror" name="inicio_superior" autocomplete="new-inicio_superior">
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="fim_superior">{{ __('Ano de conclusão ou previsto') }}</label>
-                            <input id="fim_superior" type="text" class="form-control" name="fim_superior" autocomplete="new-fim_superior">
-                        </div>
-
-                        <h6>Outro curso de graduação? Se sim:</h6>
-                        <div class="form-group mb-4">
-                            <label for="segundo_curso">{{ __('Curso') }}</label>
-                            <input id="segundo_curso" type="text" class="form-control" name="segundo_curso" autocomplete="new-segundo_curso">
-                        </div>
-                        
-                        <div class="form-group mb-4">
-                            <label for="segunda_universidade">{{ __('Universidade') }}</label>
-                            <input id="segunda_universidade" type="text" class="form-control" name="segunda_universidade" autocomplete="new-segunda_universidade">
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="inicio_graduacao">{{ __('Data de início') }}</label>
-                            <input id="inicio_graduacao" type="text" class="form-control" name="inicio_graduacao" autocomplete="new-inicio_graduacao">
-                        </div>
-
-
-                        <div class="form-group mb-4">
-                            <label for="fim_graduacao">{{ __('Ano de conclusão ou previsto') }}</label>
-                            <input id="fim_graduacao" type="text" class="form-control" name="fim_graduacao" autocomplete="new-fim_graduacao">
-                        </div>
+                        <div class="form-group row mb-2">
+                            <div class="col">
+                                <label for="data_inicio_superior" >{{ __('Data de início') }}</label>
+                                <input id="data_inicio_superior" type="date" class="form-control @error('data_inicio_superior') is-invalid @enderror" name="data_inicio_superior" autocomplete="new-data_inicio_superior">
+                       
+                            </div>
+                            <div class="col">
+                                <label for="ano_conclusao_superior">{{ __('Ano de conclusão ou previsto') }}</label>
+                                <input id="ano_conclusao_superior" type="date" class="form-control" name="ano_conclusao_superior" autocomplete="new-ano_conclusao_superior">
+                            </div>
+                        </div><br>
 
                         <h6>Cursos Complementares</h6>
                         <div class="form-group mb-4">
@@ -344,6 +327,10 @@
                             <label for="cursos_complementares">{{ __('Outros cursos complementares? Quais?') }}</label>
                             <input id="cursos_complementares" type="text" class="form-control" name="cursos_complementares" autocomplete="new-cursos_complementares">
                         </div>
+
+                        <!-- <div class="form-group mb-2" id="opcoes-container">
+                            <button type="button" class="btn btn-primary" id="adicionar-curso">Adicionar Curso Complementar</button>
+                        </div> -->
 
                         <div class="form-group mb-2">
                             <center>
@@ -451,6 +438,23 @@
     // Adicione um evento change para carregar cidades quando o estado for alterado
     $('#estado').change(function() {
         carregarCidadesParaEstadoSelecionado();
+    });
+ 
+    document.getElementById('adicionar-formacao').addEventListener('click', function() {
+        let input = document.getElementById('input_option');
+
+        let tbody = document.getElementById('tbodyOptions');
+        let tr = tbody.insertRow(-1);
+        let td = tr.insertCell(0);
+        td.textContent = input.value;
+        td.classList.add('opcoes');
+
+        tr.insertCell(1).innerHTML = '<button type="button" class="btn btn-danger" onclick="removeOpt(this)">Excluir</button>';
+
+        input.value = '';
+
+        attOptions();
+
     });
 </script>
 

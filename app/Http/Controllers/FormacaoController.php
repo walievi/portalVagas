@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+use App\Models\FormacaoAcademica;
 use Illuminate\Http\Request;
 
 class FormacaoController extends Controller
@@ -68,7 +69,19 @@ class FormacaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth()->user(); // Obtém o usuário autenticado
+
+        $formacao->local_medio = $request->input('local_medio');
+        $formacao->ano_conclusao_medio = $request->input('ano_conclusao_medio');
+        $formacao->curso_superior = $request->input('curso_superior');
+        $formacao->universidade_superior = $request->input('universidade_superior');
+        $formacao->ano_conclusao_superior = $request->input('ano_conclusao_superior');
+        $formacao->data_inicio_superior = $request->input('data_inicio_superior');
+        $formacao->user_id = $user->id;
+        
+        $formacao->save();
+
+        return redirect()->route('profile')->with('success', 'Formação inserida com sucesso.');
     }
 
     /**
