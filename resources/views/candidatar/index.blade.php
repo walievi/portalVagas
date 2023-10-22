@@ -54,7 +54,7 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('candidatar.update', ['candidatar' => $user->id]) }}" > 
+                    <form method="POST" action="{{ route('candidatar.update', ['candidatar' => $vaga->id]) }}" > 
                     @if (count($perguntas) > 0)
                     @csrf
                     @method('PUT')

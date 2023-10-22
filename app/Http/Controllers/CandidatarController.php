@@ -28,26 +28,44 @@ class CandidatarController extends Controller
         return view('candidatar.index', compact('user', 'perguntas', 'vaga'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = User::find($id);
+        $user = auth()->user();
         $vaga_id = $request->input('vaga_id'); // Id da vaga
-        $perguntas = $request->input('perguntas'); // Array de IDs das perguntas
+        //$perguntas = $request->input('perguntas'); // Array de IDs das perguntas
         $respostas = $request->input('respostas'); // Array de respostas do formulário
 
-        foreach ($respostas as $key => $resposta) {
-            $pergunta_id = $perguntas[$key];
-            $respostaArray = [
-                'vaga_id' => $vaga_id,
-                'pergunta_id' => $pergunta_id,
-                // 'pergunta_id' => $pergunta_id[0], vaga com apenas uma pergunta e uma resposta funciona com este trecho e o acima comentado
-                'user_id' => $user->id,
-                'resposta' => $resposta,
-            ];
-            //dd($respostaArray);
-            Resposta::create($respostaArray);
+        //verificar se o usuário já não está candidatado na vaga
+        $canditaturaExiste = Resposta::where('user_id', $user->id)->where('vaga_id', $vaga_id);
+        if($canditaturaExiste->count() > 0){
+            return redirect()->route('home')->with('error', 'Você já está candidatado nesta vaga.');
         }
-        return redirect()->route('home')->with('success', 'Candidatura inserida com sucesso.');
+        else{
+                foreach ($respostas as $perguntaId => $respostasPorPergunta) {
+                    // Verifica se as respostas são um array
+                    if (is_array($respostasPorPergunta)) {
+                        // As respostas são um array
+                        foreach ($respostasPorPergunta as $resposta) {
+                            $respostaModel = new Resposta();
+                            $respostaModel->pergunta_id = $perguntaId;
+                            $respostaModel->vaga_id = $vaga_id;
+                            $respostaModel->user_id = $user->id;
+                            $respostaModel->resposta = $resposta;
+                            $respostaModel->save();
+                        }
+                    } else {
+                        // As respostas não são um array, trata como resposta unica
+                        $respostaModel = new Resposta();
+                        $respostaModel->pergunta_id = $perguntaId;
+                        $respostaModel->vaga_id = $vaga_id;
+                        $respostaModel->user_id = $user->id;
+                        $respostaModel->resposta = $respostasPorPergunta;
+                        $respostaModel->save();
+                    }
+                }
+                return redirect()->route('home')->with('success', 'Candidatura inserida com sucesso.');
+            }
+
     }
 
     
