@@ -54,13 +54,16 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('candidato.update', ['candidato' => $user->id]) }}" > 
+                    <form method="POST" action="{{ route('candidatar.update', ['candidatar' => $user->id]) }}" > 
                     @if (count($perguntas) > 0)
                     @csrf
                     @method('PUT')
+
+                        <input type="hidden" name="vaga_id" value="{{ $vaga->id }}">
                         @foreach ($perguntas as $pergunta)
                             <div class="pergunta">
-                                <label >{{ __($pergunta->pergunta) }}</label><br>
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][]" value="{{ $pergunta->id }}">
+                                <label>{{ __($pergunta->pergunta) }}</label><br>
                                 
                                 @if ($pergunta->options)
                                     @php
