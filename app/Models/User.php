@@ -81,4 +81,8 @@ class User extends Authenticatable
         $this->notify(new meuResetDeSenha($token));
     }
 
+    public function formacaoAcademica()
+    {
+        return $this->hasMany(FormacaoAcademica::class);
+    }
 }

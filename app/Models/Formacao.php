@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormacaoAcademica extends Model
+class Formacao extends Model
 {
-    use HasFactory;
+    public $table = "formacao";
 
+    use HasFactory;
     protected $fillable = [
         'local_medio',
         'ano_conclusao_medio',
         'curso_superior',
         'universidade_superior',
         'ano_conclusao_superior',
-        'data_inicio_superior'
+        'data_inicio_superior',
+        'user_id'
     ];
 }

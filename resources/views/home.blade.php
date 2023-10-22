@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     @if(Auth::user()->role == 'user')
-                    <a href="{{ route('login') }}" class="btn btn-dark mt-3"> Candidate-se</a>
+                    <a href="{{ route('candidatar.index', $vaga->id ) }}" class="btn btn-dark mt-3"> Candidate-se</a>
                     @endif
                 </div>
             </div>
