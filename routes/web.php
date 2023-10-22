@@ -114,6 +114,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('show')->get('show/{curriculo}', [$class, 'show']);
     });
 
+    # rotas para candidatar-se
+    Route::name('candidatar.')->prefix('candidatar')->group(function () {
+        $class = Controllers\CandidatarController::class;
+        Route::name('index')->get('{vaga}', [$class, 'index']); 
+        Route::name('store')   ->post('',        [$class, 'store']);
+        Route::name('update')  ->put('{candidatar}', [$class, 'update']);
+    });
 
 
 
