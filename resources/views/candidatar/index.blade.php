@@ -61,9 +61,9 @@
 
                         <input type="hidden" name="vaga_id" value="{{ $vaga->id }}">
                         @foreach ($perguntas as $pergunta)
-                            <div class="pergunta">
+                            <div class="pergunta mb-3">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][]" value="{{ $pergunta->id }}">
-                                <label>{{ __($pergunta->pergunta) }}</label><br>
+                                <label class="mb-1">{{ __($pergunta->pergunta) }}</label><br>
                                 
                                 @if ($pergunta->options)
                                     @php
@@ -71,7 +71,7 @@
                                     @endphp
                                     @foreach ($options as $option)
                                         @if ($pergunta->mult_resps)
-                                            <input type="checkbox" class="form-check-input" name="respostas[{{ $pergunta->id }}][]" value="{{ $option }}"> {{ $option }}0
+                                            <input type="checkbox" class="form-check-input" name="respostas[{{ $pergunta->id }}][]" value="{{ $option }}"> {{ $option }}
                                         @else
                                             <input type="radio" class="form-check-input" name="respostas[{{ $pergunta->id }}]" value="{{ $option }}"> {{ $option }}
                                         @endif
@@ -88,7 +88,7 @@
                         
 
 
-                        <div class="form-group mb-2">
+                        <div class="form-group mb-2 mt-5">
                             <center>
                                 <button type="submit" class="btn btn-dark">
                                     {{ __('Salvar') }}

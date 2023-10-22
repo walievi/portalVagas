@@ -32,4 +32,14 @@ class Resposta extends Model
     {
         $this->belongsTo(User::class, 'user_id');
     }
+
+    public function getFreeTextAttribute()
+    {
+        return $this->resposta == null;
+    }
+
+    public function getRespostaListAttribute()
+    {
+        return ($this->resposta != null) ? json_decode($this->resposta) : null;
+    }
 }

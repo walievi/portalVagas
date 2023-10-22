@@ -31,27 +31,24 @@ class CandidatarController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        
-        // Verifique se ja existe um registro de formação para o usuario
-        // $candidato = $user->candidato ?? new Candidato();
-
         $vaga_id = $request->input('vaga_id'); // Id da vaga
         $perguntas = $request->input('perguntas'); // Array de IDs das perguntas
         $respostas = $request->input('respostas'); // Array de respostas do formulário
 
-        // Itera pelas respostas e serializa em JSON antes de armazenar
         foreach ($respostas as $key => $resposta) {
             $pergunta_id = $perguntas[$key];
             $respostaArray = [
                 'vaga_id' => $vaga_id,
-                'pergunta_id' => $pergunta_id[0],
+                'pergunta_id' => $pergunta_id,
+                // 'pergunta_id' => $pergunta_id[0], vaga com apenas uma pergunta e uma resposta funciona com este trecho e o acima comentado
                 'user_id' => $user->id,
                 'resposta' => $resposta,
             ];
-            // dd($respostaArray);
+            //dd($respostaArray);
             Resposta::create($respostaArray);
         }
-
         return redirect()->route('home')->with('success', 'Candidatura inserida com sucesso.');
     }
+
+    
 }
