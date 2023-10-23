@@ -38,6 +38,10 @@
         {{ session('error') }}
     </div>
 @endif
+@if ($errors->has('curriculo'))
+    <div class="alert alert-danger">{{ $errors->first('curriculo') }}</div>
+@endif
+
 
     <div class="row justify-content-center">
         <div class="col-md-8 mt-5">

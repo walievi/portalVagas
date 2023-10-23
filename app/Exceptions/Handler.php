@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 
 class Handler extends ExceptionHandler
 {
@@ -38,4 +40,19 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof QueryException) {
+            // Verifique se é uma exceção de chave estrangeira (1451 é o código de erro para isso).
+            if ($exception->errorInfo[1] === 1451) {
+                Session::flash('error', 'Registro possui vínculo e não pode ser deletado.');
+                return back();
+            }
+        }
+
+        return parent::render($request, $exception);    }
+    
+    
+
 }

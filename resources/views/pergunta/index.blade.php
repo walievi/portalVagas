@@ -28,19 +28,22 @@
         </div>
     </div>
     <br><br>
-@if(session('success'))
+
+<div class="row justify-content-center">
+
+    <div class="col-md-11 mt-5">
+    @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
-@endif
+    @endif
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-<div class="row justify-content-center">
-    <div class="col-md-11 mt-5">
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
         <div class="card">
             <div class="card-body">
             @if (session('status'))
