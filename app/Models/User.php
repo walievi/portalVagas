@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\meuResetDeSenha;
-
+use App\Models\Formacao;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -81,8 +81,8 @@ class User extends Authenticatable
         $this->notify(new meuResetDeSenha($token));
     }
 
-    public function formacaoAcademica()
+    public function formacao()
     {
-        return $this->hasMany(FormacaoAcademica::class);
+        return $this->hasOne(Formacao::class);
     }
 }

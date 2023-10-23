@@ -74,7 +74,11 @@ class FormacaoController extends Controller
             return redirect()->route('perfil')->with('error', 'Usuário não encontrado.');
         }
         // Verifique se ja existe um registro de formação para o usuario
-        $formacao = $user->formacao ?? new Formacao();
+        if ($user->formacao) {
+            $formacao = $user->formacao;
+        } else {
+            $formacao = new Formacao();
+        }   
         $formacao->local_medio = $request->input('local_medio');
         $formacao->ano_conclusao_medio = $request->input('ano_conclusao_medio');
         $formacao->curso_superior = $request->input('curso_superior');
