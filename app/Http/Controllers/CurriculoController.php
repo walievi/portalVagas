@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Curriculo;
+use App\Http\Requests\CurriculoRequest;
 
 class CurriculoController extends Controller
 {
@@ -33,8 +34,13 @@ class CurriculoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(CurriculoRequest $request)
+    {   
+        // Verifique se houve erros de validação
+        $request->validate($request->rules());
+        
+
+  
         $pdfFile = $request->file('curriculo');
         
         if ($pdfFile) {
