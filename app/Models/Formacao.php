@@ -2,21 +2,44 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Formacao extends Model
 {
-    public $table = "formacao";
-
     use HasFactory;
+
+    public $table = "formacoes";
+
     protected $fillable = [
-        'local_medio',
-        'ano_conclusao_medio',
-        'curso_superior',
-        'universidade_superior',
-        'ano_conclusao_superior',
-        'data_inicio_superior',
-        'user_id'
+        'user_id',
+        'nivel_estudo_id',
+        'curso',
+        'instituicao',
+        'data_inicio',
+        'data_fim',
+        'observacao'
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('current_user', function (Builder $builder) {
+            $builder->where('user_id', Auth::user()->id);
+        });
+
+        static::saving(function ($model) {
+            $model->user_id = Auth::user()->id;
+        });
+    }
+
+    public function nivelEstudo(): BelongsTo
+    {
+        return $this->belongsTo(NivelEstudo::class, 'nivel_estudo_id', 'id');
+    }
+
+
 }
