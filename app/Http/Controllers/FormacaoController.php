@@ -27,7 +27,7 @@ class FormacaoController extends Controller
 
         Formacao::create($data);
 
-        return redirect()->route('profile')->with('status', 'Formação criada com sucesso!');
+        return redirect()->route('profile')->with('statusformacao', 'Formação criada com sucesso!');
     }
 
     public function edit(Formacao $formacao)
@@ -49,12 +49,12 @@ class FormacaoController extends Controller
 
         $formacao->update($data);
 
-        return redirect()->route('profile')->with('status', 'Formação atualizada com sucesso!');
+        return redirect()->route('profile')->with('statusformacao', 'Formação atualizada com sucesso!');
     }
 
     public function destroy(Formacao $formacao)
     {
         $formacao->delete();
-        return redirect()->route('profile')->with('status', 'Formação excluída com sucesso!');
+        return redirect()->route('profile')->with('statusformacao', 'Formação excluída com sucesso!');
     }
 }

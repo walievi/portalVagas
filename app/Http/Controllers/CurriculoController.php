@@ -60,7 +60,7 @@ class CurriculoController extends Controller
         }
     
         return redirect()->route('profile')
-            ->with('success', 'Currículo enviado com sucesso.');
+            ->with('successcurriculo', 'Currículo enviado com sucesso.');
     }
 
     
@@ -76,7 +76,7 @@ class CurriculoController extends Controller
         $curriculo = Curriculo::find($id);
 
         if (!$curriculo) {
-            return redirect()->back()->with('error', 'Currículo não encontrado.');
+            return redirect()->back()->with('errorcurriculo', 'Currículo não encontrado.');
         }
     
         // Obtenha os dados binários do currículo
