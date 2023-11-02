@@ -75,19 +75,19 @@
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="form-group mb-4">
                         <label for="feedback">{{ __('Registro de feedback') }}</label>
-                        <textarea id="feedback" type="text" class="form-control" name="feedback" autocomplete="new-feedback" placeholder="Descreva aqui seu feedback sobre este currículo avaliado">{{ isset($user->dadosPessoais) ? $user->dadosPessoais->habilidades : '' }}</textarea>
+                        <textarea id="feedback" type="text" class="form-control" name="feedback" autocomplete="new-feedback" placeholder="Descreva aqui seu feedback sobre este currículo avaliado">{{ isset($feedback) ? $feedback->feedback_avaliacao : '' }}</textarea>
                     </div>
 
                     <div class="form-group mb-2">
                         <label for="status_processo">{{ __('Status da avaliação') }}</label>
                         
                         <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status_processo" type="status" class="form-control @error('status_processo') is-invalid @enderror" name="status_processo" value="{{ old('status_processo') }}" required autocomplete="status_processo">
-                            <option value="Aprovado" selected>Aprovado</option>
-                            <option value="Rejeitado">Rejeitado</option>
-                            <option value="Agendar entrevista">Agendar entrevista</option>
-                            <option value="Contratado">Contratado</option>
-                            <option value="Arquivado">Arquivado</option>
-                            <option value="Em análise">Em análise</option>
+                            <option value="Aprovado" @if ($feedback->status_processo === 'Aprovado') selected @endif>Aprovado</option>
+                            <option value="Rejeitado" @if ($feedback->status_processo === 'Rejeitado') selected @endif>Rejeitado</option>
+                            <option value="Agendar entrevista" @if ($feedback->status_processo === 'Agendar entrevista') selected @endif>Agendar entrevista</option>
+                            <option value="Contratado" @if ($feedback->status_processo === 'Contratado') selected @endif>Contratado</option>
+                            <option value="Arquivado" @if ($feedback->status_processo === 'Arquivado') selected @endif>Arquivado</option>
+                            <option value="Em análise" @if ($feedback->status_processo === 'Em análise') selected @endif>Em análise</option>
                         </select>
 
                         @error('status')

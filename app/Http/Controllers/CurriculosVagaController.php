@@ -9,6 +9,7 @@ use App\Models\Vaga;
 use App\Models\User;
 use App\Models\Resposta;
 use App\Models\Pergunta;
+use App\Models\Feedback;
 
 class CurriculosVagaController extends Controller
 {
@@ -20,10 +21,13 @@ class CurriculosVagaController extends Controller
         // buscar usuario que se candidatou na vaga
         foreach ($curriculos as $curriculo) {
             $user = User::find($curriculo->user_id);
+            $feedback = Feedback::where('vaga_id', $id)
+            ->where('user_id', $user->id)
+            ->get();
             $curriculo->user = $user;
         }        
 
-        return view('curriculosVaga.index', compact('curriculos', 'vaga', 'user'));
+        return view('curriculosVaga.index', compact('curriculos', 'vaga', 'user', 'feedback'));
     }
 
     public function show($id_vaga, $id_user) {
@@ -42,7 +46,10 @@ class CurriculosVagaController extends Controller
             $resposta->user = $user;
         }   
 
-        return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas'));
+        $feedback = Feedback::where('vaga_id', $id_vaga)
+            ->where('user_id', $id_user)->get()->first();
+
+        return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback'));
     }
 
 }

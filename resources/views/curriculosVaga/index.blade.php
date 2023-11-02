@@ -37,17 +37,21 @@
                 <thead>
                     <tr>
                     <th>Nome</th>
+                    <th>Status feedback</th>
                     <th>Data Criação</th>
 
                     <th class="actions">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                
-
                     @foreach ($curriculos as $curriculo)
                     <tr>    
                         <td><a href="#">{{ $curriculo->user->name }}</a></td>
+                        @if (isset($curriculo->feedback) && $curriculo->feedback->status_processo)
+                            <td><a href="#">{{ $curriculo->feedback->status_processo }}</a></td>
+                        @else
+                            <td><a href="#">Status de processo não disponível.</a></td>
+                        @endif
                         <td>{{ $curriculo->created_at->format('d/m/Y H:i:s') }}</td>
                         <td class='actions'>
                             <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $curriculo->user->id]) }}"></span> Visualizar</a>
