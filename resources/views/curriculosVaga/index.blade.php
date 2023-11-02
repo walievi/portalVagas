@@ -50,7 +50,7 @@
                         <td><a href="#">{{ $curriculo->user->name }}</a></td>
                         <td>{{ $curriculo->created_at->format('d/m/Y H:i:s') }}</td>
                         <td class='actions'>
-                            <a class='btn btn-success btn-xs' href="#"></span> Visualizar</a>
+                            <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $curriculo->user->id]) }}"></span> Visualizar</a>
                         </td>
                     </tr>
                     @endforeach
