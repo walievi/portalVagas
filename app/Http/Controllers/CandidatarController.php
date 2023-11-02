@@ -18,6 +18,7 @@ class CandidatarController extends Controller
     public function index($vagaId)
     {
         $user = Candidato::logged();
+        $userId = auth()->user();
         $vaga = Vaga::find($vagaId);
 
         // Recupere as perguntas associadas à vaga com o ID igual a $vagaId
@@ -25,7 +26,14 @@ class CandidatarController extends Controller
             $query->where('vaga_id', $vagaId);
         })->get();
 
-        return view('candidatar.index', compact('user', 'perguntas', 'vaga'));
+        //verificar se o usuário já não está candidatado na vaga
+        $canditaturaExiste = Resposta::where('user_id', $userId->id)->where('vaga_id', $vaga->id);
+        if($canditaturaExiste->count() > 0){
+            return redirect()->route('home')->with('error', 'Você já está candidatado nesta vaga.');
+        }
+        else{
+            return view('candidatar.index', compact('user', 'perguntas', 'vaga'));
+        }
     }
 
     public function update(Request $request)
@@ -35,12 +43,6 @@ class CandidatarController extends Controller
         //$perguntas = $request->input('perguntas'); // Array de IDs das perguntas
         $respostas = $request->input('respostas'); // Array de respostas do formulário
 
-        //verificar se o usuário já não está candidatado na vaga
-        $canditaturaExiste = Resposta::where('user_id', $user->id)->where('vaga_id', $vaga_id);
-        if($canditaturaExiste->count() > 0){
-            return redirect()->route('home')->with('error', 'Você já está candidatado nesta vaga.');
-        }
-        else{
                 foreach ($respostas as $perguntaId => $respostasPorPergunta) {
                     // Verifica se as respostas são um array
                     if (is_array($respostasPorPergunta)) {
@@ -62,7 +64,6 @@ class CandidatarController extends Controller
                         $respostaModel->resposta = $respostasPorPergunta;
                         $respostaModel->save();
                     }
-                }
                 return redirect()->route('home')->with('success', 'Candidatura inserida com sucesso.');
             }
 
