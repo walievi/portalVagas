@@ -38,26 +38,17 @@
                             <input id="nome" type="text" class="form-control" name="nome" value="{{ $user->name }}" disabled>
                             <input type="hidden" name="vaga_id" value="{{ $vaga->id }}">
                         </div>
-                  
+                   
                         @foreach ($perguntas as $pergunta)
                             <div class="pergunta mb-3 mt-3">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][]" value="{{ $pergunta->id }}">
-                                <label class="mb-1">{{ __($pergunta->pergunta) }}</label><br>
-                                
-                                @if ($pergunta->options)
-                                    @php
-                                        $options = json_decode($pergunta->options);
-                                    @endphp
-                                    @foreach ($options as $option)
-                                        @if ($pergunta->mult_resps)
-                                            <input type="checkbox" class="form-check-input" name="respostas[{{ $pergunta->id }}][]" value="{{ $option }}"> {{ $option }}
-                                        @else
-                                            <input type="radio" class="form-check-input" name="respostas[{{ $pergunta->id }}]" value="{{ $option }}"> {{ $option }}
-                                        @endif
-                                    @endforeach
-                                @else
-                                    <input type="text" class="form-control" name="respostas[{{ $pergunta->id }}]"><br>
-                                @endif
+                                <label class="mb-1"><b>{{ __($pergunta->pergunta) }}</b></label><br>
+                                @foreach ($curriculos as $curriculo)
+                                    @if ($curriculo->pergunta_id == $pergunta->id)
+                                        <input type="hidden" name="curriculos[{{ $curriculo->id }}][]" value="{{ $curriculo->id }}">
+                                        <label class="mb-1">{{ __($curriculo->resposta) }}</label><br>
+                                    @endif
+                                @endforeach
                             </div>
                         @endforeach
                 

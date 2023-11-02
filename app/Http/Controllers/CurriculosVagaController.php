@@ -21,7 +21,6 @@ class CurriculosVagaController extends Controller
         foreach ($curriculos as $curriculo) {
             $user = User::find($curriculo->user_id);
             $curriculo->user = $user;
-
         }        
 
         return view('curriculosVaga.index', compact('curriculos', 'vaga', 'user'));
@@ -35,7 +34,13 @@ class CurriculosVagaController extends Controller
         // Recupere as perguntas associadas à vaga com o ID igual a $vagaId
         $perguntas = Pergunta::whereHas('vagas', function ($query) use ($id_vaga) {
             $query->where('vaga_id', $id_vaga);
-        })->get();        
+        })->get();       
+        
+        foreach ($curriculos as $resposta) {
+            $user = User::find($resposta->user_id);
+            $pergunta = Pergunta::find($resposta->pergunta_id);
+            $resposta->user = $user;
+        }   
 
         return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas'));
     }
