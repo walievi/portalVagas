@@ -82,12 +82,12 @@
                         <label for="status_processo">{{ __('Status da avaliação') }}</label>
                         
                         <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status_processo" type="status" class="form-control @error('status_processo') is-invalid @enderror" name="status_processo" value="{{ old('status_processo') }}" required autocomplete="status_processo">
-                            <option value="Aprovado" @if ($feedback->status_processo === 'Aprovado') selected @endif>Aprovado</option>
-                            <option value="Rejeitado" @if ($feedback->status_processo === 'Rejeitado') selected @endif>Rejeitado</option>
-                            <option value="Agendar entrevista" @if ($feedback->status_processo === 'Agendar entrevista') selected @endif>Agendar entrevista</option>
-                            <option value="Contratado" @if ($feedback->status_processo === 'Contratado') selected @endif>Contratado</option>
-                            <option value="Arquivado" @if ($feedback->status_processo === 'Arquivado') selected @endif>Arquivado</option>
-                            <option value="Em análise" @if ($feedback->status_processo === 'Em análise') selected @endif>Em análise</option>
+                            <option value="Aprovado" {{ $feedback && $feedback->status_processo === 'Aprovado' ? 'selected' : '' }}>Aprovado</option>
+                            <option value="Rejeitado" {{ $feedback && $feedback->status_processo === 'Rejeitado' ? 'selected' : '' }}>Rejeitado</option>
+                            <option value="Agendar entrevista" {{ $feedback && $feedback->status_processo === 'Agendar entrevista' ? 'selected' : '' }}>Agendar entrevista</option>
+                            <option value="Contratado" {{ $feedback && $feedback->status_processo === 'Contratado' ? 'selected' : '' }}>Contratado</option>
+                            <option value="Arquivado" {{ $feedback && $feedback->status_processo === 'Arquivado' ? 'selected' : '' }}>Arquivado</option>
+                            <option value="Em análise" {{ $feedback && $feedback->status_processo === 'Em análise' ? 'selected' : '' }}>Em análise</option>
                         </select>
 
                         @error('status')
