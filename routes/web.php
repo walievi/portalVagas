@@ -122,6 +122,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('update')  ->put('{candidatar}', [$class, 'update']);
     });
 
+    # rotas para curriculosVaga
+    Route::name('curriculosVaga.')->prefix('curriculosVaga')->group(function () {
+        $class = Controllers\CurriculosVagaController::class;
+        Route::name('index')->get('{vaga}', [$class, 'index']); 
+    });
+
 
 
 });
