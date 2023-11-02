@@ -69,27 +69,29 @@
                     </div>
                 </div>
 
-                <form method="POST" action="" > 
+                <form method="POST" action="{{ route('feedback.store') }}" > 
                 @csrf
-                @method('PUT')
+                    <input type="hidden" name="vaga_id" value="{{ $vaga->id }}">
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="form-group mb-4">
                         <label for="feedback">{{ __('Registro de feedback') }}</label>
                         <textarea id="feedback" type="text" class="form-control" name="feedback" autocomplete="new-feedback" placeholder="Descreva aqui seu feedback sobre este currículo avaliado">{{ isset($user->dadosPessoais) ? $user->dadosPessoais->habilidades : '' }}</textarea>
                     </div>
 
                     <div class="form-group mb-2">
-                        <label for="status">{{ __('Status da avaliação') }}</label>
+                        <label for="status_processo">{{ __('Status da avaliação') }}</label>
                         
-                        <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status" type="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required autocomplete="status">
-                            <option value="Aberta" selected>Aprovado</option>
-                            <option value="Fechada">Rejeitado</option>
-                            <option value="Fechada">Agendar entrevista</option>
-                            <option value="Fechada">Contratado</option>
-                            <option value="Fechada">Arquivado</option>
+                        <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status_processo" type="status" class="form-control @error('status_processo') is-invalid @enderror" name="status_processo" value="{{ old('status_processo') }}" required autocomplete="status_processo">
+                            <option value="Aprovado" selected>Aprovado</option>
+                            <option value="Rejeitado">Rejeitado</option>
+                            <option value="Agendar entrevista">Agendar entrevista</option>
+                            <option value="Contratado">Contratado</option>
+                            <option value="Arquivado">Arquivado</option>
+                            <option value="Em análise">Em análise</option>
                         </select>
 
                         @error('status')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-status_processo" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
