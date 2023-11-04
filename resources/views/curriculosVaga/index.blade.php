@@ -73,7 +73,7 @@
                            
                         <td>{{ $curriculo->created_at->format('d/m/Y H:i:s') }}</td>
                         <td class='actions'>
-                            <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $curriculo->user->id]) }}"></span> Visualizar</a>
+                            <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['vaga' => $feedback->status_processo == 'Transferido' ? $curriculo->transferencia_vaga : $vaga->id, 'user' => $curriculo->user->id]) }}"></span> Visualizar</a>
                         </td>
                     </tr>
                     @endforeach
