@@ -70,6 +70,7 @@ class CandidatarController extends Controller
         $candidaturaVaga = new CandidaturaVaga();
         $candidaturaVaga->user_id = $user->id;
         $candidaturaVaga->vaga_id = $vaga_id;
+        $candidaturaVaga->transferencia_vaga = null;
         $candidaturaVaga->save();
 
         return redirect()->route('home')->with('success', 'Candidatura inserida com sucesso.');
