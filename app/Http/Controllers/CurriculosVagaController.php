@@ -10,12 +10,14 @@ use App\Models\User;
 use App\Models\Resposta;
 use App\Models\Pergunta;
 use App\Models\Feedback;
+use App\Models\CandidaturaVaga;
 
 class CurriculosVagaController extends Controller
 {
     public function index($id)
     {
-        $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
+        // $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
+        $curriculos = CandidaturaVaga::all()->where('vaga_id', $id);
         $vaga = Vaga::find($id);
         $user = User::all();
         // buscar usuario que se candidatou na vaga
