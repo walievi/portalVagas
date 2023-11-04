@@ -47,11 +47,32 @@
                     @foreach ($curriculos as $curriculo)
                     <tr>    
                         <td><a href="{{ route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $curriculo->user->id]) }}">{{ $curriculo->user->name }}</a></td>
-                        @if (isset($curriculo->feedback))
-                            <td>{{ $curriculo->feedback->status_processo }}/td>
+                        <!-- @if (isset($feedback))
+                            <td>{{ $feedback->status_processo }}</td>
+                        @else
+                            <td>Pendente</td>
+                        @endif -->
+                    
+                        <td>
+                        @if (isset($feedback))
+                            @if ($feedback->status_processo == 'Aprovado')
+                                <div class="p-1 bg-primary text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
+                            @elseif ($feedback->status_processo == 'Rejeitado')
+                                <div class="p-1 bg-danger text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
+                            @elseif ($feedback->status_processo == 'Em análise')
+                                <div class="p-1 bg-info text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
+                            @elseif ($feedback->status_processo == 'Contratado')
+                                <div class="p-1 bg-success text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
+                            @elseif ($feedback->status_processo == 'Agendar entrevista')
+                                <div class="p-1 bg-warning text-grey" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</div>
+                            @elseif ($feedback->status_processo == 'Arquivado')
+                                <div class="p-1 bg-secondary text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
+                            @endif
                         @else
                             <td>Pendente</td>
                         @endif
+                        </td>
+                           
                         <td>{{ $curriculo->created_at->format('d/m/Y H:i:s') }}</td>
                         <td class='actions'>
                             <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $curriculo->user->id]) }}"></span> Visualizar</a>

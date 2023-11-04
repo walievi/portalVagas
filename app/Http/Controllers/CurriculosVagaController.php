@@ -23,7 +23,7 @@ class CurriculosVagaController extends Controller
         // buscar usuario que se candidatou na vaga
         foreach ($curriculos as $curriculo) {
             $user = User::find($curriculo->user_id);
-            $feedback = Feedback::find($curriculo->user_id);
+            $feedback = Feedback::where('vaga_id', $id)->where('user_id', $curriculo->user_id)->get()->first();
             $curriculo->user = $user;
         }        
 
