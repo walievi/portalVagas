@@ -52,10 +52,12 @@ class CurriculosVagaController extends Controller
             $resposta->user = $user;
         }   
 
+        $listaVagas = Vaga::all();
+
         $feedback = Feedback::where('vaga_id', $id_vaga)
             ->where('user_id', $id_user)->get()->first();
 
-        return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback'));
+        return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback', 'listaVagas'));
     }
 
 }

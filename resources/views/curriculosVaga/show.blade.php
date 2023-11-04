@@ -143,6 +143,53 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-8 ">
+        <div class="card">
+            <div class="card-body">
+                @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+                @endif
+                <div class="row mb-3">
+                    <div class="col-md-9">
+                    <h4>{{ __('Transferência de vaga') }}: </h4>
+                    </div>
+                </div>
+
+                <form method="POST" action="" > 
+                @csrf
+                @method('PUT')
+                <div class="form-group mb-2">
+                        <label for="status_processo">{{ __('Selecione a vaga a qual deseja transferir este candidato:') }}</label>
+                        
+                        
+                        <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status_processo" type="status" class="form-control @error('status_processo') is-invalid @enderror" name="status_processo" value="{{ old('status_processo') }}" required autocomplete="status_processo">
+                            @foreach ($listaVagas as $vaga)
+                            <option value="{{ $vaga->id }}">{{ $vaga->titulo}}</option>
+                            @endforeach 
+                        </select>
+                        
+                        @error('status')
+                            <span class="invalid-status_processo" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+            
+                    <div class="form-group mb-2 mt-5">
+                        <center>
+                            <button type="submit" class="btn btn-dark">
+                                {{ __('Enviar retorno') }}
+                            </button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
    
