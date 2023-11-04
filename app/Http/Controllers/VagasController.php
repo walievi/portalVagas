@@ -13,10 +13,10 @@ class VagasController extends Controller
     {
         $vagas = Vaga::all();
 
-        return view('vagas.index', ['vagas' => $vagas]);
+        return view('vagas.index', compact('vagas'));
     }
 
-    public function formCreateVagas()
+    public function create()
     {
         // Direcionar para página de criar vaga
 
@@ -30,39 +30,39 @@ class VagasController extends Controller
 
         if (!$vagas) {
             return redirect()
-                ->route('vagas')
+                ->route('vaga.index')
                 ->with('error', 'Vaga não encontrada.');
         }
 
         $vagas->delete();
 
         return redirect()
-            ->route('vagas')
+            ->route('vaga.index')
             ->with('success', 'Vaga excluída com sucesso.');
     }
 
-    public function formEditVagas($id)
+    public function edit($id)
     {
         // Lógica para editar o vaga com o ID fornecido
         $vaga = Vaga::find($id);
 
         if (!$vaga) {
             return redirect()
-                ->route('vagas')
+                ->route('vaga.index')
                 ->with('error', 'Vaga não encontrada.');
         }
 
         return view('vagas.edit', compact('vaga'));
     }
 
-    public function editVaga(Request $request, $id)
+    public function update(Request $request, $id)
     {
         // Lógica para editar a vaga com o ID fornecido
         $vagas = Vaga::find($id);
 
         if (!$vagas) {
             return redirect()
-                ->route('vagas')
+                ->route('vaga.index')
                 ->with('error', 'Vaga não encontrada.');
         }
 
@@ -72,11 +72,11 @@ class VagasController extends Controller
         $vagas->save();
 
         return redirect()
-            ->route('vagas')
+            ->route('vaga.index')
             ->with('success', 'Vaga editada com sucesso.');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         view('vagas.index');
 
@@ -91,7 +91,10 @@ class VagasController extends Controller
         }
 
         return redirect()
-            ->route('vagas')
+            ->route('vaga.index')
             ->with('success', 'Vaga adicionada com sucesso.');
     }
+
+
+ 
 }

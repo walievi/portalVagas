@@ -115,7 +115,7 @@ class UsersController extends Controller
         // carreguar o curriculo do usuario
         $curriculo = Curriculo::where('user_id', $user->id)->first();
 
-        $formacao = Formacao::where('user_id', $user->id)->first();
+        $formacoes = Formacao::all();
 
         #retorna os estados para o select
         $estados = Estado::all();
@@ -126,7 +126,7 @@ class UsersController extends Controller
             $cidade = null;
         }
                 #pega o nome da cidade pelo id acima
-        return view('users.profile', compact('user', 'estados', 'cidade', 'curriculo', 'formacao'));
+        return view('users.profile', compact('user', 'estados', 'cidade', 'curriculo', 'formacoes'));
 
     }
     
@@ -195,7 +195,7 @@ class UsersController extends Controller
         // Salve os dados pessoais associados a esse usuário
         $user->dadosPessoais()->save($dadosPessoais);
     
-        return redirect()->route('profile')->with('success', 'Dados pessoais editados com sucesso.');
+        return redirect()->route('profile')->with('successdadospessoais', 'Dados pessoais editados com sucesso.');
     }
     
 

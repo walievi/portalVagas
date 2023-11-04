@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pergunta;
 use App\Models\Vaga;
+use App\Models\PerguntaVaga;
 
 class PerguntaController extends Controller
 {
@@ -78,7 +79,9 @@ class PerguntaController extends Controller
     public function edit(Pergunta $pergunta)
     {
         $vagas = Vaga::all();
-        return view('pergunta.form', compact('pergunta', 'vagas'));
+        $perguntaVagas = PerguntaVaga::where('pergunta_id', $pergunta->id)->pluck('vaga_id')->toArray();
+
+        return view('pergunta.form', compact('pergunta', 'vagas', 'perguntaVagas'));
     }
 
     /**

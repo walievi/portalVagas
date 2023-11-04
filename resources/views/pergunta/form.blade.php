@@ -84,7 +84,7 @@
                                 <div class="list-group">
                                     @foreach ($vagas as $vaga)
                                         <label class="list-group-item">
-                                            <input type="checkbox" name="vagas[]" value="{{ $vaga->id }}" class="form-check-input">
+                                            <input type="checkbox" name="vagas[]" value="{{ $vaga->id }}" class="form-check-input" {{isset($perguntaVagas) && in_array($vaga->id, $perguntaVagas) ? 'checked' : '' }} >
                                             {{ $vaga->titulo }}
                                         </label>
                                 @endforeach

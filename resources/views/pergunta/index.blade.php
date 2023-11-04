@@ -28,19 +28,22 @@
         </div>
     </div>
     <br><br>
-@if(session('success'))
+
+<div class="row justify-content-center">
+
+    <div class="col-md-12 mt-5">
+    @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
-@endif
+    @endif
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-<div class="row justify-content-center">
-    <div class="col-md-11 mt-5">
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
         <div class="card">
             <div class="card-body">
             @if (session('status'))
@@ -50,7 +53,7 @@
             @endif
 
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-11">
                     <h4>  {{ __('Perguntas') }}</h4>
                 </div>
                 <div class="col-md-3 mb-3">
@@ -80,6 +83,7 @@
                         <td class='actions'>
                             <a class='btn btn-warning btn-xs' href="{{ route('pergunta.edit', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
                             <a class='btn btn-danger btn-xs delete-pergunta-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('pergunta.destroy', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                            <a class='btn btn-success btn-xs'href="{{ route('pergunta.edit', ['pergunta' => $pergunta->id]) }}"></span> Visualizar</a>
                         </td>
                     </tr>
                     @endforeach

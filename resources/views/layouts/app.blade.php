@@ -74,7 +74,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('vagas') }}">{{ __('Vagas') }}</a>
+                            <a class="nav-link" href="{{ route('vaga.index') }}">{{ __('Vagas') }}</a>
                         </li>
 
                         <li class="nav-item">
@@ -92,6 +92,9 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">{{ __('Perfil') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">{{ __('Candidaturas') }}</a>
                         </li>
                         <!-- Fim menu usuário padrão -->
                         @endif
@@ -114,7 +117,7 @@
                                 <form id="home-form" action="{{ route('home') }}" method="GET" class="d-none">
                                     @csrf
                                 </form>
-
+                                
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

@@ -39,6 +39,8 @@
     </div>
 @endif
 
+
+
     <div class="row justify-content-center">
         <div class="col-md-8 mt-5">
             <div class="card">
@@ -115,9 +117,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('successdadospessoais'))
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+                        {{ session('successdadospessoais') }}
                     </div>
                     @endif
                     <div class="row mb-3">
@@ -223,132 +225,23 @@
     <div class="row justify-content-center">
         <div class="col-md-8 mb-5">
             <div class="card">
-                <div class="card-body">
-                    @if (session('status'))
+                    @if (session('statusformacao'))
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+                        {{ session('statusformacao') }}
                     </div>
                     @endif
-                    <div class="row mb-3">
-                        <div class="col-md-9">
-                            <h4>{{ __('Formação') }}</h4>
-                        </div>
-                    </div>
-                   
-                    <form method="POST" action="{{ route('formacao.update', ['formacao' => $user->id]) }}"> 
-                        @csrf
-                        @method('PUT')
-
-                        <h6>Ensino Médio</h6>
-                        <div class="form-group row mb-2">
-                            <div class="col-md-8">
-                                <label for="local_medio">{{ __('Local') }}</label>
-                                <input id="local_medio" type="text" class="form-control @error('local_medio') is-invalid @enderror" id="local_medio" name="local_medio"  required autocomplete="local_medio" value="{{ isset($formacao) ? $formacao->local_medio : '' }}" autofocus>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="ano_conclusao_medio">{{ __('Ano de conclusão') }}</label>
-                                <input id="ano_conclusao_medio" type="date" class="form-control @error('ano_conclusao_medio') is-invalid @enderror" id="ano_conclusao_medio" name="ano_conclusao_medio"  required autocomplete="ano_conclusao_medio" value="{{ isset($formacao) ? $formacao->ano_conclusao_medio : '' }}" autofocus>
-                            </div>
-                        </div><br>
-
-                        <h6>Ensino Superior</h6>
-                        <div class="form-group row mb-2">
-                            <div class="col-md-8">
-                                <label for="curso_superior">{{ __('Curso') }}</label>
-                                <input id="curso_superior" type="tel" class="form-control @error('curso_superior') is-invalid @enderror" id="curso_superior" name="curso_superior" required autocomplete="curso_superior" value="{{ isset($formacao) ? $formacao->curso_superior : '' }}">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="universidade_superior" >{{ __('Universidade') }}</label>
-                                <input id="universidade_superior" type="text" class="form-control @error('universidade_superior') is-invalid @enderror" id="universidade_superior" name="universidade_superior" autocomplete="new-universidade_superior" value="{{ isset($formacao) ? $formacao->universidade_superior : '' }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-2">
-                            <div class="col">
-                                <label for="data_inicio_superior" >{{ __('Data de início') }}</label>
-                                <input id="data_inicio_superior" type="date" class="form-control @error('data_inicio_superior') is-invalid @enderror" id="data_inicio_superior" name="data_inicio_superior" autocomplete="new-data_inicio_superior" value="{{ isset($formacao) ? $formacao->data_inicio_superior : '' }}">
-                       
-                            </div>
-                            <div class="col">
-                                <label for="ano_conclusao_superior">{{ __('Ano de conclusão ou previsto') }}</label>
-                                <input id="ano_conclusao_superior" type="date" class="form-control" name="ano_conclusao_superior" id="ano_conclusao_superior" autocomplete="new-ano_conclusao_superior" value="{{ isset($formacao) ? $formacao->ano_conclusao_superior : '' }}">
-                            </div>
-                        </div><br>
-
-                        <h6>Cursos Complementares</h6>
-                        <div class="form-group mb-4">
-                            <label for="ingles">{{ __('Língua Inglesa:') }}</label><br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="lingua_inglesa" id="lingua_inglesa"  value="1" {{ (isset($formacao) && $formacao->lingua_inglesa == 1) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="flexRadioLinguaInglesa">
-                                Sim
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="lingua_inglesa" id="lingua_inglesa" value="0" {{ (!isset($formacao) || $formacao->lingua_inglesa != 1) ? 'checked' : '' }} >
-                                <label class="form-check-label" for="flexRadioLinguaInglesa">
-                                    Não
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="local_ingles">{{ __('Se sim, onde o curso foi realizado?') }}</label>
-                            <input id="local_ingles" type="text" class="form-control" name="local_ingles" autocomplete="new-local_ingles" id="local_ingles" value="{{ isset($formacao) ? $formacao->local_ingles : '' }}">
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="duracao_ingles">{{ __('Duração do curso') }}</label>
-                            <input id="duracao_ingles" type="text" class="form-control" name="duracao_ingles" autocomplete="new-duracao_ingles" id="duracao_ingles" value="{{ isset($formacao) ? $formacao->duracao_ingles : '' }}"> 
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="idioma">{{ __('Fluência em outro idioma?') }}</label><br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefaultOutroIdioma" id="flexRadioDefaultOutroIdioma" value="1" {{ (isset($formacao) && $formacao->flexRadioDefaultOutroIdioma == 1) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="flexRadioDefaultOutroIdioma">
-                                Sim
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefaultOutroIdioma" id="flexRadioDefaultOutroIdioma" value="0" {{ (!isset($formacao) || $formacao->flexRadioDefaultOutroIdioma != 1) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="flexRadioDefaultOutroIdioma">
-                                    Não
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="local_idioma">{{ __('Se sim, qual?') }}</label>
-                            <input type="text" class="form-control" name="outro_idioma" autocomplete="new-idioma" id="outro_idioma" value="{{ isset($formacao) ? $formacao->outro_idioma : '' }}">
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="cursos_complementares">{{ __('Outros cursos complementares? Quais?') }}</label>
-                            <input id="cursos_complementares" type="text" class="form-control" name="cursos_complementares" id="cursos_complementares" autocomplete="new-cursos_complementares" value="{{ isset($formacao) ? $formacao->cursos_complementares : '' }}">
-                        </div>
-
-                        <!-- <div class="form-group mb-2" id="opcoes-container">
-                            <button type="button" class="btn btn-primary" id="adicionar-curso">Adicionar Curso Complementar</button>
-                        </div> -->
-
-                        <div class="form-group mb-2">
-                            <center>
-                                <button type="submit" class="btn btn-dark">
-                                    {{ __('Salvar') }}
-                                </button>
-                            </center>
-                        </div>
-                    </form>
-                </div>
+                    @include('formacao.index', ['formacoes' => $formacoes])
             </div>
 
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('successcurriculo'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('successcurriculo') }}
                         </div>
+                    @endif
+                    @if ($errors->has('curriculo'))
+                        <div class="alert alert-danger">{{ $errors->first('curriculo') }}</div>
                     @endif
                 <div class="row mb-3">
                     <div class="col-md-9">
