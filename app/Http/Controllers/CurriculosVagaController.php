@@ -60,4 +60,38 @@ class CurriculosVagaController extends Controller
         return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback', 'listaVagas'));
     }
 
+    public function update(Request $request) { 
+
+        $candidaturaVaga = new CandidaturaVaga();
+        $candidaturaVaga->user_id = $request->user_id;
+        $candidaturaVaga->vaga_id = $request->vaga_id;
+        $candidaturaVaga->save();
+
+        $feedback = new Feedback();
+        $feedback->user_id = $request->user_id;
+        $feedback->vaga_id = $request->vaga_id;
+        $feedback->feedback_avaliacao = 'Candidato transferido para outra vaga';
+        $feedback->status_processo = 'Transferido';
+        $feedback->save();
+
+        // $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
+        $curriculos = CandidaturaVaga::all()->where('vaga_id', $request->vaga_id);
+        $vaga = Vaga::find($request->vaga_id);
+        $user = User::all();
+        // buscar usuario que se candidatou na vaga
+        foreach ($curriculos as $curriculo) {
+            $user = User::find($curriculo->user_id);
+            $feedback = Feedback::where('vaga_id', $request->vaga_id)->where('user_id', $curriculo->user_id)->get()->first();
+            $curriculo->user = $user;
+        }        
+
+        if (isset($feedback)) {
+            $feedback = Feedback::where('vaga_id', $request->vaga_id)->where('user_id', $curriculo->user_id)->get()->first();
+        } else {
+            $feedback = null;
+        }
+
+        return redirect()->route('curriculosVaga.index', compact('curriculos', 'vaga', 'user', 'feedback'))->with('success', 'Candidato transferido com sucesso.');
+    }
+
 }

@@ -62,6 +62,8 @@
                                 <div class="p-1 bg-warning text-grey" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</div>
                             @elseif ($feedback->status_processo == 'Arquivado')
                                 <div class="p-1 bg-secondary text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
+                            @elseif ($feedback->status_processo == 'Transferido')
+                                <div class="p-1 bg-info text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
                             @endif
                         @else
                             <div class="p-1 bg-light text-grey" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback }}</span>

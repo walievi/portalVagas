@@ -158,31 +158,30 @@
                     </div>
                 </div>
 
-                <form method="POST" action="" > 
+                <form method="POST" action="{{ route('curriculosVaga.update') }}" > 
                 @csrf
-                @method('PUT')
                 <div class="form-group mb-2">
-                        <label for="status_processo">{{ __('Selecione a vaga a qual deseja transferir este candidato:') }}</label>
-                        
-                        
-                        <select class="form-select form-select-md mb-3" aria-label="Large select example" id="status_processo" type="status" class="form-control @error('status_processo') is-invalid @enderror" name="status_processo" value="{{ old('status_processo') }}" required autocomplete="status_processo">
-                            @foreach ($listaVagas as $vaga)
-                            <option value="{{ $vaga->id }}">{{ $vaga->titulo}}</option>
-                            @endforeach 
-                        </select>
-                        
-                        @error('status')
-                            <span class="invalid-status_processo" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                    <label for="status_processo">{{ __('Selecione a vaga a qual deseja transferir este candidato:') }}</label>
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    
+                    <select class="form-select form-select-md mb-3" aria-label="Large select example" id="vaga_id" type="status" class="form-control @error('vaga_id') is-invalid @enderror" name="vaga_id" value="{{ old('vaga_id') }}" required autocomplete="vaga_id">
+                        @foreach ($listaVagas as $vaga)
+                        <option value="{{ $vaga->id }}" name="vaga_id">{{ $vaga->titulo}}</option>
+                        @endforeach 
+                    </select>
+                    
+                    @error('status')
+                        <span class="invalid-status_processo" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
             
                     <div class="form-group mb-2 mt-5">
                         <center>
                             <button type="submit" class="btn btn-dark">
-                                {{ __('Enviar retorno') }}
+                                {{ __('Transferir') }}
                             </button>
                         </center>
                     </div>
