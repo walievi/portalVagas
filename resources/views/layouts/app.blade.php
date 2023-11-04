@@ -74,7 +74,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('vagas') }}">{{ __('Vagas') }}</a>
+                            <a class="nav-link" href="{{ route('vaga.index') }}">{{ __('Vagas') }}</a>
                         </li>
 
                         <li class="nav-item">

@@ -54,7 +54,7 @@
                   <h4>  {{ __('Vagas') }}</h4>
               </div>
               <div class="col-md-3 mb-3"> 
-                <a href="{{ route('formCreateVagas') }}" class="btn btn-dark" >Criar nova vaga</a>
+                <a href="{{ route('vaga.create') }}" class="btn btn-dark" >Criar nova vaga</a>
               </div>
           </div>
           <div class="table-responsive col-md-12">
@@ -77,8 +77,8 @@
                   <td>{{ $vaga->status }}</td>
                   <td>{{$vaga->created_at}}</td>
                   <td class='actions'>
-                    <a class='btn btn-warning btn-xs'" href="{{ route('formEditVagas', $vaga->id) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
-                    <a class='btn btn-danger btn-xs delete-vaga-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('vagas.destroy', $vaga->id) }}""><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                    <a class='btn btn-warning btn-xs' href="{{ route('vaga.edit', ['vaga' => $vaga->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
+                    <a class='btn btn-danger btn-xs delete-vaga-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('vaga.destroy', ['vaga' => $vaga->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
                   </td>
                 </tr>
                 @endforeach
