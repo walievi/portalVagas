@@ -65,6 +65,7 @@ class CurriculosVagaController extends Controller
         $candidaturaVaga = new CandidaturaVaga();
         $candidaturaVaga->user_id = $request->user_id;
         $candidaturaVaga->vaga_id = $request->vaga_id;
+        $candidaturaVaga->transferencia_vaga = $request->transferencia_vaga_id;
         $candidaturaVaga->save();
 
         $feedback = new Feedback();

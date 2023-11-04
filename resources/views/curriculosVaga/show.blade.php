@@ -163,6 +163,7 @@
                 <div class="form-group mb-2">
                     <label for="status_processo">{{ __('Selecione a vaga a qual deseja transferir este candidato:') }}</label>
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <input type="hidden" name="transferencia_vaga_id" value="{{ $vaga->id }}">
                     
                     <select class="form-select form-select-md mb-3" aria-label="Large select example" id="vaga_id" type="status" class="form-control @error('vaga_id') is-invalid @enderror" name="vaga_id" value="{{ old('vaga_id') }}" required autocomplete="vaga_id">
                         @foreach ($listaVagas as $vaga)
