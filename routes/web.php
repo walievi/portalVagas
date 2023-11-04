@@ -125,6 +125,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('update')  ->put('{candidatar}', [$class, 'update']);
     });
 
+    # rotas para curriculosVaga
+    Route::name('curriculosVaga.')->prefix('curriculosVaga')->group(function () {
+        $class = Controllers\CurriculosVagaController::class;
+        Route::name('index')->get('{vaga}', [$class, 'index']); 
+        Route::name('show')->get('{vaga}/{user}', [$class, 'show']); 
+    });
+
+    # rotas para feedback
+    Route::name('feedback.')->prefix('feedback')->group(function () {
+        $class = Controllers\FeedbackController::class;
+        Route::name('index')->get('', [$class, 'index']); 
+        Route::name('store')   ->post('',        [$class, 'store']);
+        Route::name('update')  ->put('{feedback}', [$class, 'update']);
+    });
+
 
 
 });

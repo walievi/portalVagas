@@ -79,6 +79,7 @@
                   <td class='actions'>
                     <a class='btn btn-warning btn-xs' href="{{ route('vaga.edit', ['vaga' => $vaga->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
                     <a class='btn btn-danger btn-xs delete-vaga-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('vaga.destroy', ['vaga' => $vaga->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
+                    <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.index', $vaga->id) }}">Candidaturas</a>
                   </td>
                 </tr>
                 @endforeach
