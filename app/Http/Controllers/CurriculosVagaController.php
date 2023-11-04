@@ -27,6 +27,12 @@ class CurriculosVagaController extends Controller
             $curriculo->user = $user;
         }        
 
+        if (isset($feedback)) {
+            $feedback = Feedback::where('vaga_id', $id)->where('user_id', $curriculo->user_id)->get()->first();
+        } else {
+            $feedback = null;
+        }
+
         return view('curriculosVaga.index', compact('curriculos', 'vaga', 'user', 'feedback'));
     }
 

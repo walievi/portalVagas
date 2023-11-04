@@ -47,11 +47,6 @@
                     @foreach ($curriculos as $curriculo)
                     <tr>    
                         <td><a href="{{ route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $curriculo->user->id]) }}">{{ $curriculo->user->name }}</a></td>
-                        <!-- @if (isset($feedback))
-                            <td>{{ $feedback->status_processo }}</td>
-                        @else
-                            <td>Pendente</td>
-                        @endif -->
                     
                         <td>
                         @if (isset($feedback))
@@ -69,7 +64,8 @@
                                 <div class="p-1 bg-secondary text-white" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback->status_processo }}</span>
                             @endif
                         @else
-                            <td>Pendente</td>
+                            <div class="p-1 bg-light text-grey" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $feedback }}</span>
+                            
                         @endif
                         </td>
                            
