@@ -123,9 +123,8 @@
                     </div>
                 </div>
 
-                <form method="POST" action="" > 
+                <form method="POST" action="{{ route('curriculosVaga.mail', ['vaga' => $vaga->id, 'user' => $user->id]) }}">
                 @csrf
-                @method('PUT')
                     <div class="form-group mb-4">
                         <label for="retorno">{{ __('Retorno para o candidato via e-mail') }}</label>
                         <textarea id="retorno" type="text" class="form-control" name="retorno" autocomplete="new-retorno" placeholder="Escreva aqui seu retorno para o candidato do currículo avaliado"></textarea>

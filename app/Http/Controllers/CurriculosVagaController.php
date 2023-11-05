@@ -11,6 +11,7 @@ use App\Models\Resposta;
 use App\Models\Pergunta;
 use App\Models\Feedback;
 use App\Models\CandidaturaVaga;
+use Illuminate\Support\Facades\Mail;
 
 class CurriculosVagaController extends Controller
 {
@@ -57,5 +58,19 @@ class CurriculosVagaController extends Controller
 
         return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback'));
     }
+
+    public function mail(Request $request, $id_vaga, $id_user)
+    {
+        $feedbackTexto = $request->input('retorno');
+        $vaga = Vaga::find($id_vaga);
+        $user = User::find($id_user);
+    
+        // Agora você pode usar o $feedbackTexto para enviar junto com o e-mail
+        Mail::to($user->email)->send(new \App\Mail\FeedbackVagaEmail($vaga->titulo, $vaga->unidade, $feedbackTexto));
+    
+        // Redirecione ou retorne uma resposta de acordo com sua lógica.
+        return redirect()->route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $user->id])->with('success', 'Feedback enviado com sucesso');
+    }
+    
 
 }
