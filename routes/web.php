@@ -130,6 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
         $class = Controllers\CurriculosVagaController::class;
         Route::name('index')->get('{vaga}', [$class, 'index']); 
         Route::name('show')->get('{vaga}/{user}', [$class, 'show']); 
+        Route::name('update')->post('', [$class, 'update']); 
         Route::name('mail')->post('{vaga}/{user}', [$class, 'mail']);
     });
 

@@ -142,6 +142,53 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-8 ">
+        <div class="card">
+            <div class="card-body">
+                @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+                @endif
+                <div class="row mb-3">
+                    <div class="col-md-9">
+                    <h4>{{ __('Transferência de vaga') }}: </h4>
+                    </div>
+                </div>
+
+                <form method="POST" action="{{ route('curriculosVaga.update') }}" > 
+                @csrf
+                <div class="form-group mb-2">
+                    <label for="status_processo">{{ __('Selecione a vaga a qual deseja transferir este candidato:') }}</label>
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <input type="hidden" name="transferencia_vaga_id" value="{{ $vaga->id }}">
+                    
+                    <select class="form-select form-select-md mb-3" aria-label="Large select example" id="vaga_id" type="status" class="form-control @error('vaga_id') is-invalid @enderror" name="vaga_id" value="{{ old('vaga_id') }}" required autocomplete="vaga_id">
+                        @foreach ($listaVagas as $vaga)
+                        <option value="{{ $vaga->id }}" name="vaga_id">{{ $vaga->titulo}}</option>
+                        @endforeach 
+                    </select>
+                    
+                    @error('status')
+                        <span class="invalid-status_processo" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+            
+                    <div class="form-group mb-2 mt-5">
+                        <center>
+                            <button type="submit" class="btn btn-dark">
+                                {{ __('Transferir') }}
+                            </button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
    
