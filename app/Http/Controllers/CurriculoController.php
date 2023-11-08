@@ -38,8 +38,6 @@ class CurriculoController extends Controller
     {   
         // Verifique se houve erros de validação
         $request->validate($request->rules());
-        
-
   
         $pdfFile = $request->file('curriculo');
         

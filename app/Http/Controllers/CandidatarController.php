@@ -8,6 +8,8 @@ use App\Models\Pergunta;
 use App\Models\Vaga;
 use App\Models\Resposta;
 use App\Models\User;
+use App\Models\CandidaturaVaga;
+
 class CandidatarController extends Controller
 {
         /**
@@ -65,6 +67,12 @@ class CandidatarController extends Controller
                 $respostaModel->save();
             }
         }
+        $candidaturaVaga = new CandidaturaVaga();
+        $candidaturaVaga->user_id = $user->id;
+        $candidaturaVaga->vaga_id = $vaga_id;
+        $candidaturaVaga->transferencia_vaga = null;
+        $candidaturaVaga->save();
+
         return redirect()->route('home')->with('success', 'Candidatura inserida com sucesso.');
     }
 

@@ -10,20 +10,29 @@ use App\Models\User;
 use App\Models\Resposta;
 use App\Models\Pergunta;
 use App\Models\Feedback;
+use App\Models\CandidaturaVaga;
+use Illuminate\Support\Facades\Mail;
 
 class CurriculosVagaController extends Controller
 {
     public function index($id)
     {
-        $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
+        // $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
+        $curriculos = CandidaturaVaga::all()->where('vaga_id', $id);
         $vaga = Vaga::find($id);
         $user = User::all();
         // buscar usuario que se candidatou na vaga
         foreach ($curriculos as $curriculo) {
             $user = User::find($curriculo->user_id);
-            $feedback = Feedback::find($curriculo->user_id);
+            $feedback = Feedback::where('vaga_id', $id)->where('user_id', $curriculo->user_id)->get()->first();
             $curriculo->user = $user;
         }        
+
+        if (isset($feedback)) {
+            $feedback = Feedback::where('vaga_id', $id)->where('user_id', $curriculo->user_id)->get()->first();
+        } else {
+            $feedback = null;
+        }
 
         return view('curriculosVaga.index', compact('curriculos', 'vaga', 'user', 'feedback'));
     }
@@ -44,10 +53,61 @@ class CurriculosVagaController extends Controller
             $resposta->user = $user;
         }   
 
+        $listaVagas = Vaga::all();
+
         $feedback = Feedback::where('vaga_id', $id_vaga)
             ->where('user_id', $id_user)->get()->first();
 
-        return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback'));
+        return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback', 'listaVagas'));
     }
+
+    public function update(Request $request) { 
+
+        $candidaturaVaga = new CandidaturaVaga();
+        $candidaturaVaga->user_id = $request->user_id;
+        $candidaturaVaga->vaga_id = $request->vaga_id;
+        $candidaturaVaga->transferencia_vaga = $request->transferencia_vaga_id;
+        $candidaturaVaga->save();
+
+        $feedback = new Feedback();
+        $feedback->user_id = $request->user_id;
+        $feedback->vaga_id = $request->vaga_id;
+        $feedback->feedback_avaliacao = 'Candidato transferido para outra vaga';
+        $feedback->status_processo = 'Transferido';
+        $feedback->save();
+
+        // $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
+        $curriculos = CandidaturaVaga::all()->where('vaga_id', $request->vaga_id);
+        $vaga = Vaga::find($request->vaga_id);
+        $user = User::all();
+        // buscar usuario que se candidatou na vaga
+        foreach ($curriculos as $curriculo) {
+            $user = User::find($curriculo->user_id);
+            $feedback = Feedback::where('vaga_id', $request->vaga_id)->where('user_id', $curriculo->user_id)->get()->first();
+            $curriculo->user = $user;
+        }        
+
+        if (isset($feedback)) {
+            $feedback = Feedback::where('vaga_id', $request->vaga_id)->where('user_id', $curriculo->user_id)->get()->first();
+        } else {
+            $feedback = null;
+        }
+
+        return redirect()->route('curriculosVaga.index', compact('curriculos', 'vaga', 'user', 'feedback'))->with('success', 'Candidato transferido com sucesso.');
+    }
+
+    public function mail(Request $request, $id_vaga, $id_user)
+    {
+        $feedbackTexto = $request->input('retorno');
+        $vaga = Vaga::find($id_vaga);
+        $user = User::find($id_user);
+    
+        // Agora você pode usar o $feedbackTexto para enviar junto com o e-mail
+        Mail::to($user->email)->send(new \App\Mail\FeedbackVagaEmail($vaga->titulo, $vaga->unidade, $feedbackTexto));
+    
+        // Redirecione ou retorne uma resposta de acordo com sua lógica.
+        return redirect()->route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $user->id])->with('success', 'Feedback enviado com sucesso');
+    }
+    
 
 }

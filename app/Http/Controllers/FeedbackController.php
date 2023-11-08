@@ -15,7 +15,13 @@ class FeedbackController extends Controller
 
     public function store(Request $request)
     {
-        $feedback = new Feedback();
+        $feedback = Feedback::where('vaga_id', $request->vaga_id)
+            ->where('user_id', $request->user_id)->get()->first();
+
+        if (!$feedback) {
+            $feedback = new Feedback();
+        }
+    
         $feedback->user_id = $request->user_id;
         $feedback->vaga_id = $request->vaga_id;
         $feedback->feedback_avaliacao = $request->feedback;
@@ -36,4 +42,6 @@ class FeedbackController extends Controller
         // $feedback = Feedback::find($id);
         // return view('feedback.edit', compact('feedback'));
     }
+
+    
 }
