@@ -119,7 +119,7 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('curriculosVaga.mail', ['vaga' => $candidatura->vaga->id, 'user' => $candidatura->user->id]) }}">
+                <form method="POST" action="{{ route('feedback.mail', ['vaga' => $candidatura->vaga->id, 'user' => $candidatura->user->id]) }}">
                 @csrf
                     <div class="form-group mb-4">
                         <label for="retorno">{{ __('Retorno para o candidato via e-mail') }}</label>

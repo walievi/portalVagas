@@ -133,7 +133,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('index')    ->get('{vaga}',          [$class, 'index']); 
         Route::name('show')     ->get('show/{candidatura}',   [$class, 'show']); 
         Route::name('update')   ->post('',               [$class, 'update']); 
-        Route::name('mail')     ->post('{vaga}/{user}',  [$class, 'mail']);
     });
 
     # rotas para feedback
@@ -142,6 +141,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('index')   ->get('',            [$class, 'index']); 
         Route::name('store')   ->post('',           [$class, 'store']);
         Route::name('update')  ->put('{feedback}',  [$class, 'update']);
+        Route::name('mail')     ->post('{vaga}/{user}',  [$class, 'mail']);
+
     });
 
 
