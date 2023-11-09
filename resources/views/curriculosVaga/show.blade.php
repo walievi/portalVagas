@@ -66,6 +66,9 @@
                 @csrf
                     <input type="hidden" name="vaga_id" value="{{ $candidatura->vaga->id }}">
                     <input type="hidden" name="user_id" value="{{ $candidatura->user->id }}">
+                    <!--- usamos o input abaixo para enviar o candidatura_vaga_id para o store de feedback --->
+                    <input type="hidden" name="candidatura_vaga_id" value="{{ $candidatura->id }}">
+
                     <div class="form-group mb-4">
                         <label for="feedback">{{ __('Registro de feedback') }}</label>
                         <textarea id="feedback" type="text" class="form-control" name="feedback" autocomplete="new-feedback" placeholder="Descreva aqui seu feedback sobre este currículo avaliado">{{ isset($candidatura->feedback) ? $candidatura->feedback->feedback_avaliacao : '' }}</textarea>

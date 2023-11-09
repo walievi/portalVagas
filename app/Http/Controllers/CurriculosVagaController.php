@@ -49,7 +49,7 @@ class CurriculosVagaController extends Controller
         $feedback->vaga_id = $request->vaga_id;
         $feedback->feedback_avaliacao = 'Candidato transferido para outra vaga';
         $feedback->status_processo = 'Transferido';
-        $feedback->candidatura_vaga_id = $request->candidatura_vaga_id;
+        $feedback->candidatura_vaga_id = $candidaturaVaga->id;
         $feedback->save();
 
         // $curriculos = CurriculosVaga::all()->where('vaga_id', $id);

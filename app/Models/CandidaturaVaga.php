@@ -30,6 +30,13 @@ class CandidaturaVaga extends Model
     }
 
     public function getRespostas() {
-        return Resposta::where('user_id', $this->user_id)->where('vaga_id', $this->vaga_id)->get();
+        if ($this->transferencia_vaga !== null) {
+            // O candidato foi transferido, portanto, usamos a vaga original (transferencia_vaga) para buscar as respostas
+            return Resposta::where('user_id', $this->user_id)->where('vaga_id', $this->transferencia_vaga)->get();
+        } else {
+            // O candidato não foi transferido, usamos a vaga atual (vaga_id) para buscar as respostas
+            return Resposta::where('user_id', $this->user_id)->where('vaga_id', $this->vaga_id)->get();
+        }
     }
+    
 }

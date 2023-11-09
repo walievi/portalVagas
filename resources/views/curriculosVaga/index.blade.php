@@ -54,7 +54,7 @@
                            
                         <td>{{ $candidatura->created_at->format('d/m/Y H:i:s') }}</td>
                         <td class='actions'>
-                            <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['candidatura' => ($candidatura->feedback->status_processo ?? '') == 'Transferido' ? $candidatura->transferencia_vaga : $candidatura->id]) }}"></span> Visualizar</a>
+                            <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['candidatura' => ($candidatura->feedback->status_processo ?? '') == 'Transferido' ? $candidatura->id : $candidatura->id]) }}"></span> Visualizar</a>
                         </td>
                     </tr>
                     @endforeach

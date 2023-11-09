@@ -26,6 +26,7 @@ class FeedbackController extends Controller
         $feedback->vaga_id = $request->vaga_id;
         $feedback->feedback_avaliacao = $request->feedback;
         $feedback->status_processo = $request->status_processo;
+        $feedback->candidatura_vaga_id = $request->candidatura_vaga_id;
         $feedback->save();
 
         return redirect()->route('curriculosVaga.index', $feedback->vaga_id )->with('success', 'Feedback enviado com sucesso!');
