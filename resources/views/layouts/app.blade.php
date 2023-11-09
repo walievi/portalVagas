@@ -94,7 +94,7 @@
                             <a class="nav-link" href="{{ route('profile') }}">{{ __('Perfil') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">{{ __('Candidaturas') }}</a>
+                            <a class="nav-link" href="{{ route('candidato.show') }}">{{ __('Candidaturas') }}</a>
                         </li>
                         <!-- Fim menu usuário padrão -->
                         @endif

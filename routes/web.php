@@ -60,11 +60,11 @@ Route::group(['middleware' => 'auth'], function () {
         $class = Controllers\VagasController::class;
         Route::name('index')   ->get('',                [$class, 'index']);
         Route::name('create')  ->get('create',          [$class, 'create']);
-        Route::name('show')    ->get('{vaga}',      [$class, 'show']);
-        Route::name('edit')    ->get('{vaga}/edit', [$class, 'edit']);
+        Route::name('show')    ->get('{vaga}',          [$class, 'show']);
+        Route::name('edit')    ->get('{vaga}/edit',     [$class, 'edit']);
         Route::name('store')   ->post('',               [$class, 'store']);
-        Route::name('update')  ->put('{vaga}',      [$class, 'update']);
-        Route::name('destroy') ->delete('{vaga}',   [$class, 'destroy']);
+        Route::name('update')  ->put('{vaga}',          [$class, 'update']);
+        Route::name('destroy') ->delete('{vaga}',       [$class, 'destroy']);
     });
 
 
@@ -85,9 +85,11 @@ Route::group(['middleware' => 'auth'], function () {
     # rotas do perfil do candidado
     Route::name('candidato.')->prefix('candidato')->group(function () {
         $class = Controllers\CandidatoController::class;
-        Route::name('index')   ->get('',          [$class, 'index']);
-        Route::name('edit')    ->get('/edit',     [$class, 'edit']);
-        Route::name('update')  ->put('{candidato}',      [$class, 'update']);
+        Route::name('index')   ->get('',               [$class, 'index']);
+        Route::name('edit')    ->get('/edit',          [$class, 'edit']);
+        Route::name('update')  ->put('{candidato}',    [$class, 'update']);
+        Route::name('show')    ->get('',               [$class, 'show']);
+        Route::name('cancel')  ->delete('{vaga}',      [$class, 'cancel']);
     });
 
     # rotas para perfil
@@ -112,34 +114,34 @@ Route::group(['middleware' => 'auth'], function () {
     # rotas para curriculos
     Route::name('curriculo.')->prefix('curriculo')->group(function () {
         $class = Controllers\CurriculoController::class;
-        Route::name('store')   ->post('',        [$class, 'store']);
-        Route::name('update')  ->put('{curriculo}', [$class, 'update']);
-        Route::name('show')->get('show/{curriculo}', [$class, 'show']);
+        Route::name('store')   ->post('',                [$class, 'store']);
+        Route::name('update')  ->put('{curriculo}',      [$class, 'update']);
+        Route::name('show')    ->get('show/{curriculo}', [$class, 'show']);
     });
 
     # rotas para candidatar-se
     Route::name('candidatar.')->prefix('candidatar')->group(function () {
         $class = Controllers\CandidatarController::class;
-        Route::name('index')->get('{vaga}', [$class, 'index']); 
-        Route::name('store')   ->post('',        [$class, 'store']);
-        Route::name('update')  ->put('{candidatar}', [$class, 'update']);
+        Route::name('index')    ->get('{vaga}',         [$class, 'index']); 
+        Route::name('store')   ->post('',               [$class, 'store']);
+        Route::name('update')  ->put('{candidatar}',    [$class, 'update']);
     });
 
     # rotas para curriculosVaga
     Route::name('curriculosVaga.')->prefix('curriculosVaga')->group(function () {
         $class = Controllers\CurriculosVagaController::class;
-        Route::name('index')->get('{vaga}', [$class, 'index']); 
-        Route::name('show')->get('{vaga}/{user}', [$class, 'show']); 
-        Route::name('update')->post('', [$class, 'update']); 
-        Route::name('mail')->post('{vaga}/{user}', [$class, 'mail']);
+        Route::name('index')    ->get('{vaga}',          [$class, 'index']); 
+        Route::name('show')     ->get('show/{candidatura}',   [$class, 'show']); 
+        Route::name('update')   ->post('',               [$class, 'update']); 
+        Route::name('mail')     ->post('{vaga}/{user}',  [$class, 'mail']);
     });
 
     # rotas para feedback
     Route::name('feedback.')->prefix('feedback')->group(function () {
         $class = Controllers\FeedbackController::class;
-        Route::name('index')->get('', [$class, 'index']); 
-        Route::name('store')   ->post('',        [$class, 'store']);
-        Route::name('update')  ->put('{feedback}', [$class, 'update']);
+        Route::name('index')   ->get('',            [$class, 'index']); 
+        Route::name('store')   ->post('',           [$class, 'store']);
+        Route::name('update')  ->put('{feedback}',  [$class, 'update']);
     });
 
 

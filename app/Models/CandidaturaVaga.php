@@ -24,4 +24,12 @@ class CandidaturaVaga extends Model
     public function vaga(){
         return $this->belongsTo(Vaga::class, 'vaga_id');
     }
+
+    public function feedback(){
+        return $this->hasOne(Feedback::class, 'candidatura_vaga_id');
+    }
+
+    public function getRespostas() {
+        return Resposta::where('user_id', $this->user_id)->where('vaga_id', $this->vaga_id)->get();
+    }
 }

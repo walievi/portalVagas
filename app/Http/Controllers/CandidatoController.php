@@ -12,6 +12,9 @@ use App\Models\Cidade;
 use App\Models\DadosPessoais;
 use App\Models\Contato;
 use App\Models\Endereco;
+use App\Models\Vaga;
+use App\Models\CandidaturaVaga;
+use App\Models\Resposta;
 
 class CandidatoController extends Controller
 {
@@ -88,4 +91,36 @@ class CandidatoController extends Controller
 
         return redirect()->route('profile')->with('success', 'Dados pessoais editados com sucesso.');
     }
+
+    public function show(){
+
+        $user = auth()->user();
+        $vagas = CandidaturaVaga::where('user_id', $user->id)->pluck('vaga_id');
+        $vagasCadastradas = Vaga::whereIn('id', $vagas)->get();
+        
+
+        return view('users.show', compact('vagasCadastradas'));
+    }
+
+    public function cancel($id){
+
+        $user = auth()->user();
+        $vagas = CandidaturaVaga::where('user_id', $user->id)->where('vaga_id', $id)->first();
+
+        if($vagas){
+            $canditaturaExiste = Resposta::where('user_id', $user->id)->where('vaga_id', $id);
+            if($canditaturaExiste->count() > 0){
+                $canditaturaExiste->delete(); 
+            }
+            $vagas->delete();
+            return redirect()
+            ->route('candidato.show')
+            ->with('success', 'Candidatura cancelada com sucesso.');
+        }else {
+            return redirect()
+            ->route('candidato.show')
+            ->with('error', 'Candidatura não encontrada.');
+        }
+    }
+
 }
