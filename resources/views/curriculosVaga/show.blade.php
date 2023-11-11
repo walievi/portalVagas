@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="container">
+    <br>
 @if(session('success'))
     <div class="alert alert-success">
     {{ session('success') }}

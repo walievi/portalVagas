@@ -45,26 +45,31 @@ class CandidatarController extends Controller
         //$perguntas = $request->input('perguntas'); // Array de IDs das perguntas
         $respostas = $request->input('respostas'); // Array de respostas do formulário
 
-        foreach ($respostas as $perguntaId => $respostasPorPergunta) {
-            // Verifica se as respostas são um array
-            if (is_array($respostasPorPergunta)) {
-                // As respostas são um array
-                foreach ($respostasPorPergunta as $resposta) {
+        //validar se respostas é diferente de null
+        if($respostas !== null)
+        {
+            // Percorre as respostas
+            foreach ($respostas as $perguntaId => $respostasPorPergunta) {
+                // Verifica se as respostas são um array
+                if (is_array($respostasPorPergunta)) {
+                    // As respostas são um array
+                    foreach ($respostasPorPergunta as $resposta) {
+                        $respostaModel = new Resposta();
+                        $respostaModel->pergunta_id = $perguntaId;
+                        $respostaModel->vaga_id = $vaga_id;
+                        $respostaModel->user_id = $user->id;
+                        $respostaModel->resposta = $resposta;
+                        $respostaModel->save();
+                    }
+                } else {
+                    // As respostas não são um array, trata como resposta unica
                     $respostaModel = new Resposta();
                     $respostaModel->pergunta_id = $perguntaId;
                     $respostaModel->vaga_id = $vaga_id;
                     $respostaModel->user_id = $user->id;
-                    $respostaModel->resposta = $resposta;
+                    $respostaModel->resposta = $respostasPorPergunta;
                     $respostaModel->save();
                 }
-            } else {
-                // As respostas não são um array, trata como resposta unica
-                $respostaModel = new Resposta();
-                $respostaModel->pergunta_id = $perguntaId;
-                $respostaModel->vaga_id = $vaga_id;
-                $respostaModel->user_id = $user->id;
-                $respostaModel->resposta = $respostasPorPergunta;
-                $respostaModel->save();
             }
         }
         $candidaturaVaga = new CandidaturaVaga();
