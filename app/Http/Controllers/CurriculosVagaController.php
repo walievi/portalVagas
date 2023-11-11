@@ -15,50 +15,25 @@ use Illuminate\Support\Facades\Mail;
 
 class CurriculosVagaController extends Controller
 {
-    public function index($id)
+    public function index(Vaga $vaga)
     {
-        // $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
-        $curriculos = CandidaturaVaga::all()->where('vaga_id', $id);
-        $vaga = Vaga::find($id);
-        $user = User::all();
-        // buscar usuario que se candidatou na vaga
-        foreach ($curriculos as $curriculo) {
-            $user = User::find($curriculo->user_id);
-            $feedback = Feedback::where('vaga_id', $id)->where('user_id', $curriculo->user_id)->get()->first();
-            $curriculo->user = $user;
-        }        
+        $tags = [
+            'Aprovado' => 'bg-primary text-white',
+            'Rejeitado' => 'bg-danger text-white',
+            'Em análise' => 'bg-info text-white',
+            'Contratado' => 'bg-success text-white',
+            'Agendar entrevista' => 'bg-warning text-grey',
+            'Arquivado' => 'bg-secondary text-white',
+            'Transferido' => 'bg-info text-white',
+        ];
+        
 
-        if (isset($feedback)) {
-            $feedback = Feedback::where('vaga_id', $id)->where('user_id', $curriculo->user_id)->get()->first();
-        } else {
-            $feedback = null;
-        }
-
-        return view('curriculosVaga.index', compact('curriculos', 'vaga', 'user', 'feedback'));
+        return view('curriculosVaga.index', compact('vaga', 'tags'));
     }
 
-    public function show($id_vaga, $id_user) {
-        $curriculos = CurriculosVaga::all()->where('vaga_id', $id_vaga)->where('user_id', $id_user);
-        $vaga = Vaga::find($id_vaga);
-        $user = User::find($id_user);
-
-        // Recupere as perguntas associadas à vaga com o ID igual a $vagaId
-        $perguntas = Pergunta::whereHas('vagas', function ($query) use ($id_vaga) {
-            $query->where('vaga_id', $id_vaga);
-        })->get();       
-        
-        foreach ($curriculos as $resposta) {
-            $user = User::find($resposta->user_id);
-            $pergunta = Pergunta::find($resposta->pergunta_id);
-            $resposta->user = $user;
-        }   
-
+    public function show(CandidaturaVaga $candidatura) {
         $listaVagas = Vaga::all();
-
-        $feedback = Feedback::where('vaga_id', $id_vaga)
-            ->where('user_id', $id_user)->get()->first();
-
-        return view('curriculosVaga.show', compact('curriculos', 'vaga', 'user', 'perguntas', 'feedback', 'listaVagas'));
+        return view('curriculosVaga.show', compact('candidatura', 'listaVagas'));
     }
 
     public function update(Request $request) { 
@@ -74,6 +49,7 @@ class CurriculosVagaController extends Controller
         $feedback->vaga_id = $request->vaga_id;
         $feedback->feedback_avaliacao = 'Candidato transferido para outra vaga';
         $feedback->status_processo = 'Transferido';
+        $feedback->candidatura_vaga_id = $candidaturaVaga->id;
         $feedback->save();
 
         // $curriculos = CurriculosVaga::all()->where('vaga_id', $id);
@@ -96,18 +72,7 @@ class CurriculosVagaController extends Controller
         return redirect()->route('curriculosVaga.index', compact('curriculos', 'vaga', 'user', 'feedback'))->with('success', 'Candidato transferido com sucesso.');
     }
 
-    public function mail(Request $request, $id_vaga, $id_user)
-    {
-        $feedbackTexto = $request->input('retorno');
-        $vaga = Vaga::find($id_vaga);
-        $user = User::find($id_user);
-    
-        // Agora você pode usar o $feedbackTexto para enviar junto com o e-mail
-        Mail::to($user->email)->send(new \App\Mail\FeedbackVagaEmail($vaga->titulo, $vaga->unidade, $feedbackTexto));
-    
-        // Redirecione ou retorne uma resposta de acordo com sua lógica.
-        return redirect()->route('curriculosVaga.show', ['vaga' => $vaga->id, 'user' => $user->id])->with('success', 'Feedback enviado com sucesso');
-    }
+ 
     
 
 }

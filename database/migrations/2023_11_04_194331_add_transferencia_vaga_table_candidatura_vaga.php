@@ -13,10 +13,10 @@ class AddTransferenciaVagaTableCandidaturaVaga extends Migration
      */
     public function up()
     {
-        Schema :: table ('candidatura_vaga', function (Blueprint $table) {
-            $table->unsignedBigInteger('transferencia_vaga');
-            $table->foreign('transferencia_vaga')->references('id')->on('vagas');
-        });
+        // Schema :: table ('candidatura_vaga', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('transferencia_vaga');
+        //     $table->foreign('transferencia_vaga')->references('id')->on('vagas');
+        // });
     }
 
     /**

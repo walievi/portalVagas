@@ -17,6 +17,7 @@ class Feedback extends Model
         'user_id',
         'vaga_id',
         'pergunta_id',
+        'candidatura_vaga_id'
     ];
 
     public function user()
@@ -27,5 +28,10 @@ class Feedback extends Model
     public function vaga()
     {
         return $this->belongsTo(Vaga::class, 'vaga_id');
+    }
+
+    public function candidatura()
+    {
+        return $this->belongsTo(CandidaturaVaga::class, 'candidatura_vaga_id');
     }
 }
