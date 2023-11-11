@@ -89,7 +89,8 @@
 
                         <li class="nav-item">
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">{{ __('Vagas') }}</a>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">{{ __('Perfil') }}</a>
                         </li>
