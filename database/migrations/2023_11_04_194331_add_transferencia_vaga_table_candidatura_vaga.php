@@ -13,10 +13,10 @@ class AddTransferenciaVagaTableCandidaturaVaga extends Migration
      */
     public function up()
     {
-        // Schema :: table ('candidatura_vaga', function (Blueprint $table) {
-        //     $table->unsignedBigInteger('transferencia_vaga');
-        //     $table->foreign('transferencia_vaga')->references('id')->on('vagas');
-        // });
+         Schema :: table ('candidatura_vaga', function (Blueprint $table) {
+             $table->unsignedBigInteger('transferencia_vaga');
+             $table->foreign('transferencia_vaga')->references('id')->on('vagas');
+         });
     }
 
     /**
@@ -26,6 +26,9 @@ class AddTransferenciaVagaTableCandidaturaVaga extends Migration
      */
     public function down()
     {
-        //
+        Schemma::table('candidatura_vaga', function (Blueprint $table) {
+            $table->dropForeign('candidatura_vaga_transferencia_vaga_foreign');
+            $table->dropColumn('transferencia_vaga');
+        });
     }
 }
