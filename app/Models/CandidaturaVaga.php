@@ -26,8 +26,9 @@ class CandidaturaVaga extends Model
     }
 
     public function feedback(){
-        return $this->hasOne(Feedback::class, 'candidatura_vaga_id');
+        return $this->hasOne(Feedback::class, 'candidatura_vaga_id')->latest();
     }
+    
 
     public function getRespostas() {
         if ($this->transferencia_vaga !== null) {
