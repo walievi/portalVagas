@@ -67,7 +67,9 @@
                         @auth
                         @if(Auth::user()->role == 'admin')
                         <!-- Menu usuário administrador -->
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('email.index') }}">{{ __('Notificações') }}</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('pergunta.index') }}">{{ __('Perguntas') }}</a>

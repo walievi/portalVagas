@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\Email;
 
 class FeedbackVagaEmail extends Mailable
 {
@@ -36,22 +36,23 @@ class FeedbackVagaEmail extends Mailable
      */
 
 
-    public function build()
-    {
-        $subject = 'Retorno candidatura de vaga: ' . $this->titulo;
-
-        return $this->view('email.retornocandidato')
-                    ->subject($subject) // Defina o assunto do email aqui
-                    ->with(['titulo' => $this->titulo,
-                        // Outros dados da vaga que você deseja incluir na view
-                    ])
-                    ->with(['unidade' => $this->unidade,
-                        // Outros dados da vaga que você deseja incluir na view
-                    ])
-                    ->with(['feedbackTexto' => $this->feedbackTexto,
-                        // Outros dados da vaga que você deseja incluir na view
-                    ])
-                    ;
-
-    }
+     public function build()
+     {
+         $template = Email::where('template', 'retorno_candidato')->first();
+     
+         // Substituir as variáveis no conteúdo do template
+         $content = str_replace(['{{ $titulo }}', '{{ $unidade }}', '{{ $feedbackTexto }}'], [$this->titulo, $this->unidade, $this->feedbackTexto], $template->conteudo);
+     
+         $subject = 'Retorno candidatura de vaga: ' . $this->titulo;
+     
+         return $this->html($content)
+                     ->subject($subject)
+                     ->with([
+                         'titulo' => $this->titulo,
+                         'unidade' => $this->unidade,
+                         'feedbackTexto' => $this->feedbackTexto,
+                     ]);
+     }
+     
+     
 }

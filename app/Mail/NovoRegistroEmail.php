@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\Email;
 
 
 
@@ -34,17 +34,17 @@ class NovoRegistroEmail extends Mailable
      */
     public function build()
     {
+        $template = Email::where('template', 'abertura_vaga')->first();
+        $content = str_replace(['{{ $titulo }}', '{{ $unidade }}'], [$this->vaga, $this->unidade], $template->conteudo);
+
         $subject = 'Notificação de Abertura de Vaga: ' . $this->vaga;
 
-        return $this->view('email.marketing')
-                    ->subject($subject) // Defina o assunto do email aqui
-                    ->with(['titulo' => $this->vaga,
-                        // Outros dados da vaga que você deseja incluir na view
-                    ])
-                    ->with(['unidade' => $this->unidade,
-                        // Outros dados da vaga que você deseja incluir na view
-                    ])
-                    ;
+        return $this->html($content)
+        ->subject($subject)
+        ->with([
+            'titulo' => $this->vaga,
+            'unidade' => $this->unidade,
+        ]);
 
     }
 

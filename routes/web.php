@@ -145,6 +145,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
+    # rotas para modelos de email
+    Route::name('email.')->prefix('email')->group(function () {
+        $class = Controllers\EmailController::class;
+
+        // Rota para visualizar modelos de e-mail
+        Route::name('index')->get('', [$class, 'index']); 
+
+        // Rota para editar um modelo de e-mail específico
+        Route::name('editar.modelo.email')->get('editar-modelo/{template}', [$class, 'edit']);
+
+        // Rota para atualizar um modelo de e-mail específico
+        Route::name('update.modelo.email')->put('editar-modelo/{template}', [$class, 'update']);
+    });
+
+
 
 
 });

@@ -53,11 +53,9 @@ class FeedbackController extends Controller
         $vaga = Vaga::find($id_vaga);
         $user = User::find($id_user);
     
-        // Agora você pode usar o $feedbackTexto para enviar junto com o e-mail
         Mail::to($user->email)->send(new \App\Mail\FeedbackVagaEmail($vaga->titulo, $vaga->unidade, $feedbackTexto));
     
-        // Redirecione ou retorne uma resposta de acordo com sua lógica.
-        return redirect()->route('curriculosVaga.show', ['candidatura' => $vaga->id, 'user' => $user->id])->with('success', 'Feedback enviado com sucesso');
+        return back()->with('success', 'Feedback enviado com sucesso');
     }
     
 }
