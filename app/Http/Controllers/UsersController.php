@@ -62,7 +62,7 @@ class UsersController extends Controller
         // Lógica para criar o usuário com os dados fornecidos
 
         view('users.users');
-
+        
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),

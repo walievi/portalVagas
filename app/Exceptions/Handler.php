@@ -41,6 +41,12 @@ class Handler extends ExceptionHandler
         });
     }
 
+        protected function handleDuplicateRecordException(DuplicateRecordException $exception)
+    {
+        Session::flash('error', $exception->getMessage());
+        return back();
+    }
+
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof QueryException) {
@@ -51,7 +57,17 @@ class Handler extends ExceptionHandler
             }
         }
 
-        return parent::render($request, $exception);    }
+        //exception para registro duplicado no campo email na criação de um usuário
+        if ($exception instanceof \Illuminate\Database\QueryException) {
+            if ($exception->errorInfo[1] === 1062) {
+                Session::flash('error', 'Email já cadastrado.');
+                return back();
+            }
+        }
+ 
+
+        return parent::render($request, $exception);
+        }
     
     
 
