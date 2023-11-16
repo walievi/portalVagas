@@ -58,20 +58,18 @@
                                     <th>Nome</th>
                                     <th>Status feedback</th>
                                     <th>Data Criação</th>
-                                    <th>Formação</th>
                                     <th class="actions">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($candidatos as $candidatura)
-                                   
+                                @foreach ($vaga->candidaturas as $candidatura)
+                                  
                                         <tr>
                                             <td>{{ $candidatura->user->name }}</td>
                                             <td>
                                                 <div class="p-1 pl-3  {{ $tags[$candidatura->feedback?->status_processo] ?? 'bg-info text-white' }}" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $candidatura->feedback->status_processo ?? '' }}</div>
                                             </td>
                                             <td>{{ $candidatura->created_at->format('d/m/Y H:i:s') }}</td>
-                                            <td>{{ $candidatura->user->formacao }}</td>
                                             <td class='actions'>
                                                 <a class='btn btn-success btn-xs' href="{{ route('curriculosVaga.show', ['candidatura' => ($candidatura->feedback->status_processo ?? '') == 'Transferido' ? $candidatura->id : $candidatura->id]) }}">Visualizar</a>
                                             </td>
