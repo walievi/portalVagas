@@ -19,4 +19,9 @@ class Email extends Model
         'template',
         'conteudo',
     ];
+
+    public function getEmailListAttribute()
+    {
+        return ($this->email != null) ? json_decode($this->email) : null;
+    }
 }

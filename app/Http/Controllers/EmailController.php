@@ -80,6 +80,7 @@ class EmailController extends Controller
         // Realize as ações de atualização conforme necessário.
         // Por exemplo, atualize os campos do modelo com os dados do formulário.
         $email->conteudo = $request->input('conteudo');
+        $email->email = $request->input('options');
         $email->save();
     
       

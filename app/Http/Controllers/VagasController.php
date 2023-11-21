@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vaga;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Email;
 
 class VagasController extends Controller
 {
@@ -85,9 +86,14 @@ class VagasController extends Controller
             'unidade' => $request->input('unidade'),
             'status' => $request->input('status'),
         ]);
-        // Agora, envie o email após a inclusão
+        // Busca o email no banco de dados
+        $email = Email::where('template', 'abertura_vaga')->first();
+        // decodifica o array de emails
+        $destinatarios = json_decode($email->email);
+        // Envia o email após a inclusão
         if ($request->input('status') == 'Aberta') {
-        Mail::to('portalvagass@gmail.com')->send(new \App\Mail\NovoRegistroEmail($request->input('titulo'), $request->input('unidade'), $request->input('status')));
+        Mail::to($destinatarios)->send(new \App\Mail\NovoRegistroEmail($request->input('titulo'), $request->input('unidade'), $request->input('status')));
+        
         }
 
         return redirect()
