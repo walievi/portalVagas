@@ -83,7 +83,7 @@
                         <td class='actions'>
                             <a class='btn btn-warning btn-xs' href="{{ route('pergunta.edit', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Editar</a>
                             <a class='btn btn-danger btn-xs delete-pergunta-btn' href='#' data-toggle='modal' data-target='#confirmDeleteModal' data-url="{{ route('pergunta.destroy', ['pergunta' => $pergunta->id]) }}"><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Excluir</a>
-                            <a class='btn btn-success btn-xs'href="{{ route('pergunta.edit', ['pergunta' => $pergunta->id]) }}"></span> Visualizar</a>
+                            <a class='btn btn-success btn-xs'href="{{ route('pergunta.show', ['pergunta' => $pergunta->id]) }}"></span> Visualizar</a>
                         </td>
                     </tr>
                     @endforeach
