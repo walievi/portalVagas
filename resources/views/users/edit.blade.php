@@ -47,6 +47,18 @@
                         
                         </div>
 
+                        <div class="form-group mb-2">
+                            <label for="password" >{{ __('Senha') }}</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        
+                        </div>
+
                     <div class="form-check mt-3">
                         <input class="form-check-input" type="checkbox" value="admin" id="role" name="role" {{ $user->role == 'admin' ? 'checked' : ''}}>
                         <label class="form-check-label" for="role">
