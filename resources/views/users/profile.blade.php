@@ -38,9 +38,7 @@
         {{ session('error') }}
     </div>
 @endif
-@if ($errors->has('curriculo'))
-    <div class="alert alert-danger">{{ $errors->first('curriculo') }}</div>
-@endif
+
 
 
     <div class="row justify-content-center">
@@ -119,9 +117,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('successdadospessoais'))
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+                        {{ session('successdadospessoais') }}
                     </div>
                     @endif
                     <div class="row mb-3">
@@ -227,27 +225,23 @@
     <div class="row justify-content-center">
         <div class="col-md-8 mb-5">
             <div class="card">
-                <div class="card-body">
-                    @if (session('status'))
+                    @if (session('statusformacao'))
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+                        {{ session('statusformacao') }}
                     </div>
                     @endif
-                    <div class="row mb-3">
-                        <div class="col-md-9">
-                            <h4>{{ __('Formação') }}</h4>
-                        </div>
-                    </div>
                     @include('formacao.index', ['formacoes' => $formacoes])
-                </div>
             </div>
 
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('successcurriculo'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('successcurriculo') }}
                         </div>
+                    @endif
+                    @if ($errors->has('curriculo'))
+                        <div class="alert alert-danger">{{ $errors->first('curriculo') }}</div>
                     @endif
                 <div class="row mb-3">
                     <div class="col-md-9">

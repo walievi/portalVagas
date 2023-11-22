@@ -18,7 +18,7 @@
                             <h4>  {{ __('Cadastrar vaga') }}</h4>
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('createVaga') }}">
+                    <form method="POST" action="{{ route('vaga.store') }}">
                         @csrf
 
                         <div class="form-group mb-2">
@@ -70,7 +70,7 @@
 
                         <div class="form-group mb-2">
                             <center>
-                                <a type="button" href="{{route('vagas')}}" class="btn btn-secondary">
+                                <a type="button" href="{{route('vaga.index')}}" class="btn btn-secondary">
                                     {{ __('Voltar') }}
                                 </a>
                                 <button type="submit" class="btn btn-dark">

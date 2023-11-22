@@ -14,6 +14,11 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="row mb-3">
                         <div class="col-md-9">
                             <h4>  {{ __('Adicionar usuário') }}</h4>

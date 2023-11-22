@@ -52,19 +52,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/editDadosPessoais/{id}', [Controllers\UsersController::class, 'editDadosPessoais'])->name('editDadosPessoais');
 
 
-    # rotas para módulo vagas
+   
 
-    Route::get('/vagas', [Controllers\VagasController::class, 'index'])->name('vagas');
 
-    Route::get('/formCreateVagas', [Controllers\VagasController::class, 'formCreateVagas'])->name('formCreateVagas');
+    # rotas para vagas
+    Route::name('vaga.')->prefix('vagas')->group(function () {
+        $class = Controllers\VagasController::class;
+        Route::name('index')   ->get('',                [$class, 'index']);
+        Route::name('create')  ->get('create',          [$class, 'create']);
+        Route::name('show')    ->get('{vaga}',          [$class, 'show']);
+        Route::name('edit')    ->get('{vaga}/edit',     [$class, 'edit']);
+        Route::name('store')   ->post('',               [$class, 'store']);
+        Route::name('update')  ->put('{vaga}',          [$class, 'update']);
+        Route::name('destroy') ->delete('{vaga}',       [$class, 'destroy']);
+    });
 
-    Route::post('/createVaga', [Controllers\VagasController::class, 'create'])->name('createVaga');
 
-    Route::delete('/vagas/{id}', [Controllers\VagasController::class, 'destroy'])->name('vagas.destroy');
-
-    Route::put('/editVaga/{id}', [Controllers\VagasController::class, 'editVaga'])->name('editVaga');
-
-    Route::get('/formEditVagas/{id}', [Controllers\VagasController::class, 'formEditVagas'])->name('formEditVagas');
 
     # rotas para perguntas
     Route::name('pergunta.')->prefix('pergunta')->group(function () {
@@ -82,9 +85,11 @@ Route::group(['middleware' => 'auth'], function () {
     # rotas do perfil do candidado
     Route::name('candidato.')->prefix('candidato')->group(function () {
         $class = Controllers\CandidatoController::class;
-        Route::name('index')   ->get('',          [$class, 'index']);
-        Route::name('edit')    ->get('/edit',     [$class, 'edit']);
-        Route::name('update')  ->put('{candidato}',      [$class, 'update']);
+        Route::name('index')   ->get('',               [$class, 'index']);
+        Route::name('edit')    ->get('/edit',          [$class, 'edit']);
+        Route::name('update')  ->put('{candidato}',    [$class, 'update']);
+        Route::name('show')    ->get('',               [$class, 'show']);
+        Route::name('cancel')  ->delete('{vaga}',      [$class, 'cancel']);
     });
 
     # rotas para perfil
@@ -109,18 +114,51 @@ Route::group(['middleware' => 'auth'], function () {
     # rotas para curriculos
     Route::name('curriculo.')->prefix('curriculo')->group(function () {
         $class = Controllers\CurriculoController::class;
-        Route::name('store')   ->post('',        [$class, 'store']);
-        Route::name('update')  ->put('{curriculo}', [$class, 'update']);
-        Route::name('show')->get('show/{curriculo}', [$class, 'show']);
+        Route::name('store')   ->post('',                [$class, 'store']);
+        Route::name('update')  ->put('{curriculo}',      [$class, 'update']);
+        Route::name('show')    ->get('show/{curriculo}', [$class, 'show']);
     });
 
     # rotas para candidatar-se
     Route::name('candidatar.')->prefix('candidatar')->group(function () {
         $class = Controllers\CandidatarController::class;
-        Route::name('index')->get('{vaga}', [$class, 'index']); 
-        Route::name('store')   ->post('',        [$class, 'store']);
-        Route::name('update')  ->put('{candidatar}', [$class, 'update']);
+        Route::name('index')    ->get('{vaga}',         [$class, 'index']); 
+        Route::name('store')   ->post('',               [$class, 'store']);
+        Route::name('update')  ->put('{candidatar}',    [$class, 'update']);
     });
+
+    # rotas para curriculosVaga
+    Route::name('curriculosVaga.')->prefix('curriculosVaga')->group(function () {
+        $class = Controllers\CurriculosVagaController::class;
+        Route::name('index')    ->get('{vaga}',          [$class, 'index']); 
+        Route::name('show')     ->get('show/{candidatura}',   [$class, 'show']); 
+        Route::name('update')   ->post('',               [$class, 'update']); 
+    });
+
+    # rotas para feedback
+    Route::name('feedback.')->prefix('feedback')->group(function () {
+        $class = Controllers\FeedbackController::class;
+        Route::name('index')   ->get('',            [$class, 'index']); 
+        Route::name('store')   ->post('',           [$class, 'store']);
+        Route::name('update')  ->put('{feedback}',  [$class, 'update']);
+        Route::name('mail')     ->post('{vaga}/{user}',  [$class, 'mail']);
+
+    });
+
+    # rotas para modelos de email
+    Route::name('email.')->prefix('email')->group(function () {
+        $class = Controllers\EmailController::class;
+
+        // Rota para visualizar modelos de e-mail
+        Route::name('index')->get('', [$class, 'index']); 
+
+        // Rota para editar um modelo de e-mail específico
+        Route::name('editar.modelo.email')->get('editar-modelo/{template}', [$class, 'edit']);
+
+        // Rota para atualizar um modelo de e-mail específico
+        Route::name('update.modelo.email')->put('editar-modelo/{template}', [$class, 'update']);
+    });
+
 
 
 

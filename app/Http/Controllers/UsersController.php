@@ -62,7 +62,7 @@ class UsersController extends Controller
         // Lógica para criar o usuário com os dados fornecidos
 
         view('users.users');
-
+        
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -195,7 +195,7 @@ class UsersController extends Controller
         // Salve os dados pessoais associados a esse usuário
         $user->dadosPessoais()->save($dadosPessoais);
     
-        return redirect()->route('profile')->with('success', 'Dados pessoais editados com sucesso.');
+        return redirect()->route('profile')->with('successdadospessoais', 'Dados pessoais editados com sucesso.');
     }
     
 

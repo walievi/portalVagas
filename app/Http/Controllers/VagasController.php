@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vaga;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Email;
 
 class VagasController extends Controller
 {
@@ -13,10 +14,10 @@ class VagasController extends Controller
     {
         $vagas = Vaga::all();
 
-        return view('vagas.index', ['vagas' => $vagas]);
+        return view('vagas.index', compact('vagas'));
     }
 
-    public function formCreateVagas()
+    public function create()
     {
         // Direcionar para página de criar vaga
 
@@ -30,39 +31,39 @@ class VagasController extends Controller
 
         if (!$vagas) {
             return redirect()
-                ->route('vagas')
+                ->route('vaga.index')
                 ->with('error', 'Vaga não encontrada.');
         }
 
         $vagas->delete();
 
         return redirect()
-            ->route('vagas')
+            ->route('vaga.index')
             ->with('success', 'Vaga excluída com sucesso.');
     }
 
-    public function formEditVagas($id)
+    public function edit($id)
     {
         // Lógica para editar o vaga com o ID fornecido
         $vaga = Vaga::find($id);
 
         if (!$vaga) {
             return redirect()
-                ->route('vagas')
+                ->route('vaga.index')
                 ->with('error', 'Vaga não encontrada.');
         }
 
         return view('vagas.edit', compact('vaga'));
     }
 
-    public function editVaga(Request $request, $id)
+    public function update(Request $request, $id)
     {
         // Lógica para editar a vaga com o ID fornecido
         $vagas = Vaga::find($id);
 
         if (!$vagas) {
             return redirect()
-                ->route('vagas')
+                ->route('vaga.index')
                 ->with('error', 'Vaga não encontrada.');
         }
 
@@ -72,11 +73,11 @@ class VagasController extends Controller
         $vagas->save();
 
         return redirect()
-            ->route('vagas')
+            ->route('vaga.index')
             ->with('success', 'Vaga editada com sucesso.');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         view('vagas.index');
 
@@ -85,13 +86,21 @@ class VagasController extends Controller
             'unidade' => $request->input('unidade'),
             'status' => $request->input('status'),
         ]);
-        // Agora, envie o email após a inclusão
+        // Busca o email no banco de dados
+        $email = Email::where('template', 'abertura_vaga')->first();
+        // decodifica o array de emails
+        $destinatarios = json_decode($email->email);
+        // Envia o email após a inclusão
         if ($request->input('status') == 'Aberta') {
-        Mail::to('portalvagass@gmail.com')->send(new \App\Mail\NovoRegistroEmail($request->input('titulo'), $request->input('unidade'), $request->input('status')));
+        Mail::to($destinatarios)->send(new \App\Mail\NovoRegistroEmail($request->input('titulo'), $request->input('unidade'), $request->input('status')));
+        
         }
 
         return redirect()
-            ->route('vagas')
+            ->route('vaga.index')
             ->with('success', 'Vaga adicionada com sucesso.');
     }
+
+
+ 
 }

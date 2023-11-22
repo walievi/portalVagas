@@ -23,13 +23,18 @@ class Vaga extends Model
         'status'
     ];
 
-    public function perguntas()
+    public function candidaturas()
     {
-        return null;
+        return $this->hasMany(CandidaturaVaga::class, 'vaga_id');
     }
 
     public function respostas()
     {
-        $this->hasMany(Resposta::class, 'vaga_id');
+        return $this->hasMany(Resposta::class, 'vaga_id');
+    }
+
+    public function perguntas()
+    {
+        return $this->belongsToMany(Pergunta::class, 'respostas', 'vaga_id', 'pergunta_id');
     }
 }

@@ -82,6 +82,9 @@
                             </div>
                         @endforeach
                     @else
+                    @csrf
+                    @method('PUT')
+                        <input type="hidden" name="vaga_id" value="{{ $vaga->id }}">
                         <p>Não há perguntas para exibir para esta vaga.</p>
                     @endif
 
