@@ -28,6 +28,7 @@
     </div>
     <div class="row justify-content-center mt-5">
         @foreach ($vagas as $vaga)
+        @if($vaga->status == 'Aberta')
         <div class="col-md-4">
             <div class="card" style="width: 350px">
                 <div class="card-body card-body-home" style="margin: 0 auto">
@@ -48,6 +49,7 @@
                 </div>
             </div>
         </div>
+        @endif
         @endforeach
     </div>
 </div>
