@@ -131,7 +131,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::name('curriculosVaga.')->prefix('curriculosVaga')->group(function () {
         $class = Controllers\CurriculosVagaController::class;
         Route::name('index')    ->get('{vaga}',          [$class, 'index']); 
-        Route::name('show')     ->get('show/{candidatura}',   [$class, 'show']); 
+        Route::name('show')     ->get('show/{candidatura}',   [$class, 'show']);
+        Route::name('showCurriculo')    ->get('showCurriculo/{curriculo}', [$class, 'showCurriculo']);
         Route::name('update')   ->post('',               [$class, 'update']); 
     });
 
