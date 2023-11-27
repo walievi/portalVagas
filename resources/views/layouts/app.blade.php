@@ -91,14 +91,14 @@
 
                         <li class="nav-item">
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}">{{ __('Vagas') }}</a>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">{{ __('Perfil') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('candidato.show') }}">{{ __('Candidaturas') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/home') }}">{{ __('Vagas') }}</a>
+                        <li class="nav-item">
                         <!-- Fim menu usuário padrão -->
                         @endif
 

@@ -29,25 +29,27 @@
                     <div class="col-md-9">
                     <h4>{{ __('Formulário do candidato') }}: <span style="font-weight: normal;font-size: smaller;">{{ $candidatura->vaga->titulo }}</span></h4>
                     </div>
-                    <form method="POST" action=""> 
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group mb-2">
-                            <label for="nome">{{ __('Nome') }}</label>
-                            <input id="nome" type="text" class="form-control" name="nome" value="{{ $candidatura->user->name }}" disabled>
-                        </div>
+                </div>
 
-                        <div class="form-group mb-2">
-                            <a href="{{ route('curriculosVaga.showCurriculo', ['curriculo' => $candidatura->user->id]) }}" target="_blank" class="btn btn-dark btn-sm">Visualizar currículo</a>
-                        </div>
+                <form method="POST" action="" > 
+                @csrf
+                @method('PUT')
+                    <div class="form-group mb-2">
+                        <input id="nome" type="text" class="form-control" name="nome" value="{{ $candidatura->user->name }}" disabled>
+                    </div>
 
-                        @foreach ($candidatura->getRespostas() as $resposta)
-                            <div class="pergunta mb-3 mt-3">
-                                <label class="mb-1"><b>{{ __($resposta->pergunta->pergunta) }}</b></label><br>    
-                                <label class="mb-1">{{ __($resposta?->resposta) }}</label><br>
-                            </div>
-                        @endforeach
-                    </form>
+                    <div class="form-group mb-2">
+                        <a href="{{ route('curriculosVaga.showCurriculo', ['curriculo' => $candidatura->user->id]) }}" target="_blank" class="btn btn-dark">Visualizar currículo</a>
+
+                    </div>
+
+                    @foreach ($candidatura->getRespostas() as $resposta)
+                        <div class="pergunta mb-3 mt-3">
+                            <label class="mb-1"><b>{{ __($resposta->pergunta->pergunta) }}</b></label><br>    
+                            <label class="mb-1">{{ __($resposta?->resposta) }}</label><br>
+                        </div>
+                    @endforeach
+                </form>
             </div>
         </div>
     </div>
