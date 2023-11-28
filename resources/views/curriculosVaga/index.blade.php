@@ -73,7 +73,7 @@
                                         <tr>
                                             <td>{{ $candidatura->user->name }}</td>
                                             <td>
-                                                <div class="p-1 pl-3  {{ $tags[$candidatura->feedback?->status_processo] ?? 'bg-info text-white' }}" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $candidatura->feedback->status_processo ?? '' }}</div>
+                                                <div class="p-1 pl-3  {{ $tags[$candidatura->feedback?->status_processo] ?? 'bg-info text-white' }}" style="border-radius: 10px; width: 50%; font-weight: bold; font-size: 14px;">{{ $candidatura->feedback->status_processo ?? 'Pendente' }}</div>
                                             </td>
                                             <td>{{ $candidatura->created_at->format('d/m/Y H:i:s') }}</td>
                                             <td class='actions'>

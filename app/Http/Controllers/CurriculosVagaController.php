@@ -13,7 +13,10 @@ use App\Models\Pergunta;
 use App\Models\Feedback;
 use App\Models\CandidaturaVaga;
 use App\Models\FiltroCandidatura;
+use App\Models\Curriculo;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
+
 
 class CurriculosVagaController extends Controller
 {
@@ -78,6 +81,24 @@ class CurriculosVagaController extends Controller
         $listaVagas = Vaga::all();
         return view('curriculosVaga.show', compact('candidatura', 'listaVagas'));
     }
+
+
+    public function showCurriculo($curriculoId) {
+        $curriculoPdfCandidato = Curriculo::where('user_id', $curriculoId)->first();
+    
+        if (!$curriculoPdfCandidato) {
+            abort(404, 'Currículo não encontrado');
+        }
+    
+        $pdfData = $curriculoPdfCandidato->pdf;
+        $filename = 'curriculo_' . $curriculoPdfCandidato->user_id . '.pdf';
+    
+        // Retornar o PDF como resposta
+        return response($pdfData, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="' . $filename . '"');
+    }
+    
 
     public function update(Request $request) { 
 

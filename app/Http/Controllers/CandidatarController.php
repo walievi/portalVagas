@@ -29,8 +29,9 @@ class CandidatarController extends Controller
         })->get();
 
         //verificar se o usuário já não está candidatado na vaga
-        $canditaturaExiste = Resposta::where('user_id', $userId->id)->where('vaga_id', $vaga->id);
-        if($canditaturaExiste->count() > 0){
+        //$canditaturaExiste = Resposta::where('user_id', $userId->id)->where('vaga_id', $vaga->id);
+        $candidaturaVagaExiste = CandidaturaVaga::where('user_id', $userId->id)->where('vaga_id', $vaga->id);
+        if($candidaturaVagaExiste->count() > 0){
             return redirect()->route('home')->with('error', 'Você já está candidatado nesta vaga.');
         }
         else{

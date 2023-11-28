@@ -133,6 +133,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('index')  ->get('{vaga}',             [$class, 'index']);
         Route::name('filtro') ->post('{vaga}/filtro',     [$class, 'filtro']);
         Route::name('show')   ->get('show/{candidatura}', [$class, 'show']);
+        Route::name('showCurriculo')    ->get('showCurriculo/{curriculo}', [$class, 'showCurriculo']);
         Route::name('update') ->post('',                  [$class, 'update']);
     });
 

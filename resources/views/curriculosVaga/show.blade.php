@@ -35,8 +35,12 @@
                 @csrf
                 @method('PUT')
                     <div class="form-group mb-2">
-                        <label for="nome">{{ __('Nome') }}</label>
                         <input id="nome" type="text" class="form-control" name="nome" value="{{ $candidatura->user->name }}" disabled>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <a href="{{ route('curriculosVaga.showCurriculo', ['curriculo' => $candidatura->user->id]) }}" target="_blank" class="btn btn-dark">Visualizar currículo</a>
+
                     </div>
 
                     @foreach ($candidatura->getRespostas() as $resposta)

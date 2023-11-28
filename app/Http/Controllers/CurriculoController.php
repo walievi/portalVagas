@@ -72,18 +72,14 @@ class CurriculoController extends Controller
     public function show($id)
     {
         $curriculo = Curriculo::find($id);
-
         if (!$curriculo) {
             return redirect()->back()->with('errorcurriculo', 'Currículo não encontrado.');
         }
-    
-        // Obtenha os dados binários do currículo
+        //dados binários do currículo
         $pdfData = $curriculo->pdf;
-    
-        // Gere um nome de arquivo único
+        // Gera um nome de arquivo único
         $filename = 'curriculo_' . $curriculo->user_id . '.pdf';
-    
-        // Retorne o currículo como uma resposta de arquivo
+        // Retorna o currículo como uma resposta de arquivo
         return response($pdfData, 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => "attachment; filename=\"$filename\"",
