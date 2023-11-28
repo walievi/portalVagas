@@ -81,20 +81,27 @@ class VagasController extends Controller
     {
         view('vagas.index');
 
-        Vaga::create([
-            'titulo' => $request->input('titulo'),
-            'unidade' => $request->input('unidade'),
-            'status' => $request->input('status'),
-        ]);
-        // Busca o email no banco de dados
-        $email = Email::where('template', 'abertura_vaga')->first();
-        // decodifica o array de emails
-        $destinatarios = json_decode($email->email);
-        // Envia o email após a inclusão
-        if ($request->input('status') == 'Aberta') {
-        Mail::to($destinatarios)->send(new \App\Mail\NovoRegistroEmail($request->input('titulo'), $request->input('unidade'), $request->input('status')));
-        
+        try {
+            Vaga::create([
+                'titulo' => $request->input('titulo'),
+                'unidade' => $request->input('unidade'),
+                'status' => $request->input('status'),
+            ]);
+            // Busca o email no banco de dados
+            $email = Email::where('template', 'abertura_vaga')->first();
+            // decodifica o array de emails
+            $destinatarios = json_decode($email->email);
+            // Envia o email após a inclusão
+            if ($request->input('status') == 'Aberta') {
+                Mail::to($destinatarios)->send(new \App\Mail\NovoRegistroEmail($request->input('titulo'), $request->input('unidade'), $request->input('status')));
+
+            }
+        }catch (\Exception $e){
+            return redirect()
+                ->route('vaga.index')
+                ->with('error', 'Vaga adicionada com sucesso, mas não foi possivel enviar o e-mail.');
         }
+
 
         return redirect()
             ->route('vaga.index')

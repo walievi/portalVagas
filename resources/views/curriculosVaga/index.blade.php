@@ -35,12 +35,18 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                         <!-- Adicionando o formulário de filtro -->
-                        <form method="get" action="{{ route('curriculosVaga.index', ['vaga' => $vaga->id]) }}">
+                        <form method="post" action="{{ route('curriculosVaga.filtro', ['vaga' => $vaga->id]) }}">
+                            @csrf
                             <div class="form-group">
                                 <label>Filtros:</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="filtro_ensino_superior" value="1" {{ request('filtro_ensino_superior') == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label">Com Ensino Superior</label>
+                                    <select name="nivel_estudo_id" id="nivel_estudo_id">
+                                        <option value="">Selecione</option>
+                                        @foreach($niveis_estudo as $id => $nivel)
+                                            <option value="{{ $id }}">{{ $nivel }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <!-- Adicione outros filtros conforme necessário -->
 

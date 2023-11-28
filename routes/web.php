@@ -130,9 +130,10 @@ Route::group(['middleware' => 'auth'], function () {
     # rotas para curriculosVaga
     Route::name('curriculosVaga.')->prefix('curriculosVaga')->group(function () {
         $class = Controllers\CurriculosVagaController::class;
-        Route::name('index')    ->get('{vaga}',          [$class, 'index']); 
-        Route::name('show')     ->get('show/{candidatura}',   [$class, 'show']); 
-        Route::name('update')   ->post('',               [$class, 'update']); 
+        Route::name('index')  ->get('{vaga}',             [$class, 'index']);
+        Route::name('filtro') ->post('{vaga}/filtro',     [$class, 'filtro']);
+        Route::name('show')   ->get('show/{candidatura}', [$class, 'show']);
+        Route::name('update') ->post('',                  [$class, 'update']);
     });
 
     # rotas para feedback

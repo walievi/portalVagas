@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\NivelEstudo;
 use Illuminate\Http\Request;
 use App\Models\CurriculosVaga;
 use App\Models\Vaga;
@@ -11,6 +12,7 @@ use App\Models\Resposta;
 use App\Models\Pergunta;
 use App\Models\Feedback;
 use App\Models\CandidaturaVaga;
+use App\Models\FiltroCandidatura;
 use Illuminate\Support\Facades\Mail;
 
 class CurriculosVagaController extends Controller
@@ -26,10 +28,51 @@ class CurriculosVagaController extends Controller
             'Arquivado' => 'bg-secondary text-white',
             'Transferido' => 'bg-info text-white',
         ];
-        
 
-        return view('curriculosVaga.index', compact('vaga', 'tags'));
+        $niveis_estudo = NivelEstudo::pluck('nivel', 'id')->toArray();
+
+        return view('curriculosVaga.index', compact('vaga', 'tags', 'niveis_estudo'));
     }
+
+    public function filtro(Request $request,Vaga $vaga)
+    {
+        $query = FiltroCandidatura::where('vaga_id', $vaga->id);
+
+        $selected = null;
+        if($request->nivel_estudo_id){
+            $selected = $request->nivel_estudo_id;
+            $query->where('nivel_estudo_id', (int) $request->nivel_estudo_id);
+        }
+
+        $candidaturas = $query->get();
+
+        $uniqueCandidaturas = collect();
+        $seenUserIds = [];
+
+        foreach ($candidaturas as $candidatura) {
+            if (!in_array($candidatura->user_id, $seenUserIds)) {
+                $uniqueCandidaturas->push($candidatura);
+                $seenUserIds[] = $candidatura->user_id;
+            }
+        }
+
+        $candidaturas = $uniqueCandidaturas;
+
+        $tags = [
+            'Aprovado' => 'bg-primary text-white',
+            'Rejeitado' => 'bg-danger text-white',
+            'Em análise' => 'bg-info text-white',
+            'Contratado' => 'bg-success text-white',
+            'Agendar entrevista' => 'bg-warning text-grey',
+            'Arquivado' => 'bg-secondary text-white',
+            'Transferido' => 'bg-info text-white',
+        ];
+
+        $niveis_estudo = NivelEstudo::pluck('nivel', 'id')->toArray();
+
+        return view('curriculosVaga.filtro', compact('candidaturas', 'vaga', 'tags', 'niveis_estudo', 'selected'));
+    }
+
 
     public function show(CandidaturaVaga $candidatura) {
         $listaVagas = Vaga::all();
