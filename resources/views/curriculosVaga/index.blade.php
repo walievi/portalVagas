@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 <label>Filtros:</label>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label">Selecione o n[ivel de formação:</label>
+                                    <label class="form-check-label">Selecione o nivel de formação:</label>
                                     <select name="nivel_estudo_id" id="nivel_estudo_id">
                                         <option value="">Selecione</option>
                                         @foreach($niveis_estudo as $id => $nivel)
